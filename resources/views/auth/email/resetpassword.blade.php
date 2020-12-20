@@ -1,0 +1,1 @@
+<p>Cảm ơn bạn đã sử dụng trang Web. Click vào <a href="{{$route}}">đây</a> để đổi mật khẩu</p>
