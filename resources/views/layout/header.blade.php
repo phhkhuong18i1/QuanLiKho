@@ -32,7 +32,7 @@
           <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                       
-                            <span class="fa fa-user">{{Auth::user()->name}}</span>
+                            <span class="fa fa-user"> {{Auth::user()->name}}</span>
                             <b class="caret"></b>
                         </a>
             <ul class="dropdown-menu extended logout">

@@ -103,7 +103,7 @@
                                     </div>
                                     <div class="col-lg-2">
                                         <label>Số lượng:</label>
-                                        <input type="number" name="sluong" id="sluong" class="sluong form-control">&nbsp&nbsp
+                                        <input type="number" name="sluong" id="sluong" onkeypress="return isNumberKey(event)" min="0" class="sluong form-control">&nbsp&nbsp
                                        
                                     </div>
                                     <div id='add'>
@@ -139,7 +139,7 @@
                                                     <td>{{ $item->name }}</td>
                                                     <td>{{ $item->options->kho }}</td>
                                                     <td>{{ $item->options->size }}</td>
-                                                    <td> <input id="quanty-item-{{$item->rowId}}" style="width:70px ;" type="number" value="{{$item->qty}}"  /></td>
+                                                    <td> <input id="quanty-item-{{$item->rowId}}" style="width:70px ;" type="number" min="0" onkeypress="return isNumberKey(event)" value="{{$item->qty}}"  /></td>
                                                     <td>{{ number_format($item->price,0,",",".") }} vnđ</td>
                                                     <td>{{ number_format($item->qty*$item->price,0,",",".") }}vnđ</td>
                                                     <td><i class="fa fa-times" onclick="DeleteListItemCart('{{$item->rowId}}')"></i></td>
@@ -163,7 +163,7 @@
     </section>
 @endsection
 @section('script')
-       
+       @include('layout.script')
     <script>
         // $(document).ready(function() {
         //   $(document).on('click','.add',function(e) {
@@ -300,9 +300,9 @@
                     $('#country2').append('<option value="'+countryObj.id+'">'+countryObj.kho_ten+'</option>');
                 });
 
-                $('#add').empty();
+                
                 $.each(data, function(index, countryObj){
-
+                    $('#add').empty();
                 $('#add').append('<a style="margin-left: 15px; margin-top: 24px" class=" btn btn-primary" onclick=addCart("'+countryObj.soluong_ton+'")><i class="fa fa-plus"></i></a>');
 });
 

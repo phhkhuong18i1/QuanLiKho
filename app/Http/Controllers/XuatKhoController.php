@@ -9,6 +9,7 @@ use App\VatTuKho;
 use App\CongTrinh;
 use App\VatTu;
 use App\Kho;
+use App\ThongKe;
 use PDF;
 use DB;
 use Cart;
@@ -39,7 +40,8 @@ class XuatKhoController extends Controller
 	{
 		$id_user = $request->input('txtNV');
 		$content = Cart::content();
-		$total = Cart::subtotal(0,".","");
+        $total = Cart::subtotal(0,".","");
+        $quanty = Cart::count();
 		$xuatkho = new PhieuXuatKho;
 		$xuatkho->xk_ma = $request->input('txtID');
 		$xuatkho->xk_ngaylap = date('Y-m-d');
@@ -70,11 +72,35 @@ class XuatKhoController extends Controller
 					]);
 				
 			} 
-		}
+        }
+        
+        $thongke = ThongKe::where('date',date('Y-m-d'))->first();
+        if(!is_null($thongke))
+        {
+            DB::table('thongke')
+				->where(
+					'date',date('Y-m-d')
+					)
+				->update([
+					'SoLuong' => $thongke->SoLuong+$quanty,
+                    'TongTien' => $thongke->TongTien+$total,
+                    'SoDon' => $thongke->SoDon+1
+					]);
+        }else{
+            $tk = new ThongKe;
+            $tk->date = date('Y-m-d');
+            $tk->SoLuong = $quanty;
+            $tk->TongTien = $total;
+            $tk->SoDon=1;
+            $tk->save();
 
-		Cart::destroy();
+        }
+
+        Cart::destroy();
+        
+       
 		// echo "string";
-        return redirect('qlkho/xuatkho/xuat')->with(['flash_level'=>'success','flash_message'=>'Thêm thành công!!!']);
+        return redirect('qlkho/xuatkho/xuat')->with('thongbao', 'Xuất kho thành công');
 	}
     public function postXuathang(Request $request)
 	{
@@ -244,10 +270,10 @@ class XuatKhoController extends Controller
                 'txtLyDo.max' => 'Lý do nhập có tối đa 100 ký tự'
             ]
         );
-        $pxk->lydo = $request->txtLyDo;
-        $pxk->congtrinh_id = $request->sltCongTrinh;
+        $pxk->xk_lydo = $request->txtLyDo;
+        $pxk->congtrinh_id = $request->state_id;
         $pxk->save();
-        return redirect('qlkho/xuatkho/sua/'.$id)->with('thongbao', 'Sửa thành công');
+        return redirect('qlkho/xuatkho/danhsach')->with('thongbao', 'Sửa thành công');
     }
 
     public function postXoa($id)

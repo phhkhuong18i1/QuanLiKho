@@ -21,7 +21,7 @@
                                                     <td>{{ $item->name }}</td>
                                                     <td>{{ $item->options->kho }}</td>
                                                     <td>{{ $item->options->size }}</td>
-                                                    <td> <input id="quanty-item-{{$item->rowId}}"    type="number" value="{{$item->qty}}"  /></td>
+                                                    <td> <input id="quanty-item-{{$item->rowId}}" onkeypress="return isNumberKey(event)" min="0"   type="number" value="{{$item->qty}}"  /></td>
                                                     <td>{{ number_format($item->price,0,",",".") }} vnđ</td>
                                                     <td>{{ number_format($item->qty*$item->price,0,",",".") }}vnđ</td>
                                                     <td><i class="fa fa-times" onclick="DeleteListItemCart('{{$item->rowId}}')"></i></td>

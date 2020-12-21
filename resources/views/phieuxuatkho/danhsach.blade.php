@@ -92,7 +92,7 @@
       <div class="modal-body">
      <div id="modal-body1">
     <hr>
-    <center><h2><b>PHIẾU XUẤT KHO</b></h2></center>
+    <center><h2><b>Chi tiết phiếu xuất kho</b></h2></center>
     <table id="table1" >
     <tr>
         <td width="120px" ><strong>Mã:</strong></td> <td></td>
@@ -215,11 +215,11 @@ function render(response)
                   var txt = "<tr><td style='border:thin blue solid;border-style:dashed;'>"+stt+"</td><td style='border:thin blue solid;border-style:dashed;'>"+idvt['vt_ten']+
                 "</td><td style='border:thin blue solid;border-style:dashed;'>"+chitiet[i].ctxk_soluong+
                 "</td><td style='border:thin blue solid;border-style:dashed;'>"+idvt['giatien']+
-                "</td><td style='border:thin blue solid;border-style:dashed;'>"+chitiet[i].ctxk_thanhtien+"</td></tr>";
+                " VNĐ</td><td style='border:thin blue solid;border-style:dashed;'>"+chitiet[i].ctxk_thanhtien+" VNĐ</td></tr>";
                  $("#table2").append(txt);   
               }
               
-             var tt = "<td width='480px'>Tổng giá trị nhập</><td width='200px'>"+response['xuatkho'].xk_tongtien+"</td>";
+             var tt = "<td width='480px'>Tổng giá trị nhập</><td width='200px'>"+response['xuatkho'].xk_tongtien+" VNĐ</td>";
 
              $("#tongtien").empty();
                 $("#tongtien").append(tt);  

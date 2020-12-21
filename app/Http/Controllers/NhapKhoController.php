@@ -81,7 +81,7 @@ class NhapKhoController extends Controller
 				$soluong->soluong_nhap = $item->qty;
 				$soluong->soluong_ton = $item->qty;
 				$soluong->soluong_xuat = 0;
-				$soluong->save();
+				$soluong->save(); 
 			}
 		}
 
@@ -236,7 +236,7 @@ class NhapKhoController extends Controller
 				'npp_id'	=>		$request->input('state_id'),
 				'lydo'	=>  	$request->input('txtLyDo'),
 				]);
-		return redirect('qlkho/nhapkho/danhsach');
+		return redirect('qlkho/nhapkho/danhsach')->with('thongbao', 'Sửa thành công');
 	}
 
 	public function getEdit1($id)

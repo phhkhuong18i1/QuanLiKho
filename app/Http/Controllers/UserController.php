@@ -183,6 +183,7 @@ class UserController extends Controller
         );
             $user = User::find(Auth::user()->id);
             $user->name = $request->txtTen;
+            $user->save();
 
         $nhanvien = NhanVien::find(Auth::user()->id);
         $nhanvien->nv_ten = $request->txtTen;

@@ -6,7 +6,7 @@
           <div class="col-lg-12">
             <ol class="breadcrumb">
               <li><i class="fa fa-home"></i><a href="qlkho/index">Trang chủ</a></li>
-              <li><i class="icon_document_alt"></i><a href="qlkho/nhapkho/danhsach">Nhập kho<a></li>
+              <li><i class="icon_document_alt"></i><a href="qlkho/nhapkho/danhsach">Nhập kho</a></li>
               <li><i class="fa fa-plus"></i>Nhập</li>
             </ol>
           </div>
@@ -112,7 +112,7 @@
                                             </div>
                                             <div class="col-lg-2">
                                                 <label>Số lượng:</label>
-                                                    <input type="number" name="sluong" id="sluong" class="sluong form-control">
+                                                    <input type="number" name="sluong" id="sluong" class="sluong form-control" min="0" onkeypress="return isNumberKey(event)">
                                             </div>
                                                 <a  style="margin-left: 15px; margin-top: 24px" href="#" class="add1 btn btn-primary" type="submit"><i class="fa fa-plus"></i></a>
                                             </div>
@@ -149,7 +149,7 @@
                                                     <td>{{ $item->options->kho }}</td>
                                                     <td>{{ $item->weight }}</td>
                                                     
-                                                    <td> <input id="quanty-item-{{$item->rowId}}"  required type="number" value="{{$item->qty}}" min="0" max="100" /></td>
+                                                    <td> <input id="quanty-item-{{$item->rowId}}" min="0" onkeypress="return isNumberKey(event)"  required type="number" value="{{$item->qty}}" min="0" max="100" /></td>
                                                     <td>{{ number_format($item->price) }} vnđ</td>
                                                     <td>{{ number_format($item->qty*$item->price) }} vnđ</td>
                                                     <td><i class="fa fa-times" onclick="DeleteListItemCart('{{$item->rowId}}')"></i></td>
@@ -176,6 +176,7 @@
     </section>
 @endsection
 @section('script')
+@include('layout.script')
 <script> 
         $(document).ready(function(){
             $(document).on('click','.add1',function(e) {

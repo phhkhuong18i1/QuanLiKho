@@ -16,7 +16,7 @@
             <section class="panel">
               <header class="panel-heading">
                 <div class="text-right">
-                <a style="margin-left:38px;" class="btn btn-primary" href="qlkho/nhapkho/nhap"><i class="fa fa-plus"></i> Nhập kho kho</a> 
+                <a style="margin-left:38px;" class="btn btn-primary" href="qlkho/nhapkho/nhap"><i class="fa fa-plus"></i> Nhập kho </a> 
                             <a href="qlkho/nhapkho/in" class="btn btn-warning">
                                 <i class="fa fa-file-pdf-o fa-fw"></i>Xuất file PDF
                             </a>
@@ -88,7 +88,7 @@
       <div class="modal-body">
      <div id="modal-body1">
     <hr>
-    <center><h2>PHIẾU NHẬP KHO</h2></center>
+    <center><h2><b>Chi tiết phiếu nhập kho</b></h2></center>
     <table >
     <tr id="tr0">
         <td width="120px" ><strong>Mã:</strong></td> <td ></td>
@@ -204,11 +204,11 @@ function render(response)
               { var stt= i+1;
                  var idvt = chitiet[i]['vattu'];
                var txt = "<tr><td style='border:thin blue solid;border-style:dashed;'>"+stt+"</td><td style='border:thin blue solid;border-style:dashed;'>"+idvt['vt_ten']+
-                "</td><td style='border:thin blue solid;border-style:dashed;'>"+chitiet[i].ctnk_soluong+"</td><td style='border:thin blue solid;border-style:dashed;'>"+idvt['giatien']+"</td><td style='border:thin blue solid;border-style:dashed;'>"+chitiet[i].ctnk_thanhtien+"</td></tr>";
+                "</td><td style='border:thin blue solid;border-style:dashed;'>"+chitiet[i].ctnk_soluong+"</td><td style='border:thin blue solid;border-style:dashed;'>"+idvt['giatien']+" VNĐ</td><td style='border:thin blue solid;border-style:dashed;'>"+chitiet[i].ctnk_thanhtien+" VNĐ</td></tr>";
                  $("#table2").append(txt);   
               }
               
-             var tt = "<td width='480px'>Tổng giá trị nhập</><td width='200px'>"+response['nhapkho'].tongtien+"</td>";
+             var tt = "<td width='480px'>Tổng giá trị nhập</><td width='200px'>"+response['nhapkho'].tongtien+" VND </td>";
 
              $("#tongtien").empty();
                 $("#tongtien").append(tt);  

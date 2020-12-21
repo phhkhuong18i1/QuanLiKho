@@ -114,7 +114,7 @@
                                                 @endforeach
                                             <tr>
                                                     <td colspan="5" align="right"><b><i>Tổng tiền</i></b></td>
-                                                    <td>{!! number_format($xuatkho->tongtien)  !!} vnđ</td>
+                                                    <td>{!! number_format($xuatkho->xk_tongtien)  !!} vnđ</td>
                                                 </tr>
                                             </tbody>
                                         </table>
