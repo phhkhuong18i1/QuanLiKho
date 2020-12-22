@@ -6,6 +6,8 @@ use Illuminate\Support\ServiceProvider;
 use App\Kho;
 use App\NhomVatTu;
 use App\NhaPhanPhoi;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Contracts\Routing\UrlGenerator;
 class AppServiceProvider extends ServiceProvider
 {
     /**
