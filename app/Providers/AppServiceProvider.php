@@ -13,18 +13,14 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
-    {
-        //
-    }
 
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
-    public function boot()
+    public function boot(UrlGenerator $url)
     {
+        Schema::defaultStringLength(191);
+        if(env('REDIRECT_HTTPS')) {
+            $url->formatScheme('https');
+        }
+
         $kho = Kho::all();
         view()->share('kho', $kho);
 
@@ -34,4 +30,18 @@ class AppServiceProvider extends ServiceProvider
         $nhaphanphoi = NhaPhanPhoi::all();
         view()->share('nhaphanphoi',$nhaphanphoi);
     }
+
+     public function register()
+    {
+        if(env('REDIRECT_HTTPS')) {
+            $this->app['request']->server->set('HTTPS', true);
+        }
+    }
+
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    
 }
