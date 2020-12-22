@@ -317,4 +317,12 @@ Route::group(['prefix' => 'qlkho','middleware'=>'userLogin'], function () {
         Route::get('inkho/{id}','App\Http\Controllers\BaoCaoController@getPDFK');
         Route::get('innpp/{id}','App\Http\Controllers\BaoCaoController@getPDFNPP');
     });
+
+    Route::group(['prefix' => 'thongke'], function () {
+        // + Lấy thông tin
+    Route::post('filter-by-day','App\Http\Controllers\ThongKeController@filter_by_date');
+    Route::post('dasboard-filter','App\Http\Controllers\ThongKeController@dasboard_filter');
+    Route::post('chart30days','App\Http\Controllers\ThongKeController@chart30days');
+
+    });
 });

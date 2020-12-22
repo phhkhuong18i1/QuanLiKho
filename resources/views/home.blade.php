@@ -6,10 +6,8 @@
         <!--overview start-->
         <div class="row">
           <div class="col-lg-12">
-            <h3 class="page-header"><i class="fa fa-laptop"></i> Dashboard</h3>
             <ol class="breadcrumb">
               <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
-              <li><i class="fa fa-laptop"></i>Dashboard</li>
             </ol>
           </div>
         </div>
@@ -89,36 +87,37 @@
 
         <div class="row">
             <!-- chart morris start -->
-            <div class="col-lg-12">
-              <section class="panel">
-                <header class="panel-heading">
-                  <h3>General Chart</Char>
-                      </header>
-                      <div class="panel-body">
-                        <div class="tab-pane" id="chartjs">
-                      <div class="row">
-                          <!-- Line -->
-                          <!-- Bar -->
-                          <div class="col-lg-12">
-                              <section class="panel">
-                                  <header class="panel-heading">
-                                      Bar
-                                  </header>
-                                  <div class="panel-body text-center">
-                                      <canvas id="bar" height="300" width="500"></canvas>
-                                  </div>
-                              </section>
-                          </div>
-                      </div>
-                     
-                  </div>
-                      </div>
-                      </div>
-                    </section>
-              </div>
-              <!-- chart morris start -->
-            </div>
+          <p class="title_thongke"><center style="font-size:20px; color:red;">Thống kê doanh số</center></p>
+          <form autocomplete="off">
+           @csrf
+           <div class="col-md-2">
+           <p>Từ ngày: <input type="text" id="datepicker" class="form-control"></p>
+           <input type="button" id="btn-dasboard-filter" class="btn btn-primary btn-sm" value="Lọc kết quả"></p>
+           </div>
 
+           <div class="col-md-2">
+           <p>Đến ngày: <input type="text" id="datepicker2" class="form-control"></p>
+           </div>
+                
+          <div class="col-md-2">
+          <p>
+                Lọc theo: 
+                <select class="dasboard-filter form-control">
+                <option>>------chọn------<</option>
+                <option value="7ngay">7 ngày</option>
+                <option value="thangtruoc">Tháng trước</option>
+                <option value="thangnay">Tháng này</option>
+                <option value="365ngayqua">365 ngày qua</option>
+                </select>
+          </p>
+          </div>
+          </form>
+          </div>
+          <div class="col-md-12">
+              <div id="myfirstchart" style="heigth: 250px;"></div>
+          </div>
+
+        
 
 
         <!-- statics end -->
@@ -127,6 +126,10 @@
 
 
       </section>
-     
     </section>
+@endsection
+@section('script')
+
+
+
 @endsection

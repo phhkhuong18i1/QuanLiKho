@@ -101,7 +101,7 @@
                                                         <option   value=""></option>
                                                     </select>
                                             </div>
-                                            <div class="col-lg-3">
+                                            <div class="col-lg-2">
                                                 <label>Kho:</label>
                                                     <select class="selKho form-control" name="selKho" id="selKho">
                                                         <option>--Chọn--</option>
