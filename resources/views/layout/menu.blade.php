@@ -19,8 +19,6 @@
             
               <li><a class="" href="qlkho/baocao/tonkho">Thống kê tồn kho </a></li>
               <li><a class="" href="qlkho/baocao/doanhthu"> Thống kê doanh thu </a></li>
-              <li><a class="" href="qlkho/baocao/nhomvt"> Thống kê nhập xuất </a></li>
-             
             </ul>
           </li>
 
@@ -31,8 +29,8 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
             <ul class="sub">
-              <li><a class="" href="qlkho/xuatkho/danhsach"> Xuất kho </a></li>
               <li><a class="" href="qlkho/nhapkho/danhsach">Nhập kho </a></li>
+              <li><a class="" href="qlkho/xuatkho/danhsach"> Xuất kho </a></li>
             </ul>
           </li>
 
@@ -54,6 +52,8 @@
               <li><a class="" href="qlkho/chatluong/danhsach">Chất lượng </a></li>
             </ul>
           </li>
+          @if(Auth::check())
+            @if(Auth::user()->role == 1 || Auth::user()->role == 0)
           <li class="sub-menu">
             <a href="javascript:;" class="">
                           <i class="icon_document_alt"></i>
@@ -65,6 +65,8 @@
               <li><a class="" href="qlkho/nhanvien/them">Thêm </a></li>
             </ul>
           </li>
+          @endif
+          @endif
           <li class="sub-menu">
             <a href="qlkho/lienhe" class="">
                           <i class="fa fa-phone"></i>

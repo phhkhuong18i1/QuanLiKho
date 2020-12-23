@@ -31,7 +31,7 @@
                         <div class="row">
                             <div id="acct-password-row" class="span12">
                             <div style="margin-left:auto;" >
-                                <table class="table table-bordered table-hover tablesorter" id="example"  style="width:100%">
+                                <table class="display table table-bordered table-hover " id="example"  style="width:100%">
                                     <thead style="background:#EFEFEF;">
                                     <tr >
                                    

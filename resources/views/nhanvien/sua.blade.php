@@ -82,6 +82,25 @@
                         <input class=" form-control" id="address" name="txtDiaChi" value="{{ $nhanvien->nv_diachi }}" type="text" />
                       </div>
                     </div>
+                    <div class="form-group ">
+                      <label   class="control-label col-lg-2">Phân quyền <span class="required">*</span></label>
+                      <div class="col-lg-10">
+                      <input name="quyen" value="0" 
+                                    @if(Auth::user()->role == 1)
+                                    {{"checked"}}
+                                    @endif
+                                     type="radio">Quản lí
+                                </label>
+                                <label class="radio-inline">
+                                    <input name="quyen" 
+                                    value="1" 
+                                     @if(Auth::user()->role == 2)
+                                    {{"checked"}}
+                                    @endif
+                                    type="radio">Thủ kho
+                                </label>
+                      </div>
+                    </div>
                     <div class="form-group">
                       <div class="col-lg-offset-2 col-lg-10">
                         <button class="btn btn-primary" type="submit">Save</button>

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class KhuVuc extends Model
 {
-    protected $table = 'khuvucv';
+    protected $table = 'khuvuc';
 
     public function Kho()
     {

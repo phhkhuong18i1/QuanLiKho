@@ -16,7 +16,9 @@
           <div class="col-lg-12">
             <section class="panel">
               <header class="panel-heading">
-              <a style="margin-left:38px;" class="btn btn-primary" href="qlkho/donvitinh/them">Thêm&nbsp;<span class="fa fa-plus"></span></a>
+              <div class="text-right">
+              <a  class="btn btn-primary" href="qlkho/donvitinh/them">Thêm&nbsp;<span class="fa fa-plus"></span></a>
+              </div>
               </header>
 
               <table class="display table table-bordered table-hover" id="example">

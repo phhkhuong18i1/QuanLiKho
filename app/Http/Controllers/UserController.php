@@ -88,6 +88,13 @@ class UserController extends Controller
         $nhanvien->nv_diachi = $request->txtDiaChi;
 
         $nhanvien->save();
+
+        $user = User::find(Auth::user()->id);
+            $user->name = $request->txtTen;
+            $user->role = $request->quyen;
+            $user->save();
+
+
         return redirect('qlkho/nhanvien/sua/'.$id)->with('thongbao', 'Sửa thành công');
     }
 
@@ -134,7 +141,7 @@ class UserController extends Controller
         $user->name = $request->txtTen;
         $user->email = $request->txtEmail;
         $user->password = bcrypt($request->txtPass);
-        $user->role = 0;
+        $user->role = 2;
         $user->save();
 
         $nhanvien = new NhanVien;

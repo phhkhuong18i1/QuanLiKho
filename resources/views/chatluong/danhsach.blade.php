@@ -17,7 +17,9 @@
           <div class="col-lg-12">
             <section class="panel">
               <header class="panel-heading">
-              <a style="margin-left:50px;" class="btn btn-primary" href="qlkho/chatluong/them">Thêm&nbsp;<span class="fa fa-plus"></span></a>
+              <div class="text-right">
+              <a  class="btn btn-primary" href="qlkho/chatluong/them">Thêm&nbsp;<span class="fa fa-plus"></span></a>
+              </div>
               </header>
               @if (session('thongbao'))
                     <div class="col-lg-12 alert alert-success">

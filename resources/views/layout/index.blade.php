@@ -179,6 +179,21 @@ $("#btn-dasboard-filter").click(function(){
    );
    });
 
+   $('#example').DataTable({
+            responsive: true,
+            ordering: false,
+            scrollX: true,
+            scrollY: 300
+        });
+
+        $('#dataTable-example').DataTable({
+            responsive: true,
+            ordering: false,
+            scrollX: true,
+            scrollY: 300
+        });
+</script>
+<script>
     $(document).ready(function() {
         $('#example').DataTable({
             responsive: true,
