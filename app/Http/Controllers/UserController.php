@@ -48,14 +48,23 @@ class UserController extends Controller
 
     public function getDanhSach()
     {
-        $nhanvien = NhanVien::all();
+        if(Auth::user()->role == 1)
+        {
+        $nhanvien = User::where('role','2')->get();
         return view('nhanvien.danhsach', ['nhanvien' => $nhanvien]);
+        }
+        else
+        {
+            $nhanvien = User::all();
+            return view('nhanvien.danhsach', ['nhanvien' => $nhanvien]);
+        }
     }
 
     public function getSua($id)
     {   
         $nhanvien = NhanVien::find($id);
-        return view('nhanvien.sua', ['nhanvien' => $nhanvien]);
+        $user = User::find($id);
+        return view('nhanvien.sua', ['nhanvien' => $nhanvien,'user'=>$user]);
     }
 
     public function postSua(Request $request, $id)
@@ -89,7 +98,7 @@ class UserController extends Controller
 
         $nhanvien->save();
 
-        $user = User::find(Auth::user()->id);
+        $user = User::find($id);
             $user->name = $request->txtTen;
             $user->role = $request->quyen;
             $user->save();

@@ -109,12 +109,14 @@
     </table><br><br>
        <table  cellpadding="3px" style="border:thin solid;" >
       <thead>
-        <tr>
+        <>
           <td style="border:thin solid;" width="50px"><strong>STT</strong></td>
           <td style="border:thin solid;" width="150px"><strong>Vật tư</strong></td>
           <td style="border:thin solid;" width="50px"><strong>Số lượng</strong></td>
           <td style="border:thin solid;" width="150px"><strong>Đơn giá</strong></td>
           <td style="border:thin solid;" width="200px"><strong>Thành tiền</strong></td>
+          <td style="border:thin solid;" width="200px"><strong>Kho</strong></td>
+        
         </tr>
       </thead>
       <tbody id="table2" >
@@ -126,7 +128,7 @@
               <td  ></td>
               <td  >
               </td>
-              
+              <td   > </td>
               <td   > </td>
           </tr>
             
@@ -203,8 +205,12 @@ function render(response)
               for(var i = 0; i<ten; i++)
               { var stt= i+1;
                  var idvt = chitiet[i]['vattu'];
+                 var idkho = chitiet[i]['kho']
                var txt = "<tr><td style='border:thin blue solid;border-style:dashed;'>"+stt+"</td><td style='border:thin blue solid;border-style:dashed;'>"+idvt['vt_ten']+
-                "</td><td style='border:thin blue solid;border-style:dashed;'>"+chitiet[i].ctnk_soluong+"</td><td style='border:thin blue solid;border-style:dashed;'>"+idvt['giatien']+" VNĐ</td><td style='border:thin blue solid;border-style:dashed;'>"+chitiet[i].ctnk_thanhtien+" VNĐ</td></tr>";
+                "</td><td style='border:thin blue solid;border-style:dashed;'>"+chitiet[i].ctnk_soluong+"</td><td style='border:thin blue solid;border-style:dashed;'>"+idvt['giatien']+
+                " VNĐ</td><td style='border:thin blue solid;border-style:dashed;'>"+chitiet[i].ctnk_thanhtien+
+                " VNĐ</td><td style='border:thin blue solid;border-style:dashed;'>"+idkho['kho_ten']+
+                " </td></tr>";
                  $("#table2").append(txt);   
               }
               

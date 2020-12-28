@@ -43,16 +43,16 @@
                     <tbody>
                         @foreach ($nhanvien as $item)
                             <tr class="odd gradeX" align="center">
-                                <td>{{ $item->nv_ten }}</td>
-                                <td>{{ $item->email}}</td>
-                                <td>{{  $item->nv_sdt  }} </td>
-                                <td> @if($item->GioiTinh == 1)
+                                <td>{{ $item->nhanvien->nv_ten }}</td>
+                                <td>{{ $item->nhanvien->email}}</td>
+                                <td>{{  $item->nhanvien->nv_sdt  }} </td>
+                                <td> @if($item->nhanvien->GioiTinh == 1)
                                     {{"Nam"}}
                                     @else
                                     {{"Nữ"}}
                                     @endif</td>
-                               <td>{{$item->CMND}}</td>
-                               <td> {{$item->nv_diachi}}</td>
+                               <td>{{$item->nhanvien->CMND}}</td>
+                               <td> {{$item->nhanvien->nv_diachi}}</td>
                                 <td class="center">
                                     <a class="btn btn-danger" href="qlkho/nhanvien/xoa/{{ $item->id }}">
                                         <i class="fa fa-trash-o fa-fw"></i>Xóa

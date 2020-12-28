@@ -17,4 +17,9 @@ class ChiTietNhapKho extends Model
     {
         return $this->belongsTo('App\VatTu', 'vt_id', 'id');
     }
+    public function kho()
+    {
+        return $this->belongsTo('App\Kho', 'kho_id', 'id');
+    }
 }
+

@@ -54,6 +54,7 @@ class NhapKhoController extends Controller
 			$chitiet->ctnk_thanhtien = $item->qty*$item->price;
 			$chitiet->vt_id = $item->id;
 			$chitiet->pnk_id = $nhapkho->id;
+			$chitiet->kho_id = $item->option->idkho;
 			$chitiet->save();
 			$vt = DB::table('vattukho')
 				->where(
@@ -86,7 +87,7 @@ class NhapKhoController extends Controller
 		}
 
 		Cart::destroy();
-		return redirect('qlkho/nhapkho/nhap')->with(['flash_level'=>'success','flash_message'=>'Thêm thành công!!!']);
+		return redirect('qlkho/nhapkho/nhap')->with('thongbao', 'nhập kho thành công');
     }
     public function postNhaphang(Request $request)
 	{
@@ -324,7 +325,8 @@ class NhapKhoController extends Controller
         $chitietnk = ChiTietNhapKho::where('pnk_id',$id)->get();
         foreach($chitietnk as $nk)
         {
-            $nk->vattu;
+			$nk->vattu;
+			$nk->kho;
         }
         $nv = DB::table('nhanvien')->where('id',$nhapkho->nv_id)->first();
         $npp = DB::table('nhaphanphoi')->where('id',$nhapkho->npp_id)->first();

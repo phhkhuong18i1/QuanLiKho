@@ -84,20 +84,7 @@ class ThongKeController extends Controller
         }
 
         
-        if(empty($get))
-        {
-            foreach($get1 as $key => $val)
-            {
-                
-                $chart_data[] = array(
-                    'preiod' => $val->date,
-                    'order' => $val->SoDon,
-                    'profit' => $val->TongTien,
-                    'quantify' => $val->SoLuong
-    
-                );
-        }
-    }else{
+        
             
         foreach($get as $key => $val)
         {
@@ -111,8 +98,22 @@ class ThongKeController extends Controller
             );
         
         }
+    
+        echo $data = json_encode($chart_data);
     }
 
-        echo $data = json_encode($chart_data);
+    public function getDoanhThu()
+    {
+        $doanhthu = ThongKe::all();
+        return view('baocao.doanhthu',['doanhthu'=>$doanhthu]);
+    }
+
+    public function filter_day(Request $req)
+    {
+        
+            $from_date = $req->from_date;
+            $to_date = $req->to_date;
+            $doanhthu = ThongKe::whereBetween('date',[$from_date,$to_date])->orderBy('date','ASC')->get();
+            return view('baocao.doanhthu_ajax',['doanhthu'=>$doanhthu]);
     }
 }

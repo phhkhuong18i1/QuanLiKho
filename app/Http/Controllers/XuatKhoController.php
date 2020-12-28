@@ -295,6 +295,7 @@ class XuatKhoController extends Controller
         foreach($chitiet as $xk)
         {
             $xk->vattu;
+            $xk->kho;
         }
         $nv = DB::table('nhanvien')->where('id',$xuatkho->nv_id)->first();
         $ct = DB::table('congtrinh')->where('id',$xuatkho->congtrinh_id)->first();

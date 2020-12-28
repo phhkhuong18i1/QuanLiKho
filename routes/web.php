@@ -323,6 +323,9 @@ Route::group(['prefix' => 'qlkho','middleware'=>'userLogin'], function () {
     Route::post('filter-by-day','App\Http\Controllers\ThongKeController@filter_by_date');
     Route::post('dasboard-filter','App\Http\Controllers\ThongKeController@dasboard_filter');
     Route::post('chart30days','App\Http\Controllers\ThongKeController@chart30days');
+    
+    Route::get('doanhthu','App\Http\Controllers\ThongKeController@getDoanhThu');
+    Route::post('filter-day','App\Http\Controllers\ThongKeController@filter_day');
 
     });
 });

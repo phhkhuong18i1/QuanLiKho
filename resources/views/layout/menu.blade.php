@@ -18,7 +18,7 @@
             <ul class="sub">
             
               <li><a class="" href="qlkho/baocao/tonkho">Thống kê tồn kho </a></li>
-              <li><a class="" href="qlkho/baocao/doanhthu"> Thống kê doanh thu </a></li>
+              <li><a class="" href="qlkho/thongke/doanhthu"> Thống kê doanh thu </a></li>
             </ul>
           </li>
 
