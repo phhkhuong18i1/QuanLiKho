@@ -47,7 +47,7 @@
                                 <td>{{ $item->khuvuc->kv_ten }}</td>
                                
                                 <td class="center">
-                                    <a class="btn btn-danger" href="qlkho/nhasanxuat/xoa/{{ $item->id }}">
+                                    <a onclick="return confirm('Bạn có chắc muốn xóa dữ liệu này?')" class="btn btn-danger" href="qlkho/nhasanxuat/xoa/{{ $item->id }}">
                                         <i class="fa fa-trash-o fa-fw"></i>Xóa
                                     </a>
                                 </td>

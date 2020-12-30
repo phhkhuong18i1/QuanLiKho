@@ -55,7 +55,8 @@
           <td style="border:thin solid;" width="150px"><strong>Vật tư</strong></td>
           <td style="border:thin solid;" width="50px"><strong>Số lượng</strong></td>
           <td style="border:thin solid;" width="150px"><strong>Đơn giá</strong></td>
-          <td style="border:thin solid;" width="200px"><strong>Thành tiền</strong></td>
+          <td style="border:thin solid;" width="150px"><strong>Thành tiền</strong></td>
+          <td style="border:thin solid;" width="200px"><strong>Kho</strong></td>
         </tr>
       </thead>
       <tbody>
@@ -75,6 +76,7 @@
               </td>
               
               <td style="border:thin blue solid;border-style:dashed;" >{!! number_format($val->ctnk_thanhtien) !!} vnđ </td>
+              <td style="border:thin blue solid;border-style:dashed;" >{!! $val->kho->kho_ten !!}  </td>
           </tr>
             @endforeach
             

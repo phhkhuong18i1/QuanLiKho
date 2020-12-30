@@ -64,9 +64,9 @@
           <span class="input-group-addon"><i class="icon_profile"></i></span>
           <input type="email" class="form-control" name="email" placeholder="E-mail" autofocus>
         </div>
-        <button class="btn btn-primary btn-lg btn-block" type="submit">Continue</button>
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Tiếp tục</button>
         <br>
-        <center>You don't have account?<a  href="qlkho/dangki"><b> Signup </b></a></center>
+        <center><a  href="qlkho/dangnhap"><b> Quay lại </b></a></center>
       </div>
     </form>
    

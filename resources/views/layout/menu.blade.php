@@ -5,7 +5,7 @@
           <li class="active">
             <a class="" href="qlkho/index">
                           <i class="icon_house_alt"></i>
-                          <span>Dashboard</span>
+                          <span>Trang chủ</span>
                       </a>
           </li>
      

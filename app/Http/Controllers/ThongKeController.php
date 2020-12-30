@@ -116,4 +116,39 @@ class ThongKeController extends Controller
             $doanhthu = ThongKe::whereBetween('date',[$from_date,$to_date])->orderBy('date','ASC')->get();
             return view('baocao.doanhthu_ajax',['doanhthu'=>$doanhthu]);
     }
+
+    public function timkiemtheo(Request $req)
+    {
+        $data = $req->all();
+
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+        $dauthangnay = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->toDateString();
+        $dauthangtruoc = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->startOfMonth()->toDateString();
+        $cuoithangtruoc = Carbon::now('Asia/Ho_chi_Minh')->subMonth()->endOfMonth()->toDateString();
+
+        $sub7ngay = Carbon::now('Asia/Ho_Chi_Minh')->subdays(7)->toDateString();
+        $sub365ngay = Carbon::now('Asia/Ho_Chi_Minh')->subdays(365)->toDateString();
+
+        $get1 = ThongKe::whereBetween('date',[$dauthangnay,$now])->orderBy('date','ASC')->get();
+
+        if($data['dasboard_value'] == '7ngay')
+        {
+            $doanhthu = ThongKe::whereBetween('date',[$sub7ngay,$now])->orderBy('date','ASC')->get();
+        }
+        elseif($data['dasboard_value'] == 'thangtruoc')
+        {
+            $doanhthu = ThongKe::whereBetween('date',[$dauthangtruoc,$cuoithangtruoc])->orderBy('date','ASC')->get();
+        }
+
+        elseif($data['dasboard_value'] == 'thangnay')
+        {
+            $doanhthu = ThongKe::whereBetween('date',[$dauthangnay,$now])->orderBy('date','ASC')->get();
+        }
+        else{
+            $doanhthu = ThongKe::whereBetween('date',[$sub365ngay,$now])->orderBy('date','ASC')->get();
+        }
+
+        
+        return view('baocao.doanhthu_ajax',['doanhthu'=>$doanhthu]);
+    }
 }

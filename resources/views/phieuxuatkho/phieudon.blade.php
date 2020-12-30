@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     
-    <title>Phiếu nhập kho</title>
+    <title>Phiếu xuất kho</title>
     <style>
       body{
         font-family: DejaVu Sans, sans-serif, font-size: 10px;
@@ -59,7 +59,8 @@
           <td style="border:thin solid;" width="150px"><strong>Vật tư</strong></td>
           <td style="border:thin solid;" width="50px"><strong>Số lượng</strong></td>
           <td style="border:thin solid;" width="150px"><strong>Đơn giá</strong></td>
-          <td style="border:thin solid;" width="200px"><strong>Thành tiền</strong></td>
+          <td style="border:thin solid;" width="150px"><strong>Thành tiền</strong></td>
+          <td style="border:thin solid;" width="200px"><strong>Xuất từ kho</strong></td>
         </tr>
       </thead>
       <tbody>
@@ -79,6 +80,7 @@
               </td>
               
               <td style="border:thin blue solid;border-style:dashed;" >{!! number_format($val->ctxk_thanhtien) !!} vnđ </td>
+              <td style="border:thin blue solid;border-style:dashed;" >{!! $val->kho->kho_ten !!}  </td>
           </tr>
             @endforeach
             

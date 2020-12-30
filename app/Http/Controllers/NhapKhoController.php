@@ -8,6 +8,7 @@ use App\ChiTietNhapKho;
 use App\VatTuKho;
 use App\Kho;
 use App\VatTu;
+use App\NhanVien;
 use PDF;
 use DB;
 use Cart;
@@ -54,7 +55,7 @@ class NhapKhoController extends Controller
 			$chitiet->ctnk_thanhtien = $item->qty*$item->price;
 			$chitiet->vt_id = $item->id;
 			$chitiet->pnk_id = $nhapkho->id;
-			$chitiet->kho_id = $item->option->idkho;
+			$chitiet->kho_id = $item->options->idKho;
 			$chitiet->save();
 			$vt = DB::table('vattukho')
 				->where(
@@ -95,7 +96,7 @@ class NhapKhoController extends Controller
             $id = $request->get('id');
             $qty = $request->get('qty');
             $vt = DB::table('vattu')
-            	->where('vattu.id',$id)
+            	->where('vattu.id',$id) 
             	->join('donvitinh','donvitinh.id','=','vattu.donvitinh_id')
 				->select('vattu.*','donvitinh.dvt_ten')
             	->first();
@@ -301,10 +302,10 @@ class NhapKhoController extends Controller
 
     public function getPDF($id)
     {
-        $nhapkho = DB::table('phieunhapkho')->where('id',$id)->first();
-        $chitiet = DB::table('chitietnhapkho')->where('pnk_id',$id)->get();
-        $nv = DB::table('nhanvien')->where('id',$nhapkho->nv_id)->first();
-        $npp = DB::table('nhaphanphoi')->where('id',$nhapkho->npp_id)->first();
+        $nhapkho = PhieuNhapKho::where('id',$id)->first();
+        $chitiet = ChiTietNhapKho::where('pnk_id',$id)->get();
+        $nv = NhanVien::where('id',$nhapkho->nv_id)->first();
+        $npp = NhaPhanPhoi::where('id',$nhapkho->npp_id)->first();
         // print_r($khachhang);
         $pdf = PDF::loadView('phieunhapkho.phieu',compact('nhapkho','chitiet','nv','npp'));
         return $pdf->stream();

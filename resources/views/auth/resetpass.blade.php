@@ -54,20 +54,20 @@
                             </div>
                         @endif
 
-    <form style="margin:100px auto 0;" class="login-form" action="qlkho/dangnhap" method="POST">
+    <form style="margin:100px auto 0;" class="login-form" action="" method="POST">
     @csrf
       <div class="login-wrap">
         <p class="login-img"><i class="icon_lock_alt"></i></p>
         <div class="input-group">
-          <span class="input-group-addon"><i class="icon_profile"></i></span>
-          <input type="text" class="form-control" name="password" placeholder="Password" autofocus>
+          <span class="input-group-addon"><i class="icon_key_alt"></i></span>
+          <input type="password" class="form-control" name="password" placeholder="Password" autofocus>
         </div>
         <div class="input-group">
           <span class="input-group-addon"><i class="icon_key_alt"></i></span>
           <input type="password" class="form-control" name="passwordAgain" placeholder="PasswordAgain">
         </div>
         
-        <button class="btn btn-primary btn-lg btn-block" type="submit">Change Password</button>
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Đổi mật khẩu</button>
         <br>
         
       </div>

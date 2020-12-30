@@ -207,7 +207,7 @@ Route::group(['prefix' => 'qlkho','middleware'=>'userLogin'], function () {
             return Response::json($country);
         });
 
-        Route::get('nhaphang/{id}/{qty}', ['as' => 'qlkho.nhapkho.postNhaphang','uses' => 'App\Http\Controllers\NhapkhoController@postNhaphang']);
+        Route::get('nhaphang/{id}/{qty}', 'App\Http\Controllers\NhapkhoController@postNhaphang');
         Route::get('xoaCart/{rowId}','App\Http\Controllers\NhapkhoController@getXoaCart');
         Route::get('SaveCart-list/{rowId}/{qty}','App\Http\Controllers\NhapkhoController@getSaveListCart');
         Route::get('SaveCart-list1/{rowId}/{qty}','App\Http\Controllers\NhapkhoController@getSaveListCart1');
@@ -326,6 +326,7 @@ Route::group(['prefix' => 'qlkho','middleware'=>'userLogin'], function () {
     
     Route::get('doanhthu','App\Http\Controllers\ThongKeController@getDoanhThu');
     Route::post('filter-day','App\Http\Controllers\ThongKeController@filter_day');
+    Route::post('timkiemtheo','App\Http\Controllers\ThongKeController@timkiemtheo');
 
     });
 });

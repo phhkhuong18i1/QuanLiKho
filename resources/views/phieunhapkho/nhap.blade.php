@@ -14,12 +14,16 @@
         <!-- Form validations -->
 
         <div class="row">
-        @if (Session::has('flash_message'))
-                            <div class="alert alert-{!! Session::get('flash_level') !!}">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                {!! Session::get('flash_message') !!}
-                            </div>
-                        @endif
+        @if (session('loi'))
+                        <div class="alert alert-danger">
+                            <strong>{{ session('loi') }}</strong>
+                        </div>
+                    @endif
+                    @if (session('thongbao'))
+                        <div class="alert alert-success">
+                            <strong>{{ session('thongbao') }}</strong>
+                        </div>
+                    @endif
     <div style="margin-left:20px" class="span13">
         <div class="box">
             <div class="box-header">
@@ -35,7 +39,7 @@
                                 <div id="acct-password-row" class="span8" style="margin-left:100px" >
                                     <fieldset>
                                     <div class="col-lg-3">
-                                            <label>Tên NPP:</label>
+                                            <label>Tên nhà phân phối:</label>
                                             <select  class="form-control" name="state_id" id="state_id">
                                                 <option>--Chọn--</option>
                                                 @foreach($data as $item)
@@ -114,7 +118,7 @@
                                                 <label>Số lượng:</label>
                                                     <input type="number" name="sluong" id="sluong" class="sluong form-control" min="0" onkeypress="return isNumberKey(event)">
                                             </div>
-                                                <a  style="margin-left: 15px; margin-top: 24px" href="#" class="add1 btn btn-primary" type="submit"><i class="fa fa-plus"></i></a>
+                                                <a  style="margin-left: 15px; margin-top: 24px"  class=" btn btn-primary" onclick="addCart()" ><i class="fa fa-plus"></i></a>
                                             </div>
                                         </fieldset>
                                     </div>
@@ -178,18 +182,15 @@
 @section('script')
 @include('layout.script')
 <script> 
-        $(document).ready(function(){
-            $(document).on('click','.add1',function(e) {
-              // var id = $(this).attr('.selVT1');
-              e.preventDefault();
-              // alert(id);
-                //var idnpp = $(this).parent().parent().find(".npp").val();
-                var idKho = $(this).parent().parent().find(".selKho").val();
-                var id = $(this).parent().parent().find(".selVT1").val();
-                var qty = $(this).parent().parent().find(".sluong").val();
+       function addCart()
+       {
+             
+                var idKho = $(".selKho").val();
+                var id = $(".selVT1").val();
+                var qty = $(".sluong").val();
                 var token = $("input[name='_token']").val();
                  //alert(id);
-                // alert(token);
+                 // alert(token);
                 $.ajax({
                     url:'qlkho/nhapkho/nhaphang/'+id+'/'+qty,
                     type:'GET',
@@ -197,16 +198,15 @@
                     data:{"_token":token,"id":id,"qty":qty,"idKho":idKho},
                     success: function(data) {
                         if(data == "oke") {
-                        window.location ="qlkho/nhapkho/nhap"
-                        
+                        window.location ="qlkho/nhapkho/nhap";
                         }
                         else {
                          alert("Error!");
                         }
                     }
                 });
-            });
-        });
+            
+        }
 
      
      function DeleteListItemCart(id)

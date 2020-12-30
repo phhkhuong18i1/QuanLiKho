@@ -11,7 +11,7 @@
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
   <link rel="shortcut icon" href="img/favicon.png">
 
-  <title>Elements | Creative - Bootstrap 3 Responsive Admin Template</title>
+  <title> Ứng dụng quản lý kho vật liệu xây dựng</title>
 
   
   <!-- Bootstrap CSS -->
@@ -49,7 +49,7 @@
     ======================================================= -->
 </head>
 
-<body>
+<body style="font-family: Arial;">
 
   <!-- container section start -->
   <section id="container" class="">

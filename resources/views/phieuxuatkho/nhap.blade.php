@@ -14,6 +14,16 @@
         <!-- Form validations -->
 
         <div class="row">
+        @if (session('loi'))
+                        <div class="alert alert-danger">
+                            <strong>{{ session('loi') }}</strong>
+                        </div>
+                    @endif
+                    @if (session('thongbao'))
+                        <div class="alert alert-success">
+                            <strong>{{ session('thongbao') }}</strong>
+                        </div>
+                    @endif
         <div style="margin-left:20px" class="span13">
         <div class="box">
             <div class="box-header">
@@ -29,7 +39,7 @@
                                 <div id="acct-password-row" class="span8" style="margin-left:100px">
                                     <fieldset>
                                         <div class="col-lg-3">
-                                            <label>Tên CT:</label>
+                                            <label>Tên công trình:</label>
                                             <select  class="form-control" name="selCT" id="selCT">
                                                 <option>--Chọn--</option>
                                                 @foreach($data as $item)

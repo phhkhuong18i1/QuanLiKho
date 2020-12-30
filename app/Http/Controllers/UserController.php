@@ -253,7 +253,6 @@ class UserController extends Controller
     public function sendCodeResetPass(Request $request)
     {
         $email = $request->email;
-
         $check = User::where('email',$email)->first();
 
         if(!$check)

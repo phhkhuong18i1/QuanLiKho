@@ -42,7 +42,6 @@
                         <td style="border:thin blue solid;border-style:dashed;" >
                             {{ $value->xk_tongtien }}
                         </td>
-                       
                         <td style="border:thin blue solid;border-style:dashed;">{{ $value->congtrinh->ten }}</td>
                         <td style="border:thin blue solid;border-style:dashed;">{{ $value->congtrinh->diachi }}</td>
                     </tr>

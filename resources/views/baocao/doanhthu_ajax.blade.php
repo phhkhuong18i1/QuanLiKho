@@ -14,7 +14,7 @@
                                             <td>{!! $val->date !!}</td>
                                             <td>{!! $val->SoLuong !!}</td>
                                             <td>{!! $val->SoDon !!}</td>
-                                            <td>{!! $val->TongTien !!} VNĐ</td>
+                                            <td>{!! number_format($val->TongTien) !!} VNĐ</td>
                             
                                         </tr>
                                           @endforeach  

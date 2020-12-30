@@ -47,7 +47,7 @@
                             <td>{{$item->cl_ma}}</td>
                                 <td>{{ $item->cl_ten }}</td>
                                 <td class="center">
-                                    <a class="btn btn-danger" href="qlkho/chatluong/xoa/{{ $item->id }}">
+                                    <a onclick="return confirm('Bạn có chắc muốn xóa dữ liệu này?')" class="btn btn-danger" href="qlkho/chatluong/xoa/{{ $item->id }}">
                                         <i class="fa fa-trash-o fa-fw"></i>Xóa
                                     </a>
                                 </td>

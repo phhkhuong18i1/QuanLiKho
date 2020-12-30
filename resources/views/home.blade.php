@@ -7,7 +7,7 @@
         <div class="row">
           <div class="col-lg-12">
             <ol class="breadcrumb">
-              <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
+              <li><i class="fa fa-home"></i>Trang chủ</li>
             </ol>
           </div>
         </div>
@@ -92,7 +92,7 @@
            @csrf
            <div class="col-md-2">
            <p>Từ ngày: <input type="text" id="datepicker" class="form-control"></p>
-           <input type="button" id="btn-dasboard-filter" class="btn btn-primary btn-sm" value="Lọc kết quả"></p>
+           <input type="button" id="btn-dasboard-filter" class="btn btn-primary btn-sm" value="Tìm kiếm"></p>
            </div>
 
            <div class="col-md-2">

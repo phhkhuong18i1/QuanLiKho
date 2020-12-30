@@ -55,7 +55,7 @@
                                 <td>{{ number_format($item->tongtien,0,",",".") }} VNĐ</td>
                                 <td>{{$item->nhanvien->nv_ten}}</td>
                                 <td class="center">
-                                    <a class="btn btn-danger" href="qlkho/nhapkho/xoa/{{ $item->id }}">
+                                    <a onclick="return confirm('Bạn có chắc muốn xóa dữ liệu này?')" class="btn btn-danger" href="qlkho/nhapkho/xoa/{{ $item->id }}">
                                         <i class="fa fa-trash-o fa-fw"></i>Xóa
                                     </a>
                                 </td>

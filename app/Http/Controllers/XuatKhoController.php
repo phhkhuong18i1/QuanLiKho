@@ -9,6 +9,7 @@ use App\VatTuKho;
 use App\CongTrinh;
 use App\VatTu;
 use App\Kho;
+use App\NhanVien;
 use App\ThongKe;
 use PDF;
 use DB;
@@ -320,10 +321,10 @@ class XuatKhoController extends Controller
 
     public function getPhieuDon($id)
     {
-        $xuatkho = DB::table('phieuxuatkho')->where('id',$id)->first();
-        $chitiet = DB::table('chitietxuatkho')->where('phieuxuatkho_id',$id)->get();
-        $nv = DB::table('nhanvien')->where('id',$xuatkho->nv_id)->first();
-        $ct = DB::table('congtrinh')->where('id',$xuatkho->congtrinh_id)->first();
+        $xuatkho = PhieuXuatKho::where('id',$id)->first();
+        $chitiet = ChiTietXuatKho::where('phieuxuatkho_id',$id)->get();
+        $nv = NhanVien::where('id',$xuatkho->nv_id)->first();
+        $ct = CongTrinh::where('id',$xuatkho->congtrinh_id)->first();
       
         $pdf = PDF::loadView('phieuxuatkho.phieudon',compact('xuatkho','chitiet','nv','ct'));
         return $pdf->stream();

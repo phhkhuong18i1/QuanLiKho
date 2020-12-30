@@ -67,9 +67,9 @@
           <input type="password" class="form-control" name="password" placeholder="Password">
         </div>
         <label class="checkbox">
-                <span class="pull-right"> <a href="lay-lai-mat-khau"><b> Forgot Password?</b></a></span>
+                <span class="pull-right"> <a href="lay-lai-mat-khau"><b style="color: red;"> Quên mật khẩu?</b></a></span>
          </label>
-        <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Đăng nhập</button>
       </div>
     </form>
    
