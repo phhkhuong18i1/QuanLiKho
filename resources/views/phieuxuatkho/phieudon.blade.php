@@ -88,7 +88,7 @@
     </table>
     <table class="sumary-table">
       <tr>
-        <td width="480px">Tổng giá trị nhập</td>
+        <td width="440px">Tổng giá trị nhập</td>
         <td width="200px">{!! number_format($xuatkho->xk_tongtien) !!} vnđ</td>
       </tr>
     </table><br>
@@ -97,7 +97,7 @@
       <td width="200px"></td>
         <td width="200px"></td>
         
-        <td  >Nhập,Ngày lập: <?php echo date("d-m-Y") ?></td>
+        <td  >Xuất,Ngày lập: <?php echo date("d-m-Y") ?></td>
       </tr>
       <tr>
         <td width="250px" class="customer-title"> </td>

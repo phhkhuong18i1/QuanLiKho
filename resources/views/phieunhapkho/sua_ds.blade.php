@@ -21,7 +21,8 @@
                                                         <td>{!! $vt->vt_ten !!}</td>
                                                         <td>{!! $dvt->dvt_ten !!}</td>
                                                         <td> <input id="quanty-item-{{$vt->id}}"  required type="number" value="{{$val->ctnk_soluong}}" min="0" max="100" />
-                                                        <input type="hidden" name="" value="{{ $nhapkho->id }}" class="nkID"></td>
+                                                        <input type="hidden" name="" value="{{ $nhapkho->id }}" class="nkID">
+                                                        <input type="hidden" value="{{$val->kho_id}}" class="khoid"></td>
                                                         <td>{!!  number_format($vt->giatien) !!}vnd</td>
                                                         <td>{!! number_format($val->ctnk_thanhtien)  !!} vnd</td>
                                                         <td><i class="fa fa-times" onclick="DeleteListItemCart({{$vt->id}})"></i></td>

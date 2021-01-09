@@ -2,7 +2,7 @@
      
 
       <!--logo start-->
-      <a href="qlkho/baocao/tonkho" class="logo"><b>Thống Kê</b></a>
+      <a href="qlkho/baocao/tonkho" class="logo" style="color: red;"><b>Thống Kê</b></a>
       <!--logo end-->
      
    <?php 
@@ -18,7 +18,7 @@
           <!-- task notificatoin start -->
           <li id="task_notificatoin_bar" class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="" >
-                            <label><b> Kho</b></label>
+                            <label style="color: red;"><b> Kho</b></label>
                            
                         </a>
             <ul class="dropdown-menu extended tasks-bar">
@@ -42,7 +42,7 @@
           <!-- inbox notificatoin start-->
           <li id="mail_notificatoin_bar" class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#" >
-                           <label><b> nhóm vật tư</b></label>
+                           <label style="color: red;"><b> nhóm vật tư</b></label>
                         </a>
             <ul class="dropdown-menu extended inbox">
               <div class="notify-arrow notify-arrow-blue"></div>
@@ -67,7 +67,7 @@
           <li id="alert_notificatoin_bar" class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
 
-            <label><b> Nhà Phân Phối</b></label>
+            <label style="color: red;"><b> Nhà Phân Phối</b></label>
                         </a>
             <ul class="dropdown-menu extended notification">
               <div class="notify-arrow notify-arrow-blue"></div>

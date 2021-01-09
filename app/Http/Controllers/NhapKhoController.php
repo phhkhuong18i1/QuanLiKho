@@ -19,7 +19,7 @@ class NhapKhoController extends Controller
 {
     public function getDanhSach()
     {
-        $pnk = PhieuNhapKho::all();
+        $pnk = PhieuNhapKho::orderBy('ngaylap','DESC')->get();
         return view('phieunhapkho.danhsach', ['pnk' => $pnk]);
     }
 
@@ -38,9 +38,26 @@ class NhapKhoController extends Controller
     }
     public function postList(Request $request)
 	{
+		$this->validate($request,
+    
+        [   'state_id' => 'required',
+            'txtLyDo' => 'required',
+           ],
+        [
+            'state_id.required' => 'Chưa chọn nhà phân phối',
+            'txtLyDo.required' => 'Chưa nhập lý do',
+        ]
+        
+        
+    );
 		$id_user = $request->input('txtNV');
 		$content = Cart::content();
 		$total = Cart::subtotal(0,".","");
+		if(count($content) == 0)
+		{
+			return redirect('qlkho/nhapkho/nhap')->with('thongbao','Chưa có vật tư');
+		}
+		else{
 		$nhapkho = new PhieuNhapKho;
         $nhapkho->ma = $request->input('txtID');
         $nhapkho->lydo =$request->input('txtLyDo');
@@ -88,8 +105,10 @@ class NhapKhoController extends Controller
 		}
 
 		Cart::destroy();
-		return redirect('qlkho/nhapkho/nhap')->with('thongbao', 'nhập kho thành công');
-    }
+
+		return redirect('qlkho/nhapkho/xemNK');
+	}
+}
     public function postNhaphang(Request $request)
 	{
 		if($request->ajax()) {
@@ -153,9 +172,11 @@ class NhapKhoController extends Controller
         
       
 		$nkID = $request->get('nkID');
-		if ($quanty == 0) { 
-			
-			
+		$khoid = $request->khoid;
+		$slnhap = VatTuKho::where('vattu_id',$id)->where('kho_id',$khoid)->first();
+	
+		if ($quanty == 0) {  
+		$ct = ChiTietNhapKho::where('vt_id',$id)->where('pnk_id',$nkID)->first();
 			DB::table('chitietnhapkho')
 			->where('vt_id',$id)
 			->where('pnk_id',$nkID)
@@ -166,6 +187,7 @@ class NhapKhoController extends Controller
             DB::table('chitietnhapkho')
 			->where('vt_id',$id)
 			->where('pnk_id',$nkID)
+			->where('kho_id',$khoid)
 			->update([
 					'ctnk_soluong' => $quanty,
 					'ctnk_thanhtien' => $quanty * $vt->giatien,
@@ -179,18 +201,36 @@ class NhapKhoController extends Controller
 				->update([
 					'tongtien' =>$tong
 					]);
-					if($tong == 0)
-					{
-						DB::table('phieunhapkho')
-						->where('id',$nkID)
-						->delete();
-					}
+			DB::table('vattukho')->where('vattu_id',$id)
+				->where('kho_id',$khoid)
+				->update([
+						'soluong_nhap' => $slnhap->soluong_nhap - $ct->ctnk_soluong,
+						'soluong_ton' => $slnhap->soluong_ton - $ct->ctnk_soluong
+					]);
+					$nhapkho = DB::table('phieunhapkho')->where('id',$nkID)->first();
+					$chitiet = DB::table('chitietnhapkho')->where('pnk_id',$nkID)->get();
+					return view('phieunhapkho.sua_ds',['chitiet'=>$chitiet,'nhapkho'=>$nhapkho]);
 		}
 		else{
-		  
-		
-           
-           
+			$sl = ChiTietNhapKho::where('vt_id',$id)->where('pnk_id',$nkID)->first();
+            if($quanty < $sl->ctnk_soluong )
+            {
+                $trudi = $sl->ctnk_soluong - $quanty;
+				DB::table('vattukho')->where('vattu_id',$id)
+				->where('kho_id',$khoid)
+                ->update([
+                    'soluong_ton'   =>$slnhap->soluong_ton - $trudi,
+                    'soluong_nhap' => $slnhap->soluong_nhap - $trudi
+                ]);
+            }
+            else{
+                $congthem = $quanty - $sl->ctnk_soluong ;
+                DB::table('vattukho')->where('vattu_id',$id)->where('kho_id',$khoid)
+                ->update([
+                    'soluong_ton'  => $slnhap->soluong_ton + $congthem,
+                    'soluong_nhap' => $slnhap->soluong_nhap + $congthem
+                ]);
+            }
             $vt = DB::table('vattu')
             	->where('vattu.id',$id)
             	->first();
@@ -241,14 +281,7 @@ class NhapKhoController extends Controller
 		return redirect('qlkho/nhapkho/danhsach')->with('thongbao', 'Sửa thành công');
 	}
 
-	public function getEdit1($id)
-	{
-		$nhaphanphoi = NhaPhanPhoi::all();
-		
-		$nhapkho =PhieuNhapKho::where('id',$id)->first();
-		$chitiet = DB::table('chitietnhapkho')->where('pnk_id',$id)->get();
-		return view('phieunhapkho.suatheovattu',compact('nhapkho','chitiet','nhaphanphoi'));
-	}
+
 
 	
 	public function getEditPro()
@@ -291,13 +324,31 @@ class NhapKhoController extends Controller
         }
         return redirect('qlkho/nhapkho/danhsach')->with('thongbao', 'Xóa thành công');
 	}
-	public function getDeletePro($id,$ad)
+	public function getXoaCart1(Request $request,$id)
 	{
+		$pnkid = $request->get('nkID');
+		$khoid = $request->get('khoid');
+		$slnhap = VatTuKho::where('vattu_id',$id)->where('kho_id',$khoid)->first();
+		$ct = ChiTietNhapKho::where('vt_id',$id)
+		->where('pnk_id',$pnkid)->first();
 		DB::table('chitietnhapkho')
 			->where('vt_id',$id)
-			->where('nk_id',$ad)
+			->where('pnk_id',$pnkid)
 			->delete();
-		return redirect()->route('chucnang.nhapkho.getEdit1',$ad);
+		$tong = DB::table('chitietnhapkho')->where('pnk_id',$pnkid)->sum('ctnk_thanhtien');
+		DB::table('phieunhapkho')->where('id',$pnkid)->update([
+			'tongtien' => $tong
+		]);
+		
+		DB::table('vattukho')->where('vattu_id',$id)->where('kho_id',$khoid)->update([
+			'soluong_nhap' => $slnhap->soluong_nhap - $ct->ctnk_soluong,
+			'soluong_ton' => $slnhap->soluong_ton - $ct->ctnk_soluong
+		]);
+		
+			$nhapkho = DB::table('phieunhapkho')->where('id',$pnkid)->first();
+			$chitiet = DB::table('chitietnhapkho')->where('pnk_id',$pnkid)->get();
+			return view('phieunhapkho.sua_ds',['chitiet'=>$chitiet,'nhapkho'=>$nhapkho]);
+		
 	}
 
     public function getPDF($id)
@@ -340,5 +391,34 @@ class NhapKhoController extends Controller
             
             ]);
 	}
-   
+	public function getInNK(Request $request)
+	{
+		$id_user = $request->input('txtNV');
+		$content = Cart::content();
+		$total = Cart::subtotal(0,".","");
+		$ma = $request->input('txtID');
+		$lydo =$request->input('txtLyDo');
+		$date = $request->input('txtDate');
+        $tongtien = $total;
+        $npp_id = $request->input('state_id') ;
+        $nv = NhanVien::where('id',$id_user)->first();
+        $npp = NhaPhanPhoi::where('id',$npp_id)->first();
+			$data = [
+				'ma' => $ma,
+				'lydo' =>$lydo,
+				'tongtien'=>$tongtien,
+				'date'=>$date
+			];
+
+		$pdf = PDF::loadView('phieunhapkho.in',compact('content','data','nv','npp'));
+		return $pdf->stream();
+	}
+   public function getXemNK()
+   {
+	$pnk = PhieuNhapKho::orderBy('id','DESC')->first();
+	$chitiet = ChiTietNhapKho::where('pnk_id',$pnk->id)->get();
+	$nv = NhanVien::where('id',$pnk->nv_id)->first();
+	$npp = NhaPhanPhoi::where('id',$pnk->npp_id)->first();
+	return view('phieunhapkho.in',compact('pnk','chitiet','nv','npp'));
+   }
 }

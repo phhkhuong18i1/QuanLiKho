@@ -75,7 +75,7 @@
               {!! number_format($vt->giatien) !!} vnđ 
               </td>
               
-              <td style="border:thin blue solid;border-style:dashed;" >{!! number_format($val->ctnk_thanhtien) !!} vnđ </td>
+              <td  style="border:thin blue solid;border-style:dashed;" >{!! number_format($val->ctnk_thanhtien) !!} vnđ </td>
               <td style="border:thin blue solid;border-style:dashed;" >{!! $val->kho->kho_ten !!}  </td>
           </tr>
             @endforeach
@@ -84,8 +84,8 @@
     </table>
     <table class="sumary-table">
       <tr>
-        <td width="480px">Tổng giá trị nhập</td>
-        <td width="200px">{!! number_format($nhapkho->tongtien) !!} vnđ</td>
+        <td width="438px">Tổng giá trị nhập</td>
+        <td  width="180px">{!! number_format($nhapkho->tongtien) !!} vnđ</td>
       </tr>
     </table><br>
     <table style="margin-bottom:-300px;">

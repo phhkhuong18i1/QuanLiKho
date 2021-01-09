@@ -91,10 +91,20 @@
                         <input class=" form-control" id="address" name="txtPassAgain"  type="password" />
                       </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group ">
+                      <label   class="control-label col-lg-2">Phân quyền <span class="required">*</span></label>
+                      <div class="col-lg-10">
+                        <label class="radio-inline">
+                          <input type="radio" name="quyen" value="1" >Quản lí
+                        </label>
+                       <label class="radio-inline">
+                          <input type="radio" name="quyen" value="2" >Thủ kho
+                        </label>
+                      </div>
+                    <div class="form-group" >
                       <div class="col-lg-offset-2 col-lg-10">
-                        <button class="btn btn-primary" type="submit">Save</button>
-                        <a class="btn btn-warning" href="qlkho/nhanvien/danhsach">Hủy</a>
+                       <center> <button class="btn btn-primary" type="submit">Save</button>
+                        <a class="btn btn-warning" href="qlkho/nhanvien/danhsach">Hủy</a></center>
                       </div>
                     </div>
                   </form>

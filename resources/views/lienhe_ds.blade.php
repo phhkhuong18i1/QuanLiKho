@@ -6,7 +6,7 @@
           <div class="col-lg-12">
             <ol class="breadcrumb">
               <li><i class="fa fa-home"></i><a href="qlkho/index">Trang chủ</a></li>
-              <li><i class="fa fa-table"></i>Công trình</li>
+              <li><i class="fa fa-table"></i>Liên hệ</li>
             </ol>
           </div>
         </div>
@@ -16,14 +16,13 @@
             <section class="panel">
               <header class="panel-heading">
               <div class="text-right">
-              <a class="btn btn-primary" href="qlkho/kho/them">Thêm&nbsp;<span class="fa fa-plus"></span></a>
               </div>
               </header>
               @if (session('thongbao'))
                     <div class="col-lg-12 alert alert-success">
                         <strong>{{ session('thongbao') }}</strong>
                     </div>
-                @endif 
+                @endif
                 @if (session('loi'))
                     <div class="col-lg-12 alert alert-danger alert-dismissable">
                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -33,27 +32,37 @@
               <table class="display table table-bordered table-hover" id="example">
                     <thead>
                         <tr align="center">
-                        <th>Tên</th>
-                            <th>Địa chỉ</th>
+                            <th>id</th>
+                            <th>Ngày gửi</th>
+                            <th>Tên</th>
+                            <th>email</th>
+                            <th>Chủ đề</th>
+                            <th>Nội dung</th>
                             <th>Xóa</th>
-                            <th>Sửa</th>
+                            <th>Phản hồi</th>
+                          
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach ($congtrinh as $item)
+                        @foreach ($lienhe as $item)
                             <tr class="odd gradeX" align="center">
-                                <td>{{ $item->ten }}</td>
-                                <td>{{ $item->diachi }}</td>
+                                <td>{{ $item->id }}</td>
+                                <td>{{ $item->date }} </td>
+                                <td>{{ $item->name }} </td>
+                                <td>{{ $item->email }} </td>
+                                <td>{{ $item->subject }} </td>
+                                <td>{{ $item->message }} </td>
                                 <td class="center">
-                                    <a class="btn btn-danger" href="qlkho/congtrinh/xoa/{{ $item->id }}"  onclick="return confirm('Bạn có chắc muốn xóa dữ liệu này?')">
+                                    <a onclick="return confirm('Bạn có chắc muốn xóa dữ liệu này?')" class="btn btn-danger" href="qlkho/lienhe/xoa/{{ $item->id }}">
                                         <i class="fa fa-trash-o fa-fw"></i>Xóa
                                     </a>
                                 </td>
                                 <td class="center">
-                                    <a class="btn btn-primary" href="qlkho/congtrinh/sua/{{ $item->id }}">
-                                        <i class="fa fa-pencil fa-fw"></i>Sửa
+                                    <a  class="btn btn-primary" href="qlkho/phanhoi/{{ $item->id }}">
+                                        <i class="fa fa-mail-forward"></i> Phản hồi
                                     </a>
                                 </td>
+                
                             </tr>
                         @endforeach
                     </tbody>

@@ -14,9 +14,11 @@
         <!-- Form validations -->
 
         <div class="row">
-        @if (session('loi'))
+        @if (count($errors) > 0)
                         <div class="alert alert-danger">
-                            <strong>{{ session('loi') }}</strong>
+                            @foreach ($errors->all() as $error)
+                                <strong>{{ $error }}</strong><br>
+                            @endforeach
                         </div>
                     @endif
                     @if (session('thongbao'))
@@ -49,7 +51,7 @@
                                         </div>
                                         <div class="col-lg-3">
                                             <label>Lý do:</label>
-                                            <input  type="text" name="txtLyDo" value="{{ old('txtLyDo') }}" class="form-control">
+                                            <input  type="text" name="txtLyDo" id="lydo" value="{{ old('txtLyDo') }}" class="form-control">
                                         </div>
                                         <div class="col-lg-3">
                                             <label>Nhân viên:</label>
@@ -58,7 +60,7 @@
 
                                             ?>
                                             <input type="text" value="{{ $nv->nv_ten}}" class="form-control">
-                                            <input type="hidden" name="txtNV" value="{{ $nv->id }}">
+                                            <input type="hidden" name="txtNV" id="id_nv" value="{{ $nv->id }}">
                                         </div>
                                     </fieldset>
                                 </div>
@@ -66,21 +68,21 @@
                                     <fieldset>
                                         <div class="col-lg-3 ">
                                             <label>Mã phiếu:</label>
-                                            <input  type="text" name="txtID" value="PNK{!! date('dmYhms') !!}" class="form-control">
+                                            <input  type="text" name="txtID" id="ma" value="PNK{!! date('dmYhms') !!}" class="form-control">
                                         </div>
                                         <div class="col-lg-3">
                                             <label>Ngày lập:</label>
-                                            <input  type="text" name="txtDate" value="{!! date('d-m-Y') !!}" class="form-control">
+                                            <input  type="text" name="txtDate" id="date" value="{!! date('d-m-Y') !!}" class="form-control">
                                         </div>
                                         <div>
-                                            <button  style="margin-left: 15px; margin-top: 24px" type="submit" class="btn btn-success "><i class="icon-save"></i>Lưu</button>
-                                            <a  style="margin-left: 15px; margin-top: 24px" class="btn btn-warning" href="qlkho/nhapkho/danhsach">Hủy</a>
+                                        <button type="submit"  style="margin-left: 15px; margin-top: 24px" class=" btn btn-success" ><i class="icon-save"></i>&nbsp&nbspLưu</button>
+                                            <a  style="margin-left: 15px; margin-top: 24px"   class="btn btn-warning" href="qlkho/nhapkho/danhsach" >Hủy</a>
                                         </div>
                                     </fieldset>
                                 </div>
                                 <div id="acct-password-row" class="span12"> 
                                     <fieldset>
-                                        <div>
+                                        <div> 
                                             <u><p><b>Danh sách vật tư</b></p></u>
                                         </div>
                                     </fieldset>                    
@@ -173,15 +175,110 @@
             </div>
         </div>
     </div>
+
+          <!-- modal -->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Phiếu nhập kho</h5>
+        
+      </div>
+      <div class="modal-body">
+     <div id="modal-body1">
+    <hr>
+    <center><h2><b>Chi tiết phiếu nhập kho</b></h2></center>
+    <table >
+    <tr id="tr0">
+        <td width="120px" ><strong>Mã:</strong></td> <td ></td>
+        <td><strong></td>
+      </tr>
+      <tr id="tr1">
+        <td width="120px"><strong>Nhân viên lập phiếu:</strong></td> <td ></td>
+        <td><strong></td>
+      </tr>
+      <tr id="tr2">
+        <td width="120px"><strong>Lý do nhập:</strong></td> <td ></td>
+        <td></td>
+      </tr>
+      <tr id="tr3">
+      <td width="120px"><strong>Nhập từ:</strong></td> <td></td>
+        <td></td>
+      </tr>
+    </table><br><br>
+       <table  cellpadding="3px" style="border:thin solid;" >
+      <thead>
+    
+          <td style="border:thin solid;" width="50px"><strong>STT</strong></td>
+          <td style="border:thin solid;" width="150px"><strong>Vật tư</strong></td>
+          <td style="border:thin solid;" width="50px"><strong>Số lượng</strong></td>
+          <td style="border:thin solid;" width="150px"><strong>Đơn giá</strong></td>
+          <td style="border:thin solid;" width="200px"><strong>Thành tiền</strong></td>
+          <td style="border:thin solid;" width="200px"><strong>Kho</strong></td>
+        
+        </tr>
+      </thead>
+      <tbody id="table2" >
+            
+            <tr >
+              <td ></td>
+              <td >  
+              </td>
+              <td  ></td>
+              <td  >
+              </td>
+              <td   > </td>
+              <td   > </td>
+          </tr>
+            
+            
+      </tbody>
+    </table>
+    <table class="sumary-table">
+      <tr id="tongtien">
+        <td width="365px" >Tổng giá trị nhập</td>
+        <td ></td>
+      </tr>
+    </table><br>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+        <a  class="btn btn-primary" href="qlkho/nhap/innhap/">In</a>
+      </div>
+    </div>
+  </div>
+</div>
   
-     
         <!-- page end-->
       </section>
     </section>
 @endsection
 @section('script')
-@include('layout.script')
+
 <script> 
+
+        function inNK()
+            {
+             
+            var id_npp = $("#state_id").val();
+            var id_nv = $("#id_nv").val();
+            var ma = $("#ma").val();
+            var lydo = $("#lydo").val();
+            var date = $("#date").val();
+             $.ajax({
+                 type:'GET',
+                 url:'qlkho/nhapkho/inNK',
+                 data: {"id_npp":id_npp,"id_nv":id_nv,"ma":ma,"lydo":lydo,"date":date},
+                 success: function(data)
+                 { 
+                    //  window.location = "qlkho/nhapkho/nhap";
+                 }
+     
+             });
+           
+           };
        function addCart()
        {
              
@@ -258,20 +355,12 @@
     <!-- Ajax Vật tư -->
     <script>
         $('#vattu_id').on('change', function(e) {
-            console.log(e);
             var vattu_id = e.target.value;
 
             //ajax
 
             $.getJSON("qlkho/nhapkho/vattu/ajax-call?vattu_id="+vattu_id, function (data) {
 
-                console.log(data);
-
-                // $('#country').empty();
-                // $.each(data, function(index, countryObj){
-
-                //      $('#country').append('<option value="'+countryObj.id+'  selected="{{ old("ten") === "'+countryObj.id+'" ? true : false }} ">'+countryObj.vt_ten+'</option>');
-                // });
 
                 $('#country1').empty();
                 $.each(data, function(index, countryObj){
@@ -279,14 +368,9 @@
                     $('#country1').append('<option value="'+countryObj.id+'  selected="{{ old("dvt") === "'+countryObj.id+'" ? true : false }} ">'+countryObj.dvt_ten+'</option>');
                 });
 
-                // $('#country2').empty();
-                // $.each(data, function(index, countryObj){
-
-                //     $('#country2').append('<option value="'+countryObj.id+'  selected="{{ old("kho") === "'+countryObj.id+'" ? true : false }} ">'+countryObj.kho_ten+'</option>');
-                // });
             });
         });
     </script>
         <!-- Basic Forms & Horizontal Forms-->
-
+@include('layout.script')
 @endsection

@@ -102,10 +102,11 @@
                                                         <td>
                                                         <input id="quanty-item-{{$vt->id}}"  required type="number" value="{{$val->ctnk_soluong}}" min="0" max="100" />
                                                         <input type="hidden" name="" value="{{ $nhapkho->id }}" class="nkID">
+                                                        <input type="hidden" value="{{$val->kho_id}}" class="khoid">
                                                             </td>
                                                         <td>{!!  number_format($vt->giatien) !!}vnd</td>
                                                         <td>{!! number_format($val->ctnk_thanhtien)  !!} vnd</td>
-                                                        <td><i class="fa fa-times" onclick="DeleteListItemCart({{$val->vt_id }})"></i></td>
+                                                        <td><i class="fa fa-times" onclick="DeleteListItemCart({{$val->vt_id}})"></i></td>
                                                     <td>  <i class="fa fa-save" onclick="SaveListItemCart1({{$val->vt_id }})"></i></td>
                                                     </tr>
                                                 @endforeach
@@ -133,11 +134,13 @@
     <script>
         function DeleteListItemCart(id)
      {
-        //  console.log(id);
-       
+        var token = $("input[name='_token']").val();
+        var nkID = $(".nkID").val();
+        var khoid = $(".khoid").val();
         $.ajax({
-			url: 'qlkho/nhapkho/xoaCart/'+id,
+			url: 'qlkho/nhapkho/xoaCart1/'+id,
 			type: 'GET', 
+            data:{"_token":token,"nkID":nkID,"khoid":khoid},
 		}).done(function(response)
  
 			{
@@ -153,15 +156,16 @@
                 var nkID = $(".nkID").val();
                 var soluong = $("#quanty-item-"+id).val();
                 var token = $("input[name='_token']").val();
-        console.log(nkID);
+                var khoid = $(".khoid").val();
+        console.log(khoid);
         $.ajax({
 			url: 'qlkho/nhapkho/SaveCart-list1/'+id+'/'+soluong,
 			type: 'GET', 
-            data:{"_token":token,"nkID":nkID},
+            data:{"_token":token,"nkID":nkID,"khoid":khoid},
 		}).done(function(response)
 			{
-                
-                RenderCart(response);
+               
+                 RenderCart(response);
 				alertify.success('update thành công');
                 
 			});

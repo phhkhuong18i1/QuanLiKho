@@ -8,7 +8,7 @@
               
               <ol class="breadcrumb" style="margin-bottom:2px; background:#eeeeee">
            <li><i class="fa fa-home"></i><a href="qlkho/baocao/tonkho">Thống kê</a></li>
-           <li><i class="fa fa-table"></i>Báo cáo theo kho</li>
+           <li><i class="fa fa-table"></i>Tồn kho theo kho</li>
            
          
          </ol>
@@ -40,7 +40,7 @@
                                     <td  align="right"> 
                                         <div >
                                              <a href="qlkho/baocao/inkho/{{$khovt->id}}" class="btn btn-warning">
-                                             <i class="fa fa-file-pdf-o fa-fw"></i>Xuất file PDF
+                                             <i class="fa fa-file-pdf-o fa-fw" target="_blank"></i>Xuất file PDF
                                             </a>
                                         </div>
                                     </td>

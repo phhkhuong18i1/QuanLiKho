@@ -149,7 +149,7 @@
                                                     <td>{{ $item->name }}</td>
                                                     <td>{{ $item->options->kho }}</td>
                                                     <td>{{ $item->options->size }}</td>
-                                                    <td> <input id="quanty-item-{{$item->rowId}}" style="width:70px ;" type="number" min="0" onkeypress="return isNumberKey(event)" value="{{$item->qty}}"  /></td>
+                                                    <td> <input id="quanty-item-{{$item->rowId}}" style="width:70px ;" type="number" min="0"  onkeypress="return isNumberKey(event)" value="{{$item->qty}}"  /></td>
                                                     <td>{{ number_format($item->price,0,",",".") }} vnđ</td>
                                                     <td>{{ number_format($item->qty*$item->price,0,",",".") }}vnđ</td>
                                                     <td><i class="fa fa-times" onclick="DeleteListItemCart('{{$item->rowId}}')"></i></td>
@@ -173,43 +173,15 @@
     </section>
 @endsection
 @section('script')
-       @include('layout.script')
+@include('layout.script')
     <script>
-        // $(document).ready(function() {
-        //   $(document).on('click','.add',function(e) {
-        //       // var id = $(this).attr('.selVT1');
-        //       e.preventDefault();
-        //       // var id = $(this).attr('sluong');
-        //       // alert(id);
-        //         var id = $(this).parent().parent().find(".selVT").val();
-        //         var qty = $(this).parent().parent().find(".sluong").val();
-        //         var idKho = $(this).parent().parent().find(".ware").val();
-        //         var token = $("input[name='_token']").val();
-        //         // alert(idKho);
-        //         $.ajax({
-        //             url:'qlkho/xuatkho/xuathang/'+id+'/'+qty,
-        //             type:'GET',
-        //             cache:false,
-        //             data:{"_token":token,"id":id,"qty":qty,"idKho":idKho},
-        //             success: function(data) {
-        //                 if(data == "oke") {
-        //                   window.location = "qlkho/xuatkho/xuat";
-        //                 }
-        //                 else{
-        //                     alertify.error('quá số lượng tồn');
-        //                 }
-                        
-        //             }
-        //         });
-        //     });
-        // });
+        
 
         function addCart(soluong)
         {
             
                 
                 var id = $(".selVT").val();
-                console.log(id);
                 var qty = $(".sluong").val();
                 var idKho = $(".ware").val();
                 var token = $("input[name='_token']").val();
@@ -220,7 +192,8 @@
                     cache:false,
                     data:{"_token":token,"id":id,"qty":qty,"idKho":idKho},
                     success: function(data) {
-                        if(data == "oke") {
+                        // console.log(data);
+                        if(data == "oke" ) {
                           window.location = "qlkho/xuatkho/xuat";
                         }
                         else{
@@ -233,14 +206,14 @@
 
         function DeleteListItemCart(id)
      {
-        //  console.log(id);
        
         $.ajax({
-			url: 'qlkho/nhapkho/xoaCart/'+id,
+			url: 'qlkho/xuatkho/xoaCart/'+id,
 			type: 'GET', 
 		}).done(function(response)
  
 			{
+                
                 RenderCart(response);
 				alertify.success('xóa thành công');
 			});
@@ -285,13 +258,7 @@
         $('#vattu_id').on('change', function(e) {
             console.log(e);
             var vattu_id = e.target.value;
-
-            //ajax
-
             $.getJSON("qlkho/xuatkho/vattu/ajax-call?vattu_id="+vattu_id, function (data) {
-
-                console.log(data);
-
                 $('#country').empty();
                 $.each(data, function(index, countryObj){
 
@@ -309,14 +276,10 @@
 
                     $('#country2').append('<option value="'+countryObj.id+'">'+countryObj.kho_ten+'</option>');
                 });
-
-                
                 $.each(data, function(index, countryObj){
                     $('#add').empty();
-                $('#add').append('<a style="margin-left: 15px; margin-top: 24px" class=" btn btn-primary" onclick=addCart("'+countryObj.soluong_ton+'")><i class="fa fa-plus"></i></a>');
+                $('#add').append('<a style="margin-left: 15px; margin-top: 24px" class=" btn btn-primary" onclick=addCart("'+ countryObj.soluong_ton+'")><i class="fa fa-plus"></i></a>');
 });
-
-
             });
 
         });

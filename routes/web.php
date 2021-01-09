@@ -28,6 +28,11 @@ Route::get('qlkho/dangxuat', 'App\Http\Controllers\UserController@getDangXuat');
 
 Route::get('qlkho/lienhe', 'App\Http\Controllers\PageController@getLienHe');
 Route::post('qlkho/lienhe', 'App\Http\Controllers\PageController@postLienHe');
+Route::post('qlkho/lienhe/xoa/{id}', 'App\Http\Controllers\PageController@postXoa');
+
+Route::get('qlkho/phanhoi/{id}', 'App\Http\Controllers\PageController@getPhanHoi');
+Route::post('qlkho/phanhoi/{id}', 'App\Http\Controllers\PageController@postPhanHoi');
+
 
 
 Route::get('lay-lai-mat-khau','App\Http\Controllers\UserController@getResetPass');
@@ -193,6 +198,8 @@ Route::group(['prefix' => 'qlkho','middleware'=>'userLogin'], function () {
         // + In phiếu nhập kho
         Route::get('in', 'App\Http\Controllers\NhapKhoController@getPDF1');
         Route::get('xem', 'App\Http\Controllers\NhapKhoController@getXem');
+        Route::get('xemNK', 'App\Http\Controllers\NhapKhoController@getXemNK');
+        Route::get('inNK', 'App\Http\Controllers\NhapKhoController@getInNK');
         Route::get('innhapkho/{id}', 'App\Http\Controllers\NhapKhoController@getPDF');
        
         Route::get('nhap',  'App\Http\Controllers\NhapkhoController@getList');
@@ -209,6 +216,7 @@ Route::group(['prefix' => 'qlkho','middleware'=>'userLogin'], function () {
 
         Route::get('nhaphang/{id}/{qty}', 'App\Http\Controllers\NhapkhoController@postNhaphang');
         Route::get('xoaCart/{rowId}','App\Http\Controllers\NhapkhoController@getXoaCart');
+        Route::get('xoaCart1/{id}','App\Http\Controllers\NhapKhoController@getXoaCart1');
         Route::get('SaveCart-list/{rowId}/{qty}','App\Http\Controllers\NhapkhoController@getSaveListCart');
         Route::get('SaveCart-list1/{rowId}/{qty}','App\Http\Controllers\NhapkhoController@getSaveListCart1');
 
@@ -233,6 +241,8 @@ Route::group(['prefix' => 'qlkho','middleware'=>'userLogin'], function () {
         // + In phiếu xuất kho
         Route::get('inphieu', 'App\Http\Controllers\XuatKhoController@getPDF');
         Route::get('xem', 'App\Http\Controllers\XuatKhoController@getXem');
+        Route::get('xemXK', 'App\Http\Controllers\XuatKhoController@getXemXK');
+        Route::get('inXK', 'App\Http\Controllers\XuatKhoController@getInXK');
         Route::get('in/{id}', 'App\Http\Controllers\XuatKhoController@getPhieuDon');
 
         Route::get('xuat', 'App\Http\Controllers\XuatkhoController@getList');
@@ -253,6 +263,7 @@ Route::group(['prefix' => 'qlkho','middleware'=>'userLogin'], function () {
 
         Route::get('xuathang/{id}/{qty}', ['as' => 'chucnang.xuatkho.postXuathang','uses' => 'App\Http\Controllers\XuatkhoController@postXuathang']);
         Route::get('xoaCart/{rowId}','App\Http\Controllers\XuatKhoController@getXoaCart');
+        Route::get('xoaXK/{id}','App\Http\Controllers\XuatKhoController@getXoaCart1');
         Route::get('SaveCart-list/{rowId}/{qty}','App\Http\Controllers\XuatKhoController@getSaveListCart');
         Route::get('SaveCart-list1/{rowId}/{qty}','App\Http\Controllers\XuatKhoController@getSaveListCart1');
     });

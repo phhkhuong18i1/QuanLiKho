@@ -17,8 +17,8 @@
               <header class="panel-heading">
                 <div class="text-right">
                 <a style="margin-left:38px;" class="btn btn-primary" href="qlkho/nhapkho/nhap"><i class="fa fa-plus"></i> Nhập kho </a> 
-                            <a href="qlkho/nhapkho/in" class="btn btn-warning">
-                                <i class="fa fa-file-pdf-o fa-fw"></i>Xuất file PDF
+                            <a href="qlkho/nhapkho/in" target="_blank" class="btn btn-warning">
+                                <i class="fa fa-file-pdf-o fa-fw" ></i>Xuất file PDF
                             </a>
                         </div>
               </header>
@@ -109,7 +109,7 @@
     </table><br><br>
        <table  cellpadding="3px" style="border:thin solid;" >
       <thead>
-        <>
+    
           <td style="border:thin solid;" width="50px"><strong>STT</strong></td>
           <td style="border:thin solid;" width="150px"><strong>Vật tư</strong></td>
           <td style="border:thin solid;" width="50px"><strong>Số lượng</strong></td>
@@ -169,61 +169,14 @@
                 ID: id,
             },
             success: function(response)
-            {
-                
+            { 
                 render(response);
-                
-           
             }
 
         });
       
       });
-      $('#exampleModal').on('hidden.bs.modal', function () { 
-        
-        $("#modal-body1").val('');
-      });
-function render(response)
-{
-  console.log(response);
-          var nv_ten,lydo,ma,npp = "";
-          var chitiet = response['chitietnk'];
-          var ten = chitiet.length;
-              nv_ten =  "<td width='120px'><strong>Nhân viên lập phiếu:</strong></td> <td >"+response['nv'].nv_ten+"</td><td><strong></td>";
-              lydo = "<td width='120px'><strong>Lý do nhập:</strong></> <td>"+response['nhapkho'].lydo+"</td><td></td>";
-              npp = "<td width='120px'><strong>Nhà phân phối:</strong></> <td >"+response['npp'].npp_ten+"</td><td></td>";
-              ma =  "<td width='120px'><strong>Mã:</strong></td> <td >"+response['nhapkho'].ma+"</td><td></td>";
-                $("#tr1").empty();
-                $("#tr1").append(nv_ten);
-                $("#tr2").empty();
-                $("#tr2").append(lydo);
-                $("#tr3").empty();
-                $("#tr3").append(npp);
-                $("#tr0").empty();
-                $("#tr0").append(ma);
-                $("#table2").empty();
-              for(var i = 0; i<ten; i++)
-              { var stt= i+1;
-                 var idvt = chitiet[i]['vattu'];
-                 var idkho = chitiet[i]['kho']
-               var txt = "<tr><td style='border:thin blue solid;border-style:dashed;'>"+stt+"</td><td style='border:thin blue solid;border-style:dashed;'>"+idvt['vt_ten']+
-                "</td><td style='border:thin blue solid;border-style:dashed;'>"+chitiet[i].ctnk_soluong+"</td><td style='border:thin blue solid;border-style:dashed;'>"+idvt['giatien']+
-                " VNĐ</td><td style='border:thin blue solid;border-style:dashed;'>"+chitiet[i].ctnk_thanhtien+
-                " VNĐ</td><td style='border:thin blue solid;border-style:dashed;'>"+idkho['kho_ten']+
-                " </td></tr>";
-                 $("#table2").append(txt);   
-              }
-              
-             var tt = "<td width='480px'>Tổng giá trị nhập</><td width='200px'>"+response['nhapkho'].tongtien+" VND </td>";
-
-             $("#tongtien").empty();
-                $("#tongtien").append(tt);  
-
-              var inphieu = "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Đóng</button><a  class='btn btn-primary' href='qlkho/nhapkho/innhapkho/"+response['nhapkho'].id+"'>In</a>"
-                $(".modal-footer").empty();
-                $(".modal-footer").append(inphieu);
-}
-
   
 </script>
+@include ('layout.script')
  @endsection

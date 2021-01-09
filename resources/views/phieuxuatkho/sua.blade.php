@@ -105,11 +105,12 @@
                                                         <td>
                                                         <input id="quanty-item-{{$vt->id}}"  required type="number" value="{{$val->ctxk_soluong}}"  />
                                                         <input type="hidden" name="" value="{{ $xuatkho->id }}" class="xkID">
+                                                        <input type="hidden" value="{{$val->kho_id}}" id="khoid-{{$val->kho_id}}">
                                                             </td>
                                                         <td>{!!  number_format($vt->giatien) !!}vnd</td>
                                                         <td>{!! number_format($val->ctxk_thanhtien)  !!} vnd</td>
-                                                        <td><i class="fa fa-times" onclick="DeleteListItemCart({{$val->vattu_id }})"></i></td>
-                                                    <td>  <i class="fa fa-save" onclick="SaveListItemCart1({{$val->vattu_id }},{{$vtkho->soluong_ton}})"></i></td>
+                                                        <td><i class="fa fa-times" onclick="DeleteListItemCart({{$val->vattu_id }},{{$val->kho_id}})"></i></td>
+                                                    <td>  <i class="fa fa-save" onclick="SaveListItemCart1({{$val->vattu_id }},{{$val->kho_id}},{{$vtkho->soluong_ton+$val->ctxk_soluong}})"></i></td>
                                                     </tr>
                                                 @endforeach
                                             <tr>
@@ -134,14 +135,20 @@
 @endsection
 @section('script')
     <script>
-        function DeleteListItemCart(id)
+        function DeleteListItemCart(id,khoid)
      {
         //  console.log(id);
+        var xkID = $(".xkID").val();
+                var soluong = $("#quanty-item-"+id).val();
+                var token = $("input[name='_token']").val();
+                var khoid = $("#khoid-"+khoid).val();
        
         $.ajax({
-			url: 'qlkho/xuatkho/xoaCart/'+id,
+			url: 'qlkho/xuatkho/xoaXK/'+id,
 			type: 'GET', 
+            data:{"_token":token,"xkID":xkID,"khoid":khoid},
 		}).done(function(response)
+ 
  
 			{
                 RenderCart(response);
@@ -150,30 +157,35 @@
         
      }
 
-     function SaveListItemCart1(id,soluongTon)
+     function SaveListItemCart1(id,khoid,soluongTon)
     {
         
                 var xkID = $(".xkID").val();
                 var soluong = $("#quanty-item-"+id).val();
                 var token = $("input[name='_token']").val();
-        
-        $.ajax({
+                var khoid = $("#khoid-"+khoid).val();
+                console.log(soluongTon);
+               
+       $.ajax({
 			url: 'qlkho/xuatkho/SaveCart-list1/'+id+'/'+soluong,
 			type: 'GET', 
-            data:{"_token":token,"xkID":xkID},
+            data:{"_token":token,"xkID":xkID,"khoid":khoid},
 		}).done(function(response)
 			{
+                //console.log(response);
+                
                 if(Number(soluong) > Number(soluongTon))
                 {
-                  alertify.error('quá số lượng tồn, số lượng tồn còn lại là'+soluongTon);
+                    alertify.error('quá số lượng tồn, số lượng tồn còn lại là'+soluongTon);
                 }
                 else{
+
                 RenderCart(response);
 				alertify.success('update thành công');
+            
                 }
+			}); 
                 
-			});
-    
     }
 
      function RenderCart(response){

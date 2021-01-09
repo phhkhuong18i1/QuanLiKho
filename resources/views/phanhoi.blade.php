@@ -6,7 +6,7 @@
           <div class="col-lg-12">
             <ol class="breadcrumb">
               <li><i class="fa fa-home"></i><a href="index.html">Trang chủ</a></li>
-              <li><i class="fa fa-phone"></i>Liên hệ</li>
+              <li><i class="fa fa-phone"></i>Phản hồi</li>
             </ol>
           </div>
         </div>
@@ -14,27 +14,18 @@
         <div class="row">
           <div class="col-lg-6">
             <div class="recent">
-              <p style="font-size: 30px"><b>Đóng góp ý kiến về ứng dụng cho chúng tôi</b></p>
+              <p ><b><center style="font-size: 30px">Gửi phản hồi cho người dùng</center></b></p>
             </div>
-            <div id="sendmessage">Your message has been sent. Thank you!</div>
-            <div id="errormessage"></div>
+           
             @if (session('thongbao'))
                     <div class="col-lg-12 alert alert-success">
                         <strong>{{ session('thongbao') }}</strong>
                     </div>
                 @endif
-            <form action="qlkho/lienhe" method="post" role="form" class="contactForm">
+            <form action="" method="post" role="form" class="contactForm">
             @csrf
               <div class="form-group">
-                <input type="text" name="name" class="form-control" id="name" placeholder="Tên" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-                <div class="validation"></div>
-              </div>
-              <div class="form-group">
-                <input type="email" class="form-control" value="{{Auth::user()->email}}" name="email" id="email" placeholder="Email" data-rule="email" data-msg="Please enter a valid email" />
-                <div class="validation"></div>
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control" name="subject" id="subject" placeholder="Chủ đề" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+                <input type="email" class="form-control" value="{{$phanhoi->email}}" name="email" id="email" placeholder="Email" data-rule="email" data-msg="Please enter a valid email" disable="true" />
                 <div class="validation"></div>
               </div>
               <div class="form-group">

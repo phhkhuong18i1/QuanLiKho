@@ -55,7 +55,7 @@ class UserController extends Controller
         }
         else
         {
-            $nhanvien = User::all();
+            $nhanvien = User::where('role','>',0)->get();
             return view('nhanvien.danhsach', ['nhanvien' => $nhanvien]);
         }
     }
@@ -150,7 +150,7 @@ class UserController extends Controller
         $user->name = $request->txtTen;
         $user->email = $request->txtEmail;
         $user->password = bcrypt($request->txtPass);
-        $user->role = 2;
+        $user->role = $request->quyen;
         $user->save();
 
         $nhanvien = new NhanVien;

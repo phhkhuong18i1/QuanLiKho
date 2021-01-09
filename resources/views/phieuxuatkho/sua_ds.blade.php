@@ -22,12 +22,15 @@
                                                         <td>{!! $val->vattu_id !!}</td>
                                                         <td>{!! $vt->vt_ten !!}</td>
                                                         <td>{!! $dvt->dvt_ten !!}</td>
-                                                        <td> <input id="quanty-item-{{$vt->id}}"  required type="number" value="{{$val->ctxk_soluong}}"  />
-                                                        <input type="hidden" name="" value="{{ $xuatkho->id }}" class="nkID"></td>
+                                                        <td>
+                                                        <input id="quanty-item-{{$vt->id}}"  required type="number" value="{{$val->ctxk_soluong}}"  />
+                                                        <input type="hidden" name="" value="{{ $xuatkho->id }}" class="xkID">
+                                                        <input type="hidden" value="{{$val->kho_id}}" id="khoid-{{$val->kho_id}}">
+                                                            </td>
                                                         <td>{!!  number_format($vt->giatien) !!}vnd</td>
                                                         <td>{!! number_format($val->ctxk_thanhtien)  !!} vnd</td>
-                                                        <td><i class="fa fa-times" onclick="DeleteListItemCart({{$vt->id}})"></i></td>
-                                                    <td>  <i class="fa fa-save" onclick="SaveListItemCart1({{$vt->id}},{{$vtkho->soluong_ton}})"></i></td>
+                                                        <td><i class="fa fa-times" onclick="DeleteListItemCart({{$val->vattu_id }},{{$val->kho_id}})"></i></td>
+                                                    <td>  <i class="fa fa-save" onclick="SaveListItemCart1({{$val->vattu_id }},{{$val->kho_id}},{{$vtkho->soluong_ton+$val->ctxk_soluong}})"></i></td>
                                                     </tr>
                                                 @endforeach
                                             <tr>

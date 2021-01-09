@@ -19,7 +19,7 @@ class XuatKhoController extends Controller
 {
     public function getDanhSach()
     {
-        $pxk = PhieuXuatKho::all();
+        $pxk = PhieuXuatKho::orderBy('xk_ngaylap','DESC')->get();
         $ctxk = ChiTietXuatKho::all();
         return view('phieuxuatkho.danhsach', ['pxk' => $pxk, 'ctxk' => $ctxk]);
     }
@@ -51,7 +51,7 @@ class XuatKhoController extends Controller
 		$xuatkho->congtrinh_id =  $request->input('selCT') ;
 		$xuatkho->nv_id = $id_user;
 		$xuatkho->save();
-		foreach ($content as  $item) {
+		foreach ($content as  $item) {   
 			$chitiet = new ChiTietXuatKho;
 			$chitiet->ctxk_soluong =  $item->qty;
 			$chitiet->ctxk_thanhtien = $item->qty*$item->price;;
@@ -71,10 +71,9 @@ class XuatKhoController extends Controller
 					'soluong_xuat' => $vt->soluong_xuat + $item->qty,
 					'soluong_ton' => $vt->soluong_ton - $item->qty,
 					]);
-				
 			} 
-        }
         
+        }
         $thongke = ThongKe::where('date',date('Y-m-d'))->first();
         if(!is_null($thongke))
         {
@@ -96,16 +95,19 @@ class XuatKhoController extends Controller
             $tk->save();
 
         }
-
+    
         Cart::destroy();
         
        
 		// echo "string";
-        return redirect('qlkho/xuatkho/xuat')->with('thongbao', 'Xuất kho thành công');
+        return redirect('qlkho/xuatkho/xemXK');
+    
 	}
     public function postXuathang(Request $request)
 	{
 		if($request->ajax()) {
+
+           
 			$idKho = $request->get('idKho');
             $id = $request->get('id');
             $qty = $request->get('qty');
@@ -117,15 +119,40 @@ class XuatKhoController extends Controller
             $kho = Kho::where('id',$idKho)->first();
             $vtkho = VatTuKho::where('vattu_id', $id)
             	->where('kho_id',$idKho)
-            	->first();
-            if ($vtkho->soluong_ton >= $qty) {
-            	Cart::add(['id' => $id, 'name' => $vt->vt_ten, 'qty' => $qty, 'price' => $vt->giatien,'weight'=>$vtkho->soluong_ton,'options' => ['size' => $vt->dvt_ten,'kho'=>$kho->kho_ten,'idKho'=>$kho->id]]);
-            	 echo "oke";
-            } else {
-            	echo "<script>
-            		alert('Số lượng xuất lớn hơn số lượng tồn trong kho!');
-            	</script>";
-            }
+                ->first();
+                $cart = Cart::content()->where('id',$id)->first();
+                
+                if(isset($cart))
+                {
+                    $c = $cart->options->idKho;
+                    if($idKho == $c)
+                     {
+                
+                        $tongsl = $qty + $cart->qty;
+                        if($vtkho->soluong_ton < $tongsl )
+                         {
+                             echo "loi";
+                        }
+                        else{
+                         Cart::update($cart->rowId,['qty'=>$tongsl]);
+                            echo "oke";
+                        }
+                    }
+                    else
+                    {
+                        if ($vtkho->soluong_ton >= $qty) {
+            	        Cart::add(['id' => $id, 'name' => $vt->vt_ten, 'qty' => $qty, 'price' => $vt->giatien,'weight'=>$vtkho->soluong_ton,'options' => ['size' => $vt->dvt_ten,'kho'=>$kho->kho_ten,'idKho'=>$kho->id]]);
+                        echo "oke";   
+                       } 
+                    }
+                 }
+                else
+                {
+                    if ($vtkho->soluong_ton >= $qty) {
+            	        Cart::add(['id' => $id, 'name' => $vt->vt_ten, 'qty' => $qty, 'price' => $vt->giatien,'weight'=>$vtkho->soluong_ton,'options' => ['size' => $vt->dvt_ten,'kho'=>$kho->kho_ten,'idKho'=>$kho->id]]);
+                         echo "oke";   
+            } 
+        }
             
             
            
@@ -142,12 +169,52 @@ class XuatKhoController extends Controller
         }
         else
         {
-        Cart::remove($id);
+         Cart::remove($id);
         }
         $content = Cart::content();
-        return view('phieuxuatkho.nhap_ds',['content1'=>$content]);
+         return view('phieuxuatkho.nhap_ds',['content'=>$content]);
         
         
+    }
+    
+    public function getXoaCart1(Request $request,$id)
+    {
+        
+        $xkid = $request->get('xkID');
+		$khoid = $request->get('khoid');
+        $slnhap = VatTuKho::where('vattu_id',$id)->where('kho_id',$khoid)->first();
+		$ct = ChiTietXuatKho::where('vattu_id',$id)
+        ->where('phieuxuatkho_id',$xkid)->
+        where('kho_id',$khoid)->first();
+
+        //  update thongke 
+        $xk = PhieuXuatKho::where('id',$xkid)->first();
+        $tk = ThongKe::where('date',$xk->xk_ngaylap)->first();
+        DB::table('thongke')->where('date',$xk->xk_ngaylap)->update([
+            'TongTien' => $tk->TongTien - $ct->ctxk_thanhtien,
+            'SoLuong' => $tk->SoLuong - $ct->ctxk_soluong
+        ]);
+
+        // xóa ctxk
+		DB::table('chitietxuatkho')
+			->where('vattu_id',$id)
+            ->where('phieuxuatkho_id',$xkid)
+            ->where('kho_id',$khoid)
+            ->delete();
+		$tong = DB::table('chitietxuatkho')->where('phieuxuatkho_id',$xkid)->sum('ctxk_thanhtien');
+		DB::table('phieuxuatkho')->where('id',$xkid)->update([
+			'xk_tongtien' => $tong
+		]);
+        
+        //update vật tư kho
+		DB::table('vattukho')->where('vattu_id',$id)->where('kho_id',$khoid)->update([
+			'soluong_xuat' => $slnhap->soluong_xuat - $ct->ctxk_soluong,
+			'soluong_ton' => $slnhap->soluong_ton + $ct->ctxk_soluong
+		]);
+		
+        $xuatkho = DB::table('phieuxuatkho')->where('id',$xkid)->first();
+        $chitiet = DB::table('chitietxuatkho')->where('phieuxuatkho_id',$xkid)->get();
+        return view('phieuxuatkho.sua_ds',['chitiet'=>$chitiet,'xuatkho'=>$xuatkho]);
 	}
 	
 	public function getSaveListCart(Request $request,$id,$quanty)
@@ -157,25 +224,17 @@ class XuatKhoController extends Controller
        $cart = Cart::content()->where('rowId',$id)->first();
         
 		if ($quanty == 0) { 
-			
 			$cart->remove($id);
-
-			
 		}
 		
         elseif($quanty > $cart->weight)
-         {
-            
-            
+         {   
         }
         else{ 
             Cart::update($id,['qty'=>$quanty]);  
-          
         }
         $content1 = Cart::content();
-
         return view('phieuxuatkho.nhap_ds',['content1'=>$content1]);
-
     }
     
     public function getSaveListCart1(Request $request,$id,$quanty)
@@ -183,20 +242,46 @@ class XuatKhoController extends Controller
         
       
         $xkID = $request->get('xkID');
-        $soluongton = VatTu::where('id',$id)->first();
+        $khoid = $request->get('khoid');
+
+        // update thống kê
+        $soluongton = VatTuKho::where('vattu_id',$id)->where('kho_id',$khoid)->first();
+        $xk = PhieuXuatKho::where('id',$xkID)->first();
+        $tk = ThongKe::where('date',$xk->xk_ngaylap)->first();
+        $sluong = ChiTietXuatKho::where('vattu_id',$id)
+        ->where('phieuxuatkho_id',$xkID)
+        ->where('kho_id',$khoid)
+        ->first();
+        DB::table('thongke')->where('date',$xk->xk_ngaylap)->update([
+            'TongTien' => $tk->TongTien - $sluong->ctxk_thanhtien,
+            'SoLuong' => $tk->SoLuong - $sluong->ctxk_soluong
+        ]);
+
+        //update soluong
+        DB::table('vattukho')->where('vattu_id',$id)->where('kho_id',$khoid)
+        ->update([
+            'soluong_ton' => $soluongton->soluong_ton + $sluong->ctxk_soluong,
+            'soluong_xuat' => $soluongton->soluong_xuat - $sluong->ctxk_soluong
+        ]);
+
+        $soluongton = VatTuKho::where('vattu_id',$id)->where('kho_id',$khoid)->first();
+
+
 		if ($quanty == 0) { 
-			
-			
 			DB::table('chitietxuatkho')
 			->where('vattu_id',$id)
-			->where('phieuxuatkho_id',$xkID)
+            ->where('phieuxuatkho_id',$xkID)
+            ->where('kho_id',$khoid)
 			->delete();
 			$vt = DB::table('vattu')
             	->where('vattu.id',$id)
-            	->first();
+                ->first();
+                
+            //update ctxk
             DB::table('chitietxuatkho')
 			->where('vattu_id',$id)
-			->where('phieuxuatkho_id',$nkID)
+            ->where('phieuxuatkho_id',$xkID)
+            ->where('kho_id',$khoid)
 			->update([
 					'ctxk_soluong' => $quanty,
 					'ctxk_thanhtien' => $quanty * $vt->giatien,
@@ -210,39 +295,60 @@ class XuatKhoController extends Controller
 				->update([
 					'xk_tongtien' =>$tong
 					]);
-					if($tong == 0)
-					{
-						DB::table('phieuxuatkho')
-						->where('id',$xkID)
-						->delete();
-					}
+                    $xuatkho = DB::table('phieuxuatkho')->where('id',$xkID)->first();
+                    $chitiet = DB::table('chitietxuatkho')->where('phieuxuatkho_id',$xkID)->get();
+                    return view('phieuxuatkho.sua_ds',['chitiet'=>$chitiet,'xuatkho'=>$xuatkho]);
 		}
         elseif($quanty > $soluongton->soluong_ton)
         {
+            $xuatkho = DB::table('phieuxuatkho')->where('id',$xkID)->first();
+            $chitiet = DB::table('chitietxuatkho')->where('phieuxuatkho_id',$xkID)->get();
+            return view('phieuxuatkho.sua_ds',['chitiet'=>$chitiet,'xuatkho'=>$xuatkho]);
         }
         else
         {
-		  
+            $soluongton = VatTuKho::where('vattu_id',$id)->where('kho_id',$khoid)->first();
+            $sl = ChiTietXuatKho::where('vattu_id',$id)
+            ->where('phieuxuatkho_id',$xkID)
+            ->where('kho_id',$khoid)->first();
+                DB::table('vattukho')->where('vattu_id',$id)->where('kho_id',$khoid)
+                ->update([
+                    'soluong_ton'   =>$soluongton->soluong_ton - $quanty,
+                    'soluong_xuat' => $soluongton->soluong_xuat + $quanty
+                ]);
             $vt = DB::table('vattu')
             	->where('vattu.id',$id)
-            	->first();
+                ->first();
+
+                //update ctxk soluong va thanh tien
             DB::table('chitietxuatkho')
 			->where('vattu_id',$id)
-			->where('phieuxuatkho_id',$nkID)
+            ->where('phieuxuatkho_id',$xkID)
+            ->where('kho_id',$khoid)
 			->update([
 					'ctxk_soluong' => $quanty,
 					'ctxk_thanhtien' => $quanty * $vt->giatien,
-				]);
+                ]);
+                
+                //update phiếu xuất kho tongtien
 			$tong = DB::table('chitietxuatkho')
-				->where('phieuxuatkho_id',$nkID)
+				->where('phieuxuatkho_id',$xkID)
 				->sum('ctxk_thanhtien');
 			DB::table('phieuxuatkho')
 				->where('id',$xkID)
 				->update([
-					'tongtien' =>$tong
-					]);
+					'xk_tongtien' =>$tong
+                    ]);
+                    //update thống kê
+        $xk = PhieuXuatKho::where('id',$xkID)->first();
+        $tk = ThongKe::where('date',$xk->xk_ngaylap)->first();
+        $sluong = ChiTietXuatKho::where('vattu_id',$id)->where('phieuxuatkho_id',$xkID)
+        ->where('kho_id',$khoid)->first();
+        DB::table('thongke')->where('date',$xk->xk_ngaylap)->update([
+            'TongTien' => $tk->TongTien + $sluong->ctxk_thanhtien,
+            'SoLuong' => $tk->SoLuong + $sluong->ctxk_soluong
+        ]);
 		}
-       
         $xuatkho = DB::table('phieuxuatkho')->where('id',$xkID)->first();
 		$chitiet = DB::table('chitietxuatkho')->where('phieuxuatkho_id',$xkID)->get();
         return view('phieuxuatkho.sua_ds',['chitiet'=>$chitiet,'xuatkho'=>$xuatkho]);
@@ -328,5 +434,14 @@ class XuatKhoController extends Controller
       
         $pdf = PDF::loadView('phieuxuatkho.phieudon',compact('xuatkho','chitiet','nv','ct'));
         return $pdf->stream();
+    }
+
+    public function getXemXK()
+    {
+     $pxk = PhieuXuatKho::orderBy('id','DESC')->first();
+     $chitiet = ChiTietXuatKho::where('phieuxuatkho_id',$pxk->id)->get();
+     $nv = NhanVien::where('id',$pxk->nv_id)->first();
+     $ct = CongTrinh::where('id',$pxk->congtrinh_id)->first();
+     return view('phieuxuatkho.in',compact('pxk','chitiet','nv','ct'));
     }
 }

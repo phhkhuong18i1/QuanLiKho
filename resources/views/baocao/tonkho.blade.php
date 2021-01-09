@@ -5,16 +5,8 @@
 
       <section class="wrapper">
         <div class="row">
-        
           <div class="col-lg-12"> 
-          
-               
             @include('layout.header1')
-           
-             
-            
-          
-           
           </div>
         </div>
         <!-- page start-->
@@ -39,7 +31,7 @@
                                     <td  align="right" colspan="9"> 
                                         <div >
                                              <a href="qlkho/vattu/inton" class="btn btn-warning">
-                                             <i class="fa fa-file-pdf-o fa-fw"></i>Xuất file PDF
+                                             <i class="fa fa-file-pdf-o fa-fw" target="_blank"></i>Xuất file PDF
                                             </a>
                                         </div>
                                     </td>

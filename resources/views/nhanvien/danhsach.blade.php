@@ -36,6 +36,7 @@
                             <th>Giới tính</th>
                             <th>CMND</th>
                             <th>Địa chỉ</th>
+                            <th>Phân quyền</th>
                             <th>Xóa</th>
                             <th>Sửa</th>
                         </tr>
@@ -53,6 +54,11 @@
                                     @endif</td>
                                <td>{{$item->nhanvien->CMND}}</td>
                                <td> {{$item->nhanvien->nv_diachi}}</td>
+                               <td> @if($item->role == 2)
+                                   {{"Thủ kho"}} 
+                                    @else  {{"Quản lý"}}
+                                    @endif
+                                     </td>
                                 <td class="center">
                                     <a onclick="return confirm('Bạn có chắc muốn xóa dữ liệu này?')" class="btn btn-danger" href="qlkho/nhanvien/xoa/{{ $item->id }}">
                                         <i class="fa fa-trash-o fa-fw"></i>Xóa
