@@ -3,7 +3,7 @@
                                                     <th>Mã VT</th>
                                                     <th>Tên VT</th>
                                                     <th>ĐVT</th>
-                                                    <th>Số lượng</th>
+                                                    <th width="100px">Số lượng</th>
                                                     <th>Đơn giá</th>
                                                     <th>Thành tiền</th>
                                                     <th class="span1"></th>
@@ -20,7 +20,7 @@
                                                         <td>{!! $val->vt_id !!}</td>
                                                         <td>{!! $vt->vt_ten !!}</td>
                                                         <td>{!! $dvt->dvt_ten !!}</td>
-                                                        <td> <input id="quanty-item-{{$vt->id}}"  required type="number" value="{{$val->ctnk_soluong}}" min="0" max="100" />
+                                                        <td> <input id="quanty-item-{{$vt->id}}" class="form-control" required type="number" value="{{$val->ctnk_soluong}}" min="0" onkeypress="return isNumberKey(event)" />
                                                         <input type="hidden" name="" value="{{ $nhapkho->id }}" class="nkID">
                                                         <input type="hidden" value="{{$val->kho_id}}" class="khoid"></td>
                                                         <td>{!!  number_format($vt->giatien) !!}vnd</td>

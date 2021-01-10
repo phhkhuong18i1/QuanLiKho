@@ -83,7 +83,7 @@
                                                     <th>Mã VT</th>
                                                     <th>Tên VT</th>
                                                     <th>ĐVT</th>
-                                                    <th>Số lượng</th>
+                                                    <th width="100px" >Số lượng</th>
                                                     <th>Đơn giá</th>
                                                     <th>Thành tiền</th>
                                                     <th class="span1"></th>
@@ -103,7 +103,7 @@
                                                         <td>{!! $vt->vt_ten !!}</td>
                                                         <td>{!! $dvt->dvt_ten !!}</td>
                                                         <td>
-                                                        <input id="quanty-item-{{$vt->id}}"  required type="number" value="{{$val->ctxk_soluong}}"  />
+                                                        <input id="quanty-item-{{$vt->id}}" class="form-control" min="0" onkeypress="return isNumberKey(event)"  required type="number" value="{{$val->ctxk_soluong}}"  />
                                                         <input type="hidden" name="" value="{{ $xuatkho->id }}" class="xkID">
                                                         <input type="hidden" value="{{$val->kho_id}}" id="khoid-{{$val->kho_id}}">
                                                             </td>
@@ -193,5 +193,5 @@
             $("#myTable").html(response);
      }
     </script>
-    
+    @include('layout.script')
 @endsection

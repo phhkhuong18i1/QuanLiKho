@@ -116,8 +116,8 @@
                     </div>
                     <div class="form-group ">
                       <label for="address" class="control-label col-lg-2">số lượng <span class="required">*</span></label>
-                      <div class="col-lg-10">
-                      <input id="l" name="txtSLuong" min="0" class="span4" type="number" value="{!! old('txtSLuong') !!}" autocomplete="false" onkeypress="return isNumberKey(event)">
+                      <div class="col-lg-2">
+                      <input id="l" name="txtSLuong" min="0" class="form-control" type="number" value="{!! old('txtSLuong') !!}" autocomplete="false" onkeypress="return isNumberKey(event)">
                       </div>
                      
               </div>

@@ -19,6 +19,8 @@
             
               <li><a class="" href="qlkho/baocao/tonkho">Thống kê tồn kho </a></li>
               <li><a class="" href="qlkho/thongke/doanhthu"> Thống kê doanh thu </a></li>
+              <li><a class="" href="qlkho/baocao/vtnhap"> Thống kê vật tư nhập </a></li>
+              <li><a class="" href="qlkho/baocao/vtxuat"> Thống kê vật tư xuất </a></li>
             </ul>
           </li>
 

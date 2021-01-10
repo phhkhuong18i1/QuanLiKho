@@ -257,8 +257,7 @@ Route::group(['prefix' => 'qlkho','middleware'=>'userLogin'], function () {
             ->join('donvitinh','donvitinh.id','=','vattu.donvitinh_id')
             ->select('vattu.vt_ten','donvitinh.dvt_ten','khovt.kho_ten','vattukho.vattu_id','vattukho.soluong_ton','khovt.id')
             ->get();
-            
-            return Response::json($country);
+            return Response::json( $country);
         });
 
         Route::get('xuathang/{id}/{qty}', ['as' => 'chucnang.xuatkho.postXuathang','uses' => 'App\Http\Controllers\XuatkhoController@postXuathang']);
@@ -327,6 +326,9 @@ Route::group(['prefix' => 'qlkho','middleware'=>'userLogin'], function () {
         Route::get('innvt/{id}','App\Http\Controllers\BaoCaoController@getPDFNVT');
         Route::get('inkho/{id}','App\Http\Controllers\BaoCaoController@getPDFK');
         Route::get('innpp/{id}','App\Http\Controllers\BaoCaoController@getPDFNPP');
+
+        Route::get('vtnhap','App\Http\Controllers\BaoCaoController@getVTNhap');
+        Route::get('vtxuat','App\Http\Controllers\BaoCaoController@getVTXuat');
     });
 
     Route::group(['prefix' => 'thongke'], function () {

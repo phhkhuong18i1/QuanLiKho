@@ -10,6 +10,8 @@ use App\NhomVatTu;
 use DB;
 use PDF;
 use App\NhaPhanPhoi;
+use App\ChiTietXuatKho;
+use App\ChiTietNhapKho;
 class BaoCaoController extends Controller
 {
 
@@ -199,15 +201,26 @@ class BaoCaoController extends Controller
         ->get();
         $count = VatTu::where('nhaphanphoi_id',$nhapp->id)->count();
         $tong = DB::table('vattu')
-                                                    ->where('vattu.nhaphanphoi_id',$nhapp->id)
-                                                    ->join('vattukho','vattu.id','=','vattukho.vattu_id')
-                                                    ->select(
-                                                        DB::raw('(vattukho.soluong_ton*vattu.giatien) as thanhtien')
-                                                        )
-                                                    ->sum(DB::raw('(vattukho.soluong_ton*vattu.giatien)'));
+         ->where('vattu.nhaphanphoi_id',$nhapp->id)
+         ->join('vattukho','vattu.id','=','vattukho.vattu_id')
+         ->select(
+             DB::raw('(vattukho.soluong_ton*vattu.giatien) as thanhtien')
+                 )
+        ->sum(DB::raw('(vattukho.soluong_ton*vattu.giatien)'));
 
 		
         $pdf = PDF::loadView('baocao.phieutonnpp',compact('nhapp','vattu','count','tong'));
         return $pdf->stream();
+    }
+
+    public function getVTNhap()
+    {
+        $ctnk = ChiTietNhapKho::orderBy('created_at','DESC')->get();
+        return view('baocao.vtnhap',compact('ctnk'));
+    }
+    public function getVTXuat()
+    {
+        $ctxk = ChiTietXuatKho::orderBy('created_at','DESC')->get();
+        return view('baocao.vtxuat',compact('ctxk'));
     }
 }

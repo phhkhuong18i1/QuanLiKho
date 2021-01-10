@@ -155,7 +155,7 @@
                                                     <td>{{ $item->options->kho }}</td>
                                                     <td>{{ $item->weight }}</td>
                                                     
-                                                    <td> <input id="quanty-item-{{$item->rowId}}" min="0" onkeypress="return isNumberKey(event)"  required type="number" value="{{$item->qty}}" min="0" max="100" /></td>
+                                                    <td> <input id="quanty-item-{{$item->rowId}}" min="0" class="form-control" onkeypress="return isNumberKey(event)"  required type="number" value="{{$item->qty}}" min="0" max="100" /></td>
                                                     <td>{{ number_format($item->price) }} vnđ</td>
                                                     <td>{{ number_format($item->qty*$item->price) }} vnđ</td>
                                                     <td><i class="fa fa-times" onclick="DeleteListItemCart('{{$item->rowId}}')"></i></td>
@@ -294,12 +294,7 @@
                     cache:false,
                     data:{"_token":token,"id":id,"qty":qty,"idKho":idKho},
                     success: function(data) {
-                        if(data == "oke") {
-                        window.location ="qlkho/nhapkho/nhap";
-                        }
-                        else {
-                         alert("Error!");
-                        }
+                        RenderCart(data);
                     }
                 });
             

@@ -124,7 +124,8 @@ class NhapKhoController extends Controller
             $kho = DB::table('khovt')->where('id',$idKho)->first();
             $npp = DB::table('nhaphanphoi')->where('id',$idnpp)->first();
             Cart::add(['id' => $id, 'name' => $vt->vt_ten, 'qty' => $qty, 'price' => $vt->giatien,'weight'=>$vt->dvt_ten,'options' => ['size' => $vt->dvt_ten,'kho'=>$kho->kho_ten,'idKho'=>$kho->id]]);
-            echo "oke";
+			$content = Cart::content();
+			return view('phieunhapkho.nhap_ds',['content1'=>$content]);
         }
 
     }
@@ -315,7 +316,20 @@ class NhapKhoController extends Controller
 	}
 
     public function postXoa($id)
-    {
+    {	
+		$ctnk = ChiTietNhapKho::where('pnk_id',$id)->get();
+		foreach($ctnk as $ct)
+		{
+			$vtkho = VatTuKho::where('vattu_id',$ct->vt_id)->where('kho_id',$ct->kho_id)->first();
+            DB::table('vattukho')->where('vattu_id',$ct->vt_id)
+            ->where('kho_id',$ct->kho_id)
+            ->update([
+                'soluong_ton' => $vtkho->soluong_ton - $ct->ctnk_soluong,
+                'soluong_nhap'=> $vtkho->soluong_xuat - $ct->ctnk_soluong
+            ]);
+            $chitiet = ChiTietNhapKho::find($ct->id);
+            $chitiet->delete();
+		}
         $pnk = PhieuNhapKho::find($id);
         try {
             $pnk->delete();

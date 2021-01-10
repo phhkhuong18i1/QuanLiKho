@@ -1,3 +1,4 @@
+<table class="table table-bordered table-hover tablesorter" id="example"  >
 <thead style="background:#EFEFEF;">
                                         <tr align="center">
                                             <th >Id</th>
@@ -20,3 +21,4 @@
                                           @endforeach  
                                       
                                     </tbody>
+                                    </table>

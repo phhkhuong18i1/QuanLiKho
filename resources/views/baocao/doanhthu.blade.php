@@ -53,7 +53,8 @@
                         <div class="row">
                             <div id="acct-password-row" class="span12">
                             <div style="margin-left:20px;">
-                                <table class="table table-bordered table-hover tablesorter" id="mytable" >
+                            <div id="loadtb">
+                                <table class="table table-bordered table-hover tablesorter" id="example"  >
                                     <thead style="background:#EFEFEF;">
                                         <tr align="center">
                                             <th >Id</th>
@@ -64,8 +65,6 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    
-                                       
                                         @foreach ($doanhthu as $val)
                                         <tr align="center">
                                             <td>{!! $val->id !!}</td>
@@ -78,8 +77,9 @@
                                           @endforeach  
                                       
                                     </tbody>
+                                   
                                 </table>
-                                        </div>
+                                    </div>
                             </div>
                         </div>
                     </div>
@@ -107,8 +107,8 @@
        data: {from_date: from_date, to_date: to_date, _token:_token},
      }).done(function(response)
        {
-          $("#mytable").empty();
-          $("#mytable").html(response);
+          $("#loadtb").empty();
+          $("#loadtb").html(response);
        }
      )
 };
@@ -124,8 +124,8 @@ $('.loc-theo').change(function()
     data: {dasboard_value:dasboard_value, _token:_token},
   }).done(function(response)
     {
-      $("#mytable").empty();
-         $("#mytable").html(response);
+      $("#loadtb").empty();
+         $("#loadtb").html(response);
     });
   });
 
@@ -148,10 +148,5 @@ $('.loc-theo').change(function()
         duration: "slow"
       }
     );
-
-
-
-
-
 </script>
 @endsection

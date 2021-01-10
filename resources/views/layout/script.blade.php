@@ -51,11 +51,11 @@ function render1(response)
             var chitiet = response['chitiet'];
             var ten = chitiet.length;
 
-                nv_ten = "<tr><td width='120px'><strong>Nhân viên lập phiếu:</strong></td><td>"+response['xuatkho'].xk_ma+
-                "</td><td><strong></td></tr><tr><td width='120px'><strong>Nhân viên lập phiếu:</strong></td><td>"+response['nv'].nv_ten+
-                "</td><td><strong></td></tr><tr><td width='120px'><strong>Lý do nhập:</strong></td><td>"+response['xuatkho'].xk_lydo+
-                "</td><td><strong></td></tr><tr><td width='120px'><strong>Công trình:</strong></td><td>"+response['ct'].ten+
-                "</td><td><strong></td></tr><tr><td width='120px'><strong>Địa chỉ:</strong></td> <td >"+response['ct'].diachi+"</td><td><strong></td></tr>";
+                nv_ten = "<tr><td width='140px'><strong>Nhân viên lập phiếu:</strong></td><td>"+response['xuatkho'].xk_ma+
+                "</td><td><strong></td></tr><tr><td width='140px'><strong>Nhân viên lập phiếu:</strong></td><td>"+response['nv'].nv_ten+
+                "</td><td><strong></td></tr><tr><td width='140px'><strong>Lý do nhập:</strong></td><td>"+response['xuatkho'].xk_lydo+
+                "</td><td><strong></td></tr><tr><td width='140px'><strong>Công trình:</strong></td><td>"+response['ct'].ten+
+                "</td><td><strong></td></tr><tr><td width='140px'><strong>Địa chỉ:</strong></td> <td >"+response['ct'].diachi+"</td><td><strong></td></tr>";
                
                 $("#table1").empty();
                 $("#table1").append(nv_ten);
@@ -63,7 +63,7 @@ function render1(response)
               for(var i = 0; i<ten; i++)
               {   var stt= i+1;
                   var idvt = chitiet[i]['vattu'];
-                  var idkho = chitiet[i]['kho']
+                  var idkho = chitiet[i]['kho'];
                   var txt = "<tr><td style='border:thin blue solid;border-style:dashed;'>"+stt+"</td><td style='border:thin blue solid;border-style:dashed;'>"+idvt['vt_ten']+
                 "</td><td style='border:thin blue solid;border-style:dashed;'>"+chitiet[i].ctxk_soluong+
                 "</td><td style='border:thin blue solid;border-style:dashed;'>"+idvt['giatien']+
@@ -72,7 +72,7 @@ function render1(response)
                  $("#table2").append(txt);   
               }
               
-             var tt = "<td width='480px'>Tổng giá trị nhập</><td width='200px'>"+response['xuatkho'].xk_tongtien+" VNĐ</td>";
+             var tt = "<td width='400px'>Tổng giá trị nhập</><td width='300px'>"+response['xuatkho'].xk_tongtien+" VNĐ</td>";
 
              $("#tongtien").empty();
                 $("#tongtien").append(tt);  

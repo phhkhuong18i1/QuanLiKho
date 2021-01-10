@@ -30,7 +30,7 @@
                                 <div id="acct-password-row" class="span8">
                                     <fieldset>
                                         <div class="col-lg-3 ">
-                                            <label>Tên NPP:&nbsp&nbsp</label>
+                                            <label>Tên nhà phân phối:&nbsp&nbsp</label>
                                             <select  class="form-control" name="state_id" id="state_id">
                                             @foreach($nhaphanphoi as $npp)
                                              <option 
@@ -82,7 +82,7 @@
                                                     <th>Mã VT</th>
                                                     <th>Tên VT</th>
                                                     <th>ĐVT</th>
-                                                    <th>Số lượng</th>
+                                                    <th width="100px">Số lượng</th>
                                                     <th>Đơn giá</th>
                                                     <th>Thành tiền</th>
                                                     <th class="span1"></th>
@@ -100,7 +100,7 @@
                                                         <td>{!! $vt->vt_ten !!}</td>
                                                         <td>{!! $dvt->dvt_ten !!}</td>
                                                         <td>
-                                                        <input id="quanty-item-{{$vt->id}}"  required type="number" value="{{$val->ctnk_soluong}}" min="0" max="100" />
+                                                        <input id="quanty-item-{{$vt->id}}" class="form-control"  required type="number" value="{{$val->ctnk_soluong}}" min="0" onkeypress="return isNumberKey(event)" />
                                                         <input type="hidden" name="" value="{{ $nhapkho->id }}" class="nkID">
                                                         <input type="hidden" value="{{$val->kho_id}}" class="khoid">
                                                             </td>
@@ -177,5 +177,5 @@
             $("#myTable").html(response);
      }
     </script>
-    
+    @include('layout.script')
 @endsection

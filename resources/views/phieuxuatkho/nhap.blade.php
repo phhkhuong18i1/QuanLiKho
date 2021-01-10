@@ -14,9 +14,11 @@
         <!-- Form validations -->
 
         <div class="row">
-        @if (session('loi'))
+        @if (count($errors) > 0)
                         <div class="alert alert-danger">
-                            <strong>{{ session('loi') }}</strong>
+                            @foreach ($errors->all() as $error)
+                                <strong>{{ $error }}</strong><br>
+                            @endforeach
                         </div>
                     @endif
                     @if (session('thongbao'))
@@ -83,6 +85,7 @@
                                     
                                 </div>
                                 </form>
+                                <div id="load">
                                 <form action="" method="POST" accept-charset="utf-8">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <div id="acct-password-row" class="span12">
@@ -104,7 +107,7 @@
                                             <select class="form-control" name="dvt" id="country1">
                                                 <option value="" ></option>
                                             </select>
-</div>
+                                    </div>
                                             <div class="col-lg-3">
                                         <label>Kho:</label>
                                             <select class="ware form-control" name="kho" id="country2">
@@ -149,7 +152,7 @@
                                                     <td>{{ $item->name }}</td>
                                                     <td>{{ $item->options->kho }}</td>
                                                     <td>{{ $item->options->size }}</td>
-                                                    <td> <input id="quanty-item-{{$item->rowId}}" style="width:70px ;" type="number" min="0"  onkeypress="return isNumberKey(event)" value="{{$item->qty}}"  /></td>
+                                                    <td> <input id="quanty-item-{{$item->rowId}}" style="width:70px ;" class="form-control" type="number" min="0"  onkeypress="return isNumberKey(event)" value="{{$item->qty}}"  /></td>
                                                     <td>{{ number_format($item->price,0,",",".") }} vnđ</td>
                                                     <td>{{ number_format($item->qty*$item->price,0,",",".") }}vnđ</td>
                                                     <td><i class="fa fa-times" onclick="DeleteListItemCart('{{$item->rowId}}')"></i></td>
@@ -161,6 +164,7 @@
                                         </table>
                                         </form>
                                     </div>
+                                </div>
                                 </div>
                             </div>
                         </div>
@@ -179,8 +183,6 @@
 
         function addCart(soluong)
         {
-            
-                
                 var id = $(".selVT").val();
                 var qty = $(".sluong").val();
                 var idKho = $(".ware").val();
@@ -193,11 +195,11 @@
                     data:{"_token":token,"id":id,"qty":qty,"idKho":idKho},
                     success: function(data) {
                         // console.log(data);
-                        if(data == "oke" ) {
-                          window.location = "qlkho/xuatkho/xuat";
+                        if(data == "loi" ) {
+                            alertify.error('quá số lượng tồn, số lượng còn lại là '+soluong);
                         }
                         else{
-                            alertify.error('quá số lượng tồn, số lượng còn lại là '+soluong);
+                            RenderCart(data);
                         }
                         
                     }
@@ -258,7 +260,9 @@
         $('#vattu_id').on('change', function(e) {
             console.log(e);
             var vattu_id = e.target.value;
-            $.getJSON("qlkho/xuatkho/vattu/ajax-call?vattu_id="+vattu_id, function (data) {
+            $.getJSON("qlkho/xuatkho/vattu/ajax-call?vattu_id="+vattu_id,
+
+             function (data) {
                 $('#country').empty();
                 $.each(data, function(index, countryObj){
 

@@ -31,7 +31,6 @@ class XuatKhoController extends Controller
 			->join('donvitinh','donvitinh.id','=','vattu.donvitinh_id')
 			->select('vattu.*','donvitinh.dvt_ten')
             ->get();
-        
 		$dataKho = DB::table('khovt')->get();
 		$content = Cart::content();
 		return view('phieuxuatkho.nhap',compact('data','data1','dataKho','content'));
@@ -39,9 +38,26 @@ class XuatKhoController extends Controller
 
     public function postList(Request $request)
 	{
+        $this->validate($request,
+    
+        [  
+            'txtLyDo' => 'required'
+           ],
+        [
+            
+            'txtLyDo.required' => 'Chưa nhập lý do',
+        ]
+        
+        
+    );
 		$id_user = $request->input('txtNV');
 		$content = Cart::content();
         $total = Cart::subtotal(0,".","");
+        if(count($content) == 0)
+		{
+			return redirect('qlkho/xuatkho/xuat')->with('thongbao','Chưa có vật tư');
+		}
+		else{
         $quanty = Cart::count();
 		$xuatkho = new PhieuXuatKho;
 		$xuatkho->xk_ma = $request->input('txtID');
@@ -101,13 +117,11 @@ class XuatKhoController extends Controller
        
 		// echo "string";
         return redirect('qlkho/xuatkho/xemXK');
-    
+        }
 	}
     public function postXuathang(Request $request)
 	{
 		if($request->ajax()) {
-
-           
 			$idKho = $request->get('idKho');
             $id = $request->get('id');
             $qty = $request->get('qty');
@@ -122,12 +136,12 @@ class XuatKhoController extends Controller
                 ->first();
                 $cart = Cart::content()->where('id',$id)->first();
                 
+                //đã tồn tại id cart
                 if(isset($cart))
                 {
                     $c = $cart->options->idKho;
                     if($idKho == $c)
                      {
-                
                         $tongsl = $qty + $cart->qty;
                         if($vtkho->soluong_ton < $tongsl )
                          {
@@ -135,23 +149,32 @@ class XuatKhoController extends Controller
                         }
                         else{
                          Cart::update($cart->rowId,['qty'=>$tongsl]);
-                            echo "oke";
+                         $content = Cart::content();
+                        return view('phieuxuatkho.nhap_ds',['content'=>$content]);   
                         }
                     }
                     else
                     {
                         if ($vtkho->soluong_ton >= $qty) {
             	        Cart::add(['id' => $id, 'name' => $vt->vt_ten, 'qty' => $qty, 'price' => $vt->giatien,'weight'=>$vtkho->soluong_ton,'options' => ['size' => $vt->dvt_ten,'kho'=>$kho->kho_ten,'idKho'=>$kho->id]]);
-                        echo "oke";   
-                       } 
+                        $content = Cart::content();
+                        return view('phieuxuatkho.nhap_ds',['content'=>$content]);   
+                        }
+                       else{
+                           echo "loi";
+                       }
                     }
                  }
                 else
                 {
                     if ($vtkho->soluong_ton >= $qty) {
             	        Cart::add(['id' => $id, 'name' => $vt->vt_ten, 'qty' => $qty, 'price' => $vt->giatien,'weight'=>$vtkho->soluong_ton,'options' => ['size' => $vt->dvt_ten,'kho'=>$kho->kho_ten,'idKho'=>$kho->id]]);
-                         echo "oke";   
-            } 
+                        $content = Cart::content();
+                        return view('phieuxuatkho.nhap_ds',['content'=>$content]);   
+                    } 
+                    else{
+                        echo "loi";
+                    }
         }
             
             
@@ -204,7 +227,13 @@ class XuatKhoController extends Controller
 		$tong = DB::table('chitietxuatkho')->where('phieuxuatkho_id',$xkid)->sum('ctxk_thanhtien');
 		DB::table('phieuxuatkho')->where('id',$xkid)->update([
 			'xk_tongtien' => $tong
-		]);
+        ]);
+        if($tong == 0)
+        {
+            DB::table('thongke')->where('date',$xk->xk_ngaylap)->update([
+                'SoDon' => $tk->SoDon - 1
+            ]);
+        }
         
         //update vật tư kho
 		DB::table('vattukho')->where('vattu_id',$id)->where('kho_id',$khoid)->update([
@@ -294,7 +323,13 @@ class XuatKhoController extends Controller
 				->where('id',$xkID)
 				->update([
 					'xk_tongtien' =>$tong
-					]);
+                    ]);
+            if($tong == 0)
+            {
+                DB::table('thongke')->where('date',$xk->xk_ngaylap)->update([
+                    'SoDon' => $tk->SoDon - 1
+                ]);
+            }
                     $xuatkho = DB::table('phieuxuatkho')->where('id',$xkID)->first();
                     $chitiet = DB::table('chitietxuatkho')->where('phieuxuatkho_id',$xkID)->get();
                     return view('phieuxuatkho.sua_ds',['chitiet'=>$chitiet,'xuatkho'=>$xuatkho]);
@@ -385,6 +420,30 @@ class XuatKhoController extends Controller
 
     public function postXoa($id)
     {
+        $ctxk = ChiTietXuatKho::where('phieuxuatkho_id',$id)->get();
+        $soluong = ChiTietXuatKho::where('phieuxuatkho_id',$id)->sum('ctxk_soluong');
+        $pxk = PhieuXuatKho::where('id',$id)->first();
+        $tk= ThongKe::where('date',$pxk->xk_ngaylap)->first();
+
+        DB::table('thongke')->where('date',$pxk->xk_ngaylap)
+        ->update([
+            'SoLuong' => $tk->SoLuong - $soluong,
+            'TongTien' => $tk->TongTien - $pxk->xk_tongtien,
+            'SoDon' => $tk->SoDon - 1
+        ]);
+        foreach($ctxk as $ct)
+        {
+            
+            $vtkho = VatTuKho::where('vattu_id',$ct->vattu_id)->where('kho_id',$ct->kho_id)->first();
+            DB::table('vattukho')->where('vattu_id',$ct->vattu_id)
+            ->where('kho_id',$ct->kho_id)
+            ->update([
+                'soluong_ton' => $vtkho->soluong_ton + $ct->ctxk_soluong,
+                'soluong_xuat'=> $vtkho->soluong_xuat - $ct->ctxk_soluong
+            ]);
+            $chitiet = ChiTietXuatKho::find($ct->id);
+            $chitiet->delete();
+        }
         $pxk = PhieuXuatKho::find($id);
         try {
             $pxk->delete();

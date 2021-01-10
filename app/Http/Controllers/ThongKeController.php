@@ -14,8 +14,19 @@ class ThongKeController extends Controller
         $from_date = $req->from_date;
         $to_date = $req->to_date;
 
+        $sub365ngay = Carbon::now('Asia/Ho_Chi_Minh')->subdays(365)->toDateString();
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+        if($from_date == null)
+        {
+            $get = ThongKe::whereBetween('date',[$sub365ngay,$to_date])->orderBy('date','ASC')->get();
+        }
+        elseif ($to_date == null)
+        {
+            $get = ThongKe::whereBetween('date',[$from_date,$now])->orderBy('date','ASC')->get();
+        }
+        else{
         $get = ThongKe::whereBetween('date',[$from_date,$to_date])->orderBy('date','ASC')->get();
-
+        }
         foreach($get as $key => $val)
         {
             $chart_data[] = array(
@@ -113,7 +124,19 @@ class ThongKeController extends Controller
         
             $from_date = $req->from_date;
             $to_date = $req->to_date;
-            $doanhthu = ThongKe::whereBetween('date',[$from_date,$to_date])->orderBy('date','ASC')->get();
+            $sub365ngay = Carbon::now('Asia/Ho_Chi_Minh')->subdays(365)->toDateString();
+            $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+            if($from_date == null)
+            {
+                $doanhthu = ThongKe::whereBetween('date',[$sub365ngay,$to_date])->orderBy('date','DESC')->get();
+            }
+            elseif($to_date == null)
+            {
+                $doanhthu = ThongKe::whereBetween('date',[$from_date,$now])->orderBy('date','DESC')->get();
+            }
+            else{
+            $doanhthu = ThongKe::whereBetween('date',[$from_date,$to_date])->orderBy('date','DESC')->get();
+            }
             return view('baocao.doanhthu_ajax',['doanhthu'=>$doanhthu]);
     }
 
