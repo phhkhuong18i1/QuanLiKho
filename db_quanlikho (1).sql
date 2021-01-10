@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 23, 2020 lúc 12:58 PM
+-- Thời gian đã tạo: Th1 10, 2021 lúc 11:53 AM
 -- Phiên bản máy phục vụ: 10.4.11-MariaDB
 -- Phiên bản PHP: 7.4.5
 
@@ -56,6 +56,7 @@ CREATE TABLE `chitietnhapkho` (
   `ctnk_thanhtien` double NOT NULL,
   `vt_id` int(10) UNSIGNED NOT NULL,
   `pnk_id` bigint(20) UNSIGNED NOT NULL,
+  `kho_id` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -64,9 +65,24 @@ CREATE TABLE `chitietnhapkho` (
 -- Đang đổ dữ liệu cho bảng `chitietnhapkho`
 --
 
-INSERT INTO `chitietnhapkho` (`id`, `ctnk_soluong`, `ctnk_thanhtien`, `vt_id`, `pnk_id`, `created_at`, `updated_at`) VALUES
-(6, 8, 81480, 11, 8, '2020-11-09 08:56:00', '2020-11-09 08:56:00'),
-(8, 2, 187000, 12, 10, '2020-11-09 08:57:53', '2020-11-09 08:57:53');
+INSERT INTO `chitietnhapkho` (`id`, `ctnk_soluong`, `ctnk_thanhtien`, `vt_id`, `pnk_id`, `kho_id`, `created_at`, `updated_at`) VALUES
+(6, 8, 81480, 11, 8, 1, '2020-11-09 08:56:00', '2020-11-09 08:56:00'),
+(8, 2, 187000, 12, 10, 2, '2020-11-09 08:57:53', '2020-11-09 08:57:53'),
+(12, 20, 4000000, 2, 18, 1, '2020-12-29 01:14:46', '2020-12-29 01:14:46'),
+(13, 50, 4375000, 14, 19, 1, '2020-12-29 01:16:43', '2020-12-29 01:16:43'),
+(14, 10, 850000, 13, 19, 1, '2020-12-29 01:16:43', '2020-12-29 01:16:43'),
+(15, 3, 280500, 12, 20, 2, '2021-01-08 00:49:06', '2021-01-08 00:49:06'),
+(16, 5, 50925, 16, 20, 1, '2021-01-08 00:49:07', '2021-01-08 00:49:07'),
+(17, 2, 187000, 12, 23, 2, '2021-01-08 00:53:20', '2021-01-08 00:53:20'),
+(18, 3, 280500, 12, 29, 1, '2021-01-08 01:09:09', '2021-01-08 01:09:09'),
+(19, 3, 280500, 12, 30, 2, '2021-01-08 01:15:32', '2021-01-08 01:15:32'),
+(20, 3, 30555, 11, 31, 1, '2021-01-08 01:16:40', '2021-01-08 01:16:40'),
+(21, 5, 50925, 10, 32, 2, '2021-01-08 01:18:37', '2021-01-08 01:18:37'),
+(22, 5, 437500, 14, 33, 3, '2021-01-08 01:19:07', '2021-01-08 01:19:07'),
+(23, 3, 30555, 11, 34, 1, '2021-01-08 01:20:43', '2021-01-08 01:20:43'),
+(24, 3, 255000, 13, 35, 1, '2021-01-08 01:23:27', '2021-01-08 01:23:27'),
+(25, 15, 1402500, 12, 36, 1, '2021-01-08 01:24:47', '2021-01-08 01:24:47'),
+(52, 47, 478695, 11, 58, 2, '2021-01-10 02:49:04', '2021-01-10 02:49:04');
 
 -- --------------------------------------------------------
 
@@ -95,13 +111,17 @@ INSERT INTO `chitietxuatkho` (`id`, `ctxk_soluong`, `ctxk_thanhtien`, `vattu_id`
 (7, 2, 20370, 8, 6, 2, '2020-12-01 20:06:30', '2020-12-01 20:06:30'),
 (8, 2, 20370, 11, 7, 2, '2020-12-02 09:22:11', '2020-12-02 09:22:11'),
 (9, 2, 20370, 9, 7, 2, '2020-12-02 09:22:11', '2020-12-02 09:22:11'),
-(18, 2, 500000, 6, 16, 1, '2020-12-20 03:14:20', '2020-12-20 03:14:20'),
 (19, 2, 500000, 6, 17, 1, '2020-12-20 03:14:37', '2020-12-20 03:14:37'),
 (20, 2, 170000, 13, 18, 1, '2020-12-20 03:15:13', '2020-12-20 03:15:13'),
 (21, 2, 540000, 4, 19, 1, '2020-12-20 03:16:16', '2020-12-20 03:16:16'),
 (22, 2, 540000, 4, 20, 1, '2020-12-20 03:17:34', '2020-12-20 03:17:34'),
 (23, 2, 20370, 10, 21, 2, '2020-12-20 03:19:58', '2020-12-20 03:19:58'),
-(24, 3, 30105, 7, 22, 2, '2020-12-20 03:27:55', '2020-12-20 03:27:55');
+(39, 10, 1800000, 3, 34, 1, '2021-01-09 04:35:02', '2021-01-09 04:35:02'),
+(43, 10, 101850, 11, 36, 2, '2021-01-09 07:07:20', '2021-01-09 07:07:20'),
+(47, 2, 187000, 12, 38, 1, '2021-01-09 20:22:16', '2021-01-09 20:22:16'),
+(48, 2, 170000, 13, 38, 1, '2021-01-09 20:22:16', '2021-01-09 20:22:16'),
+(49, 60, 611100, 11, 38, 2, '2021-01-09 20:22:16', '2021-01-09 20:22:16'),
+(50, 10, 850000, 13, 39, 1, '2021-01-10 02:05:15', '2021-01-10 02:05:15');
 
 -- --------------------------------------------------------
 
@@ -208,6 +228,31 @@ INSERT INTO `khuvuc` (`id`, `kv_ma`, `kv_ten`, `created_at`, `updated_at`) VALUE
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `lienhe`
+--
+
+CREATE TABLE `lienhe` (
+  `id` int(11) NOT NULL,
+  `date` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `message` varchar(1000) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `subject` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `lienhe`
+--
+
+INSERT INTO `lienhe` (`id`, `date`, `email`, `name`, `message`, `subject`, `created_at`, `updated_at`) VALUES
+(1, '2021-01-07', 'vtdkhoa@gmail.com', 'Phan Khương', 'khuong 123', 'Liên hệ', '2021-01-07 03:05:15', '2021-01-07 03:05:15'),
+(2, '2021-01-09', 'khuonghstvk@gmail.com', 'Phan Khương', '12351', 'Nam', '2021-01-09 01:27:09', '2021-01-09 01:27:09');
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `migrations`
 --
 
@@ -263,8 +308,8 @@ CREATE TABLE `nhanvien` (
 
 INSERT INTO `nhanvien` (`id`, `email`, `nv_ten`, `nv_sdt`, `GioiTinh`, `CMND`, `nv_diachi`, `created_at`, `updated_at`) VALUES
 (1, 'vtdkhoa@gmail.com', 'Phan Khương', '0919839903', 1, 197416451, 'Quảng Trị', '2020-11-09 15:40:53', '2020-12-20 20:52:43'),
-(3, 'pkhkhuong.18i@cit.udn.vn', 'Phan Khương', NULL, 1, NULL, NULL, '2020-11-13 06:50:41', '2020-11-13 06:50:41'),
-(4, 'hieu12@gmail.com', 'hieu', NULL, 1, NULL, NULL, '2020-11-13 07:35:55', '2020-11-13 07:35:55'),
+(3, 'pkhkhuong.18i@cit.udn.vn', 'Phan Khương', '0334956419', 1, 197416451, 'Hải Lăng, Quảng Trị', '2020-11-13 06:50:41', '2021-01-08 06:54:31'),
+(4, 'hieu12@gmail.com', 'hieu', '0334956419', 1, 123567895, 'Đà nẵng', '2020-11-13 07:35:55', '2021-01-07 21:01:15'),
 (7, 'khuonghstvk@gmail.com', 'Khương', '0334956419', 1, 197416451, 'Hải Lăng, Quảng Trị', '2020-12-17 02:32:08', '2020-12-17 02:32:08'),
 (8, 'lhphu.18i@cit.udn.vn', 'Lê Hồng Phú', '0335678942', 1, 123789654, 'Quảng TRị', '2020-12-23 00:01:56', '2020-12-23 00:03:09');
 
@@ -391,7 +436,20 @@ CREATE TABLE `phieunhapkho` (
 
 INSERT INTO `phieunhapkho` (`id`, `ma`, `lydo`, `ngaylap`, `tongtien`, `npp_id`, `nv_id`, `created_at`, `updated_at`) VALUES
 (8, 'PNK09112020031131', '123456', '2020-11-09', 81480, 1, 1, '2020-11-09 08:56:00', '2020-11-09 08:56:00'),
-(10, 'PNK09112020031148', 'kkl', '2020-11-09', 187000, 2, 1, '2020-11-09 08:57:53', '2020-11-09 08:57:53');
+(10, 'PNK09112020031148', 'kkl', '2020-11-09', 187000, 2, 1, '2020-11-09 08:57:53', '2020-11-09 08:57:53'),
+(18, 'PNK29122020081213', 'kkl', '2020-12-29', 4000000, 1, 1, '2020-12-29 01:14:46', '2020-12-29 01:14:46'),
+(19, 'PNK29122020081235', 'kkl', '2020-12-29', 5225000, 2, 1, '2020-12-29 01:16:43', '2020-12-29 01:16:43'),
+(20, 'PNK08012021070103', 'thieu do', '2021-01-08', 331425, 1, 3, '2021-01-08 00:49:06', '2021-01-08 00:49:06'),
+(23, 'PNK08012021070117', 'thieu do', '2021-01-08', 187000, 1, 3, '2021-01-08 00:53:20', '2021-01-08 00:53:20'),
+(29, 'PNK08012021080104', 'thieu do', '2021-01-08', 280500, 2, 3, '2021-01-08 01:09:09', '2021-01-08 01:09:09'),
+(30, 'PNK08012021080128', 'thieu do', '2021-01-08', 280500, 1, 3, '2021-01-08 01:15:32', '2021-01-08 01:15:32'),
+(31, 'PNK08012021080137', 'thieu do', '2021-01-08', 30555, 1, 3, '2021-01-08 01:16:40', '2021-01-08 01:16:40'),
+(32, 'PNK08012021080134', 'kkjlklk', '2021-01-08', 50925, 2, 3, '2021-01-08 01:18:37', '2021-01-08 01:18:37'),
+(33, 'PNK08012021080102', 'thieu do', '2021-01-08', 437500, 1, 3, '2021-01-08 01:19:07', '2021-01-08 01:19:07'),
+(34, 'PNK08012021080132', 'kkl', '2021-01-08', 30555, 1, 3, '2021-01-08 01:20:43', '2021-01-08 01:20:43'),
+(35, 'PNK08012021080123', 'kkjlklk', '2021-01-08', 255000, 2, 3, '2021-01-08 01:23:27', '2021-01-08 01:23:27'),
+(36, 'PNK08012021080143', 'kkl', '2021-01-08', 1402500, 1, 3, '2021-01-08 01:24:47', '2021-01-08 01:24:47'),
+(58, 'PNK10012021090148', 'kkjlklk', '2021-01-10', 478695, 1, 3, '2021-01-10 02:49:04', '2021-01-10 02:49:04');
 
 -- --------------------------------------------------------
 
@@ -419,13 +477,15 @@ INSERT INTO `phieuxuatkho` (`id`, `xk_ma`, `xk_lydo`, `xk_ngaylap`, `xk_tongtien
 (5, 'PXK01122020081246', 'thieu do', '2020-12-01', 20370, 5, 1, '2020-12-01 01:15:54', '2020-12-01 01:15:54'),
 (6, 'PXK02122020031222', 'kkl', '2020-12-02', 5885370, 3, 1, '2020-12-01 20:06:30', '2020-12-01 20:06:30'),
 (7, 'PXK02122020041202', '1234', '2020-12-02', 40740, 1, 1, '2020-12-02 09:22:11', '2020-12-02 09:22:11'),
-(16, 'PXK20122020101219', 'thieu do', '2020-12-20', 500000, 2, 1, '2020-12-20 03:14:20', '2020-12-20 03:14:20'),
 (17, 'PXK20122020101219', 'thieu do', '2020-12-20', 500000, 2, 1, '2020-12-20 03:14:37', '2020-12-20 03:14:37'),
 (18, 'PXK20122020101210', 'kkl', '2020-12-20', 170000, 1, 1, '2020-12-20 03:15:13', '2020-12-20 03:15:13'),
 (19, 'PXK20122020101213', 'kkl', '2020-12-20', 540000, 2, 1, '2020-12-20 03:16:16', '2020-12-20 03:16:16'),
 (20, 'PXK20122020101213', 'kkl', '2020-12-20', 540000, 2, 1, '2020-12-20 03:17:34', '2020-12-20 03:17:34'),
 (21, 'PXK20122020101254', 'kkl', '2020-12-20', 20370, 2, 1, '2020-12-20 03:19:58', '2020-12-20 03:19:58'),
-(22, 'PXK20122020101212', 'kkjlklk', '2020-12-20', 30105, 2, 1, '2020-12-20 03:27:55', '2020-12-20 03:27:55');
+(34, 'PXK09012021110152', 'thieu do', '2021-01-09', 1800000, 3, 3, '2021-01-09 04:35:02', '2021-01-09 04:35:02'),
+(36, 'PXK09012021020117', 'kkjlklk', '2021-01-09', 101850, 2, 3, '2021-01-09 07:07:20', '2021-01-09 07:07:20'),
+(38, 'PXK10012021030126', 'kkl123', '2021-01-10', 968100, 2, 3, '2021-01-09 20:22:16', '2021-01-09 20:25:53'),
+(39, 'PXK10012021090108', 'thieu do', '2021-01-10', 850000, 1, 3, '2021-01-10 02:05:15', '2021-01-10 02:05:15');
 
 -- --------------------------------------------------------
 
@@ -538,9 +598,26 @@ CREATE TABLE `thongke` (
 --
 
 INSERT INTO `thongke` (`id`, `date`, `SoLuong`, `TongTien`, `SoDon`, `created_at`, `updated_at`) VALUES
-(4, '2020-12-20', 5, 50475, 2, '2020-12-20 03:19:58', '2020-12-20 03:19:58'),
-(5, '2020-12-01', 10, 100000, 12, '2020-12-21 08:48:49', '2020-12-21 08:48:49'),
-(6, '2020-12-02', 5, 560000, 7, '2020-12-21 08:49:27', '2020-12-21 08:49:27');
+(4, '2020-12-20', 15, 200000, 2, '2020-12-20 03:19:58', '2020-12-20 03:19:58'),
+(5, '2020-12-01', 35, 250000, 12, '2020-12-21 08:48:49', '2020-12-21 08:48:49'),
+(6, '2020-12-02', 10, 100000, 7, '2020-12-21 08:49:27', '2020-12-21 08:49:27'),
+(7, '2020-12-29', 5, 50000, 1, '2020-12-29 00:58:53', '2020-12-29 00:58:53'),
+(8, '2020-12-03', 50, 150000, 6, '2021-01-07 14:02:17', '2021-01-07 14:02:17'),
+(9, '2020-12-04', 34, 120000, 12, '2021-01-07 14:02:17', '2021-01-07 14:02:17'),
+(10, '2020-12-05', 23, 80000, 6, '2021-01-07 14:02:17', '2021-01-07 14:02:17'),
+(11, '2021-01-01', 20, 65000, 20, '2021-01-08 04:12:30', '2021-01-08 04:12:30'),
+(12, '2021-01-02', 41, 160000, 40, '2021-01-08 04:12:30', '2021-01-08 04:12:30'),
+(13, '2021-01-05', 63, 170000, 12, '2021-01-08 04:12:30', '2021-01-08 04:12:30'),
+(14, '2021-01-06', 16, 40000, 3, '2021-01-08 04:12:30', '2021-01-08 04:12:30'),
+(15, '2020-12-10', 38, 45000, 12, '2021-01-08 04:14:48', '2021-01-08 04:14:48'),
+(16, '2020-12-12', 45, 90000, 21, '2021-01-08 04:14:48', '2021-01-08 04:14:48'),
+(17, '2020-11-01', 60, 130000, 10, '2021-01-08 04:16:19', '2021-01-08 04:16:19'),
+(18, '2020-11-02', 36, 72000, 15, '2021-01-08 04:16:19', '2021-01-08 04:16:19'),
+(19, '2020-11-03', 28, 76000, 35, '2021-01-08 04:16:19', '2021-01-08 04:16:19'),
+(20, '2020-11-05', 62, 250000, 14, '2021-01-08 04:16:19', '2021-01-08 04:16:19'),
+(21, '2021-01-08', 50, 4250000, 2, '2021-01-08 07:08:54', '2021-01-08 07:08:54'),
+(23, '2021-01-09', 20, 1901850, 2, '2021-01-09 02:21:46', '2021-01-09 02:21:46'),
+(24, '2021-01-10', 74, 1818100, 2, '2021-01-09 20:22:16', '2021-01-09 20:22:16');
 
 -- --------------------------------------------------------
 
@@ -566,10 +643,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `code`, `time_code`, `email`, `password`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Phan Khương', '', '2020-11-14 03:54:04', 'vtdkhoa@gmail.com', '$2y$10$UvhboVD1nTh9yKsF4WsfbOCwlD8Kv7MKdYgnk9Hkrl0KxsEOrFJzS', 0, 'CH3mweQtMl07zxfZvMEf8NTBgtJFndh34S4o3vvz1SzWweFkG4rq2Fo1Qhdw', NULL, '2020-12-20 20:54:31'),
-(3, 'Phan Khương', '', '2020-11-14 03:54:04', 'pkhkhuong.18i@cit.udn.vn', '$2y$10$kSH0CVclVF01Ka8zn/WFQenySS.D6kOddNsfA8ZL5H7G43AoUQjTG', 2, NULL, '2020-11-13 06:50:41', '2020-11-13 06:50:41'),
+(1, 'Phan Khương', '', '2020-11-14 03:54:04', 'vtdkhoa@gmail.com', '$2y$10$UvhboVD1nTh9yKsF4WsfbOCwlD8Kv7MKdYgnk9Hkrl0KxsEOrFJzS', 0, 'uY6XHMgxPFFHgqyI6El1CRilIKxX04KKnCS6m7LKbFivEmQzOTKvDGnq1RIM', NULL, '2020-12-20 20:54:31'),
+(3, 'Phan Khương', '$2y$10$N04CO7iM5a2ILNyOnsP3LugZWhv7c6BE7RCTPFbzKNo2Ous8pbRRy', '2021-01-07 06:17:54', 'pkhkhuong.18i@cit.udn.vn', '$2y$10$CGvTftXsEjBSWvSST6juZ.jxbbmk0pf5zNJzB1nvw4zJRDMwsusfC', 0, NULL, '2020-11-13 06:50:41', '2021-01-07 06:18:21'),
 (4, 'hieu', '', '2020-11-14 03:54:04', 'hieu12@gmail.com', '$2y$10$Ufx/0tRkkspeill5tfumTeRWJFXX2ODN1M3nb198HXMB/bGUE6IBC', 2, NULL, '2020-11-13 07:35:55', '2020-11-13 07:35:55'),
-(7, 'Khương', NULL, '2020-12-17 09:32:08', 'khuonghstvk@gmail.com', '$2y$10$ZbXMhl0FvwlYfujTVFk3SOHCXRp.JUByXqtMv2w8MSbrXqNOqVkey', 1, NULL, '2020-12-17 02:32:08', '2020-12-17 02:32:08'),
+(7, 'Khương', '$2y$10$mfOIibZbi0Siu8hL7HG6tuqbEBE2TPoKeKF1m5Kp6Ql1Dv6ZCv7hG', '2020-12-29 00:48:49', 'khuonghstvk@gmail.com', '$2y$10$qbAwrStUtHPbr8XNJKO/r.n2iMd/vFK0VJ6dNXDAt0xxCzgwg0URm', 1, NULL, '2020-12-17 02:32:08', '2020-12-29 00:49:18'),
 (8, 'Lê Hồng Phú', NULL, '2020-12-23 07:01:56', 'lhphu.18i@cit.udn.vn', '$2y$10$c2DPXnpgPK1gixyh6g1xPeH7aMdJpCEyAXyK0D8zTS0MzVt4pg6OO', 2, NULL, '2020-12-23 00:01:56', '2020-12-23 00:03:09');
 
 -- --------------------------------------------------------
@@ -627,8 +704,8 @@ CREATE TABLE `vattukho` (
   `soluong_ton` int(11) NOT NULL,
   `kho_id` int(10) NOT NULL,
   `vattu_id` int(10) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -636,24 +713,26 @@ CREATE TABLE `vattukho` (
 --
 
 INSERT INTO `vattukho` (`id`, `soluong_nhap`, `soluong_xuat`, `soluong_ton`, `kho_id`, `vattu_id`, `created_at`, `updated_at`) VALUES
-(1, 100, 5, 95, 1, 2, NULL, '2019-08-06 02:30:08'),
-(2, 120, 35, 85, 1, 3, NULL, '2019-08-05 10:56:05'),
+(1, 120, 5, 115, 1, 2, '2020-12-29 07:37:48', '2020-12-29 08:14:46'),
+(2, 120, 47, 73, 1, 3, '2020-12-29 07:37:48', '2021-01-09 11:35:52'),
 (3, 100, 0, 100, 1, 1, '0000-00-00 00:00:00', '2020-12-14 02:58:57'),
-(4, 1200, 203, 997, 2, 7, NULL, '2020-12-20 03:27:55'),
-(5, 1000, 2, 998, 2, 8, NULL, '2020-12-01 20:06:30'),
-(6, 1000, 2, 998, 2, 9, NULL, '2020-12-02 09:22:11'),
-(7, 1102, 102, 1000, 2, 10, NULL, '2020-12-20 03:19:58'),
-(8, 100, 25, 75, 2, 11, NULL, '2020-12-20 03:05:16'),
-(9, 2, 0, 2, 1, 12, NULL, '2019-08-04 17:30:56'),
-(10, 550, 52, 498, 1, 13, NULL, '2020-12-20 03:15:13'),
-(11, 600, 100, 500, 1, 15, NULL, NULL),
-(12, 720, 220, 500, 1, 14, NULL, NULL),
-(13, 530, 453, 77, 1, 5, NULL, '2020-12-01 20:06:30'),
-(14, 120, 26, 94, 1, 6, NULL, '2020-12-20 03:14:37'),
+(4, 1200, 203, 997, 2, 7, '2020-12-29 07:37:48', '2021-01-09 09:22:04'),
+(5, 1000, 2, 998, 2, 8, '2020-12-29 07:37:48', '2020-12-01 20:06:30'),
+(6, 1000, 64, 936, 2, 9, '2020-12-29 07:37:48', '2021-01-10 09:52:46'),
+(7, 1110, 165, 945, 2, 10, '2020-12-29 07:37:48', '2021-01-10 09:29:04'),
+(8, 140, 100, 50, 2, 11, '2020-12-29 07:37:48', '2021-01-10 09:49:04'),
+(9, 100, 7, 93, 1, 12, '2020-12-29 07:37:48', '2021-01-09 20:22:16'),
+(10, 564, 282, 282, 1, 13, '2020-12-29 07:37:48', '2021-01-10 09:05:51'),
+(11, 600, 100, 500, 1, 15, '2020-12-29 07:37:48', '2020-12-29 07:38:06'),
+(12, 770, 220, 550, 1, 14, '2020-12-29 07:37:48', '2020-12-29 08:16:43'),
+(13, 500, 453, 47, 1, 5, '2020-12-29 07:37:48', '2021-01-10 09:52:46'),
+(14, 500, 25, 922, 1, 6, '2020-12-29 07:37:48', '2021-01-09 14:52:37'),
 (15, 200, 104, 96, 1, 4, '0000-00-00 00:00:00', '2020-12-20 03:17:34'),
-(18, 100, 0, 100, 1, 1, '2019-08-05 16:32:56', '2020-12-14 02:58:57'),
-(19, 2, 0, 2, 1, 7, '2020-11-09 08:56:00', '2020-11-09 08:56:00'),
-(20, 4, 0, 4, 4, 7, '2020-11-11 07:38:56', '2020-11-11 07:38:56');
+(19, 200, 0, 200, 1, 7, '2020-11-09 08:56:00', '2021-01-09 11:43:24'),
+(20, 400, 0, 400, 4, 7, '2020-11-11 07:38:56', '2021-01-09 11:43:32'),
+(22, 160, 150, 10, 2, 12, '2021-01-08 00:49:07', '2021-01-09 14:02:25'),
+(23, 500, 0, 500, 1, 16, '2021-01-08 00:49:07', '2021-01-09 11:43:51'),
+(35, 50, 0, 50, 4, 4, '2021-01-08 22:18:27', '2021-01-08 22:18:27');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -671,7 +750,8 @@ ALTER TABLE `chatluong`
 ALTER TABLE `chitietnhapkho`
   ADD PRIMARY KEY (`id`),
   ADD KEY `chitietnhapkho_vattu_id_foreign` (`vt_id`),
-  ADD KEY `chitietnhapkho_phieunhapkho_id_foreign` (`pnk_id`);
+  ADD KEY `chitietnhapkho_phieunhapkho_id_foreign` (`pnk_id`),
+  ADD KEY `kho_ctnk` (`kho_id`);
 
 --
 -- Chỉ mục cho bảng `chitietxuatkho`
@@ -704,6 +784,12 @@ ALTER TABLE `khovt`
 -- Chỉ mục cho bảng `khuvuc`
 --
 ALTER TABLE `khuvuc`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Chỉ mục cho bảng `lienhe`
+--
+ALTER TABLE `lienhe`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -812,13 +898,13 @@ ALTER TABLE `chatluong`
 -- AUTO_INCREMENT cho bảng `chitietnhapkho`
 --
 ALTER TABLE `chitietnhapkho`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT cho bảng `chitietxuatkho`
 --
 ALTER TABLE `chitietxuatkho`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT cho bảng `congtrinh`
@@ -843,6 +929,12 @@ ALTER TABLE `khovt`
 --
 ALTER TABLE `khuvuc`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT cho bảng `lienhe`
+--
+ALTER TABLE `lienhe`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `migrations`
@@ -872,13 +964,13 @@ ALTER TABLE `nhomvattu`
 -- AUTO_INCREMENT cho bảng `phieunhapkho`
 --
 ALTER TABLE `phieunhapkho`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT cho bảng `phieuxuatkho`
 --
 ALTER TABLE `phieuxuatkho`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT cho bảng `tbl_statistical`
@@ -890,7 +982,7 @@ ALTER TABLE `tbl_statistical`
 -- AUTO_INCREMENT cho bảng `thongke`
 --
 ALTER TABLE `thongke`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT cho bảng `users`
@@ -908,7 +1000,7 @@ ALTER TABLE `vattu`
 -- AUTO_INCREMENT cho bảng `vattukho`
 --
 ALTER TABLE `vattukho`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -919,7 +1011,8 @@ ALTER TABLE `vattukho`
 --
 ALTER TABLE `chitietnhapkho`
   ADD CONSTRAINT `chitietnhapkho_phieunhapkho_id_foreign` FOREIGN KEY (`pnk_id`) REFERENCES `phieunhapkho` (`id`),
-  ADD CONSTRAINT `chitietnhapkho_vattu_id_foreign` FOREIGN KEY (`vt_id`) REFERENCES `vattu` (`id`);
+  ADD CONSTRAINT `chitietnhapkho_vattu_id_foreign` FOREIGN KEY (`vt_id`) REFERENCES `vattu` (`id`),
+  ADD CONSTRAINT `kho_ctnk` FOREIGN KEY (`kho_id`) REFERENCES `khovt` (`id`);
 
 --
 -- Các ràng buộc cho bảng `chitietxuatkho`
