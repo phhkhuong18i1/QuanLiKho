@@ -58,8 +58,9 @@
           <td style="border:thin solid;" width="50px"><strong>STT</strong></td>
           <td style="border:thin solid;" width="150px"><strong>Vật tư</strong></td>
           <td style="border:thin solid;" width="50px"><strong>Số lượng</strong></td>
-          <td style="border:thin solid;" width="150px"><strong>Đơn giá</strong></td>
-          <td style="border:thin solid;" width="150px"><strong>Thành tiền</strong></td>
+          <td style="border:thin solid;" width="50px"><strong>ĐVT</strong></td>
+          <td style="border:thin solid;" width="120px"><strong>Đơn giá</strong></td>
+          <td style="border:thin solid;" width="120px"><strong>Thành tiền</strong></td>
           <td style="border:thin solid;" width="200px"><strong>Xuất từ kho</strong></td>
         </tr>
       </thead>
@@ -71,10 +72,12 @@
               <td style="border:thin blue solid;border-style:dashed;">
                   <?php  
                       $vt = DB::table('vattu')->where('id',$val->vattu_id)->first();
+                      $dvt = Db::table('donvitinh')->where('id',$vt->donvitinh_id)->first();
                       print_r($vt->vt_ten);
                   ?>
               </td>
               <td style="border:thin blue solid;border-style:dashed;">{!! $val->ctxk_soluong !!}</td>
+              <td style="border:thin blue solid;border-style:dashed;">{!! $dvt->dvt_ten !!}</td>
               <td style="border:thin blue solid;border-style:dashed;">
               {!! number_format($vt->giatien) !!} vnđ 
               </td>

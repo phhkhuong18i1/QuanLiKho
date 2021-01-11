@@ -69,7 +69,7 @@
                                 <td>{{ $item->nhaphanphoi->npp_ten }}</td>
                                 <td>{{ $item->nhasanxuat->nsx_ten }}</td>
                                 <td class="center">
-                                    <a class="btn btn-danger" href="qlkho/vattu/xoa/{{ $item->id }}">
+                                <a  class="btn btn-danger" data-toggle="modal" data-target="#exampleModalXoa"  data-id="{{$item->id}}">
                                         <i class="fa fa-trash-o fa-fw"></i>Xóa
                                     </a>
                                 </td>
@@ -85,7 +85,52 @@
             </section>
           </div>
         </div>
+        
+<!-- modal -->
+        <div class="modal fade" id="exampleModalXoa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                     <h5 class="modal-title" id="exampleModalLabel">Xóa</h5>
+            
+                </div>
+        <div class="modal-body">
+            <div id="modal-body1">
+                <p>Bạn có chắc chắn muốn xóa ko?</p>
+        <div class="modal-footer">
+        <a herf="" class="btn btn-danger">Xóa</a><button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+        </div>
+        </div>
+    </div>
+    </div>
         <!-- page end-->
       </section>
     </section>
 @endsection
+@section('script')
+<script>
+      $('#exampleModalXoa').on('shown.bs.modal', function (e) {
+             
+             var id = $(e.relatedTarget).attr('data-id');
+            // $(this).find('.xkid').text(id);
+             $.ajax({
+                 type:'GET',
+                 url:'qlkho/vattu/xoa',
+                 data: {
+                     ID: id,
+                 },
+                 success: function(response)
+                 {
+                     
+                     DeleteVT(response);
+                 }
+     
+             });
+           
+           });
+
+
+  
+</script>
+@include('layout.script')
+ @endsection

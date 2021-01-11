@@ -58,7 +58,7 @@
             @if(Auth::user()->role == 1 || Auth::user()->role == 0)
           <li class="sub-menu">
             <a href="javascript:;" class="">
-                          <i class="icon_document_alt"></i>
+                          <i class="fa fa-user"></i>
                           <span>Nhân viên</span>
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>

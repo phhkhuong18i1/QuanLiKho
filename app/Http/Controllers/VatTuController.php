@@ -186,6 +186,14 @@ class VatTuController extends Controller
         }
     }
 
+    public function getXoa(Request $request)
+    {
+        $id = $request->get('ID');
+        $vattu = DB::table('vattu')->where('id',$id)->first();
+        return response()->json([
+            'vattu'=>$vattu,
+            ]);
+    }
     public function postXoa($id)
     {
         $vattu = VatTu::find($id);

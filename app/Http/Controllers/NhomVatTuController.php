@@ -44,20 +44,29 @@ class NhomVatTuController extends Controller
     public function postThem(Request $request)
     {
         $this->validate($request,
-            ['txtTen' => 'required|unique:nhomvattu,ten|min:10|max:100'],
+            ['txtTen' => 'required|unique:nhomvattu,nvt_ten|min:1|max:100'],
             [
                 'txtTen.required' => 'Chưa nhập tên nhóm vật tư',
                 'txtTen.unique' => 'Tên nhóm vật tư đã tồn tại. Nhập tên khác',
-                'txtTen.min' => 'Tên nhóm vật tư phải có ít nhất 10 ký tự',
+                'txtTen.min' => 'Tên nhóm vật tư phải có ít nhất 1 ký tự',
                 'txtTen.max' => 'Tên nhóm vật tư có tối đa 100 ký tự'
             ]
         );
         $nhomvattu = new NhomVatTu;
         $nhomvattu->nvt_ma = $request->txtMa;
         $nhomvattu->nvt_ten = $request->txtTen;
+        $nhomvattu->save();
         return redirect('qlkho/nhomvattu/them')->with('thongbao', 'Thêm thành công');
     }
 
+    public function getXoa(Request $request)
+    {
+        $id = $request->get('ID');
+        $nhomvattu = NhomVatTu::where('id',$id)->first();
+        return response()->json([
+            'nhomvattu'=>$nhomvattu,
+            ]);
+    }
     public function postXoa($id) 
     {
         $nhomvattu = NhomVatTu::find($id);

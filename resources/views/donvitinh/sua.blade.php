@@ -7,7 +7,7 @@
             <ol class="breadcrumb">
               <li><i class="fa fa-home"></i><a href="qlkho/index">Trang chủ</a></li>
               <li><i class="icon_document_alt"></i><a href="qlkho/donvitinh/danhsach">Đơn vị tính</a></li>
-              <li><i class="fa fa-files-o"></i>Sửa</li>
+              <li><i class="fa fa-pencil"></i>Sửa</li>
             </ol>
           </div>
         </div>
@@ -50,7 +50,7 @@
                     <div class="form-group">
                       <div class="col-lg-offset-2 col-lg-10">
                         <button class="btn btn-primary" type="submit">Save</button>
-                        
+                        <a class="btn btn-warning" href="qlkho/donvitinh/danhsach">Hủy</a>
                       </div>
                     </div>
                   </form>

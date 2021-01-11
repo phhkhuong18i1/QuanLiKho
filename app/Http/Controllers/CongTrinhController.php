@@ -52,7 +52,7 @@ class CongTrinhController extends Controller
         $this->validate($request,
             [
                 'txtTen' => 'required|min:10|max:100',
-                'txtDiaChi' => 'required|unique:coso,diachi|min:10|max:100'
+                'txtDiaChi' => 'required|unique:congtrinh,diachi|min:10|max:100'
             ],
             [
                 'txtTen.required' => 'Chưa nhập tên công trình',
@@ -71,6 +71,14 @@ class CongTrinhController extends Controller
         return redirect('qlkho/congtrinh/them')->with('thongbao', 'Thêm thành công');
     }
 
+    public function getXoa(Request $request)
+    {
+        $id = $request->get('ID');
+        $ct = CongTrinh::where('id',$id)->first();
+        return response()->json([
+            'ct'=>$ct,
+            ]);
+    }
     public function postXoa($id)
     {
         $congtrinh = CongTrinh::find($id);

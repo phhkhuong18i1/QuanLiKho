@@ -57,6 +57,7 @@ Route::group(['prefix' => 'qlkho','middleware'=>'userLogin'], function () {
         Route::post('them', 'App\Http\Controllers\ChatLuongController@postThem');
 
         // + Xóa chất lượng
+        Route::get('xoa', 'App\Http\Controllers\ChatLuongController@getXoa');
         Route::get('xoa/{id}', 'App\Http\Controllers\ChatLuongController@postXoa');
     });
 
@@ -74,6 +75,7 @@ Route::group(['prefix' => 'qlkho','middleware'=>'userLogin'], function () {
         Route::post('them', 'App\Http\Controllers\CongTrinhController@postThem');
 
         // + Xóa công trình
+        Route::get('xoa', 'App\Http\Controllers\CongTrinhController@getXoa');
         Route::get('xoa/{id}', 'App\Http\Controllers\CongTrinhController@postXoa');
     });
 
@@ -91,6 +93,7 @@ Route::group(['prefix' => 'qlkho','middleware'=>'userLogin'], function () {
         Route::post('them', 'App\Http\Controllers\DonViTinhController@postThem');
 
         // + Xóa đơn vị tính
+        Route::get('xoa', 'App\Http\Controllers\DonViTinhController@getXoa');
         Route::get('xoa/{id}', 'App\Http\Controllers\DonViTinhController@postXoa');
     });
 
@@ -108,6 +111,7 @@ Route::group(['prefix' => 'qlkho','middleware'=>'userLogin'], function () {
         Route::post('them', 'App\Http\Controllers\KhoController@postThem');
 
         // + Xóa kho
+        Route::get('xoa', 'App\Http\Controllers\KhoController@getXoa');
         Route::get('xoa/{id}', 'App\Http\Controllers\KhoController@postXoa');
     });
 
@@ -125,6 +129,7 @@ Route::group(['prefix' => 'qlkho','middleware'=>'userLogin'], function () {
         Route::post('them', 'App\Http\Controllers\KhuVucController@postThem');
 
         // + Xóa khu vực
+        Route::get('xoa', 'App\Http\Controllers\KhuVucController@getXoa');
         Route::get('xoa/{id}', 'App\Http\Controllers\KhuVucController@postXoa');
     });
 
@@ -142,6 +147,7 @@ Route::group(['prefix' => 'qlkho','middleware'=>'userLogin'], function () {
         Route::post('them', 'App\Http\Controllers\NhaPhanPhoiController@postThem');
 
         // + Xóa nhà phân phối
+        Route::get('xoa', 'App\Http\Controllers\NhaPhanPhoiController@getXoa');
         Route::get('xoa/{id}', 'App\Http\Controllers\NhaPhanPhoiController@postXoa');
     });
 
@@ -159,6 +165,7 @@ Route::group(['prefix' => 'qlkho','middleware'=>'userLogin'], function () {
         Route::post('them', 'App\Http\Controllers\NhaSanXuatController@postThem');
 
         // + Xóa nhà sản xuất
+        Route::get('xoa', 'App\Http\Controllers\NhaSanXuatController@getXoa');
         Route::get('xoa/{id}', 'App\Http\Controllers\NhaSanXuatController@postXoa');
     });
 
@@ -176,6 +183,7 @@ Route::group(['prefix' => 'qlkho','middleware'=>'userLogin'], function () {
         Route::post('them', 'App\Http\Controllers\NhomVatTuController@postThem');
 
         // + Xóa nhóm vật tư
+        Route::get('xoa', 'App\Http\Controllers\NhomVatTuController@getXoa');
         Route::get('xoa/{id}', 'App\Http\Controllers\NhomVatTuController@postXoa');
     });
 
@@ -193,6 +201,7 @@ Route::group(['prefix' => 'qlkho','middleware'=>'userLogin'], function () {
         // Route::post('nhap', 'App\Http\Controllers\NhapKhoController@postNhapKho');
 
         // + Xóa phiếu nhập kho
+        Route::get('xoa', 'App\Http\Controllers\NhapKhoController@getXoa');
         Route::get('xoa/{id}', 'App\Http\Controllers\NhapKhoController@postXoa');
 
         // + In phiếu nhập kho
@@ -236,6 +245,7 @@ Route::group(['prefix' => 'qlkho','middleware'=>'userLogin'], function () {
         // Route::post('xuat', 'XuatKhoController@postXuatKho');
 
         // + Xóa phiếu xuất kho
+        Route::get('xoa', 'App\Http\Controllers\XuatKhoController@getXoa');
         Route::get('xoa/{id}', 'App\Http\Controllers\XuatKhoController@postXoa');
 
         // + In phiếu xuất kho
@@ -289,6 +299,7 @@ Route::group(['prefix' => 'qlkho','middleware'=>'userLogin'], function () {
         Route::get('inton', 'App\Http\Controllers\VatTuController@getPDF');
 
         // + Xóa vật tư
+        Route::get('xoa', 'App\Http\Controllers\VatTuController@getXoa');
         Route::get('xoa/{id}', 'App\Http\Controllers\VatTuController@postXoa');
     });
 
@@ -312,8 +323,8 @@ Route::group(['prefix' => 'qlkho','middleware'=>'userLogin'], function () {
 
 
         // + Thêm 
-        Route::get('them', 'App\Http\Controllers\UserController@getThem');
-        Route::post('them', 'App\Http\Controllers\UserController@postThem');
+        Route::get('xoa', 'App\Http\Controllers\UserController@getXoa');
+        Route::get('xoa/{id}', 'App\Http\Controllers\UserController@postXoa');
 
     });
 

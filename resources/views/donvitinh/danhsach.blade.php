@@ -20,7 +20,17 @@
               <a  class="btn btn-primary" href="qlkho/donvitinh/them">Thêm&nbsp;<span class="fa fa-plus"></span></a>
               </div>
               </header>
-
+              @if (session('thongbao'))
+                    <div class="col-lg-12 alert alert-success">
+                        <strong>{{ session('thongbao') }}</strong>
+                    </div>
+                @endif
+                @if (session('loi'))
+                    <div class="col-lg-12 alert alert-danger alert-dismissable">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>{{ session('loi') }}</strong>
+                    </div>
+                @endif
               <table class="display table table-bordered table-hover" id="example">
                     <thead>
                         <tr align="center">
@@ -36,7 +46,7 @@
                             <td>{{$item->dvt_ma}}</td>
                                 <td>{{ $item->dvt_ten }}</td>
                                 <td class="center">
-                                    <a onclick="return confirm('Bạn có chắc muốn xóa dữ liệu này?')" class="btn btn-danger" href="qlkho/donvitinh/xoa/{{ $item->id }}">
+                                <a  class="btn btn-danger" data-toggle="modal" data-target="#exampleModalXoa"  data-id="{{$item->id}}">
                                         <i class="fa fa-trash-o fa-fw"></i>Xóa
                                     </a>
                                 </td>
@@ -52,7 +62,32 @@
             </section>
           </div>
         </div>
+        @include('layout.xoa')
         <!-- page end-->
       </section>
     </section>
 @endsection
+@section('script')
+<script>
+      $('#exampleModalXoa').on('shown.bs.modal', function (e) {
+             
+             var id = $(e.relatedTarget).attr('data-id');
+            // $(this).find('.xkid').text(id);
+             $.ajax({
+                 type:'GET',
+                 url:'qlkho/donvitinh/xoa',
+                 data: {
+                     ID: id,
+                 },
+                 success: function(response)
+                 {
+                     
+                     DeleteDVT(response);
+                 }
+     
+             });
+           
+           });
+</script>
+@include('layout.script')
+ @endsection

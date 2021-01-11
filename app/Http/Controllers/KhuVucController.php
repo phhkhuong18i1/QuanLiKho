@@ -23,11 +23,11 @@ class KhuVucController extends Controller
     {
         $khuvuc = KhuVuc::find($id);
         $this->validate($request,
-            ['txtTen' => 'required|min:10|max:100',
+            ['txtTen' => 'required|min:1|max:100',
             'txtMa' => 'required|min:1|max:100'],
             [
                 'txtTen.required' => 'Chưa nhập tên khu vực',
-                'txtTen.min' => 'Tên khu vực phải có ít nhất 10 ký tự',
+                'txtTen.min' => 'Tên khu vực phải có ít nhất 1 ký tự',
                 'txtTen.max' => 'Tên khu vực có tối đa 100 ký tự',
                 'txtMa.required' => 'Chưa nhập mã khu vực',
                 'txtMa.min' => 'Mã khu vực phải có ít nhất 1 ký tự',
@@ -49,8 +49,8 @@ class KhuVucController extends Controller
     public function postThem(Request $request)
     {
         $this->validate($request,
-            ['txtTen' => 'required|unique:khuvuc,kv_ten|min:10|max:100',
-            'txtMa' => 'required|unique:khuvuc,kv_ma|min:10|max:100'],
+            ['txtTen' => 'required|unique:khuvuc,kv_ten|min:1|max:100',
+            'txtMa' => 'required|unique:khuvuc,kv_ma|min:1|max:100'],
             [
                 'txtMa.required' => 'Chưa nhập mã khu vực',
                 'txtMa.unique' => 'Mã khu vực đã tồn tại. Nhập mã khác',
@@ -58,7 +58,7 @@ class KhuVucController extends Controller
                 'txtMa.max' => 'Mã khu vực có tối đa 100 ký tự',
                 'txtTen.required' => 'Chưa nhập tên khu vực',
                 'txtTen.unique' => 'Tên khu vực đã tồn tại. Nhập tên khác',
-                'txtTen.min' => 'Tên khu vực phải có ít nhất 10 ký tự',
+                'txtTen.min' => 'Tên khu vực phải có ít nhất 1 ký tự',
                 'txtTen.max' => 'Tên khu vực có tối đa 100 ký tự'
               
             ]
@@ -68,6 +68,14 @@ class KhuVucController extends Controller
         $khuvuc->kv_ten = $request->txtTen;
         $khuvuc->save();
         return redirect('qlkho/khuvuc/them')->with('thongbao', 'Thêm thành công');
+    }
+    public function getXoa(Request $request)
+    {
+        $id = $request->get('ID');
+        $khuvuc = KhuVuc::where('id',$id)->first();
+        return response()->json([
+            'khuvuc'=>$khuvuc,
+            ]);
     }
 
     public function postXoa($id)

@@ -63,6 +63,14 @@ class DonViTinhController extends Controller
         return redirect('qlkho/donvitinh/them')->with('thongbao', 'Thêm thành công');
     }
 
+    public function getXoa(Request $request)
+    {
+        $id = $request->get('ID');
+        $dvt = DonViTinh::where('id',$id)->first();
+        return response()->json([
+            'dvt'=>$dvt,
+            ]);
+    }
     public function postXoa($id)
     {
         $donvitinh = DonViTinh::find($id);

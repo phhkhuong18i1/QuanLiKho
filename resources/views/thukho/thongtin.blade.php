@@ -35,26 +35,26 @@
                   <form class="form-validate form-horizontal " id="register_form" method="POST" action="qlkho/nhanvien/thongtin">
                   @csrf
                     <div class="form-group ">
-                      <label   class="control-label col-lg-2">Tên  <span class="required">*</span></label>
-                      <div class="col-lg-10">
-                        <input class=" form-control" id="fullname" name="txtTen" value="{{ $nhanvien->nv_ten }}" type="text" />
+                      <label   class="control-label col-lg-3">Tên  <span class="required">*</span></label>
+                      <div class="col-lg-6">
+                        <input class=" form-control" id="fullname" name="txtTen" value="{{ $nhanvien->nv_ten }}" type="text" ></input>
                       </div>
                     </div>
                     <div class="form-group ">
-                      <label   class="control-label col-lg-2">Email <span class="required">*</span></label>
-                      <div class="col-lg-10">
+                      <label   class="control-label col-lg-3">Email <span class="required">*</span></label>
+                      <div class="col-lg-6">
                         <input class=" form-control" id="address" name="txtEmail" value="{{ $nhanvien->email }}" type="text" disabled="true"/>
                       </div>
                     </div>
                     <div class="form-group ">
-                      <label   class="control-label col-lg-2">Số điện thoại <span class="required">*</span></label>
-                      <div class="col-lg-10">
+                      <label   class="control-label col-lg-3">Số điện thoại <span class="required">*</span></label>
+                      <div class="col-lg-6">
                         <input class=" form-control" id="address" name="txtSDT" value="{{ $nhanvien->nv_sdt }}" type="text" />
                       </div>
                     </div>
                     <div class="form-group ">
-                      <label  class="control-label col-lg-2">Giới tính <span class="required">*</span></label>
-                      <div class="col-lg-10">
+                      <label  class="control-label col-lg-3">Giới tính <span class="required">*</span></label>
+                      <div class="col-lg-6">
                       <label>
                          <input type="radio" name="GioiTinh"  value="1" @if($nhanvien->GioiTinh == 1)
                                     {{"checked"}}
@@ -71,20 +71,20 @@
                       </div>
                     </div>
                     <div class="form-group ">
-                      <label   class="control-label col-lg-2">Chứng minh nhân dân <span class="required">*</span></label>
-                      <div class="col-lg-10">
+                      <label   class="control-label col-lg-3">Chứng minh nhân dân <span class="required">*</span></label>
+                      <div class="col-lg-6">
                         <input class=" form-control" id="address" name="txtCMND" value="{{ $nhanvien->CMND }}" type="text" />
                       </div>
                     </div>
                     <div class="form-group ">
-                      <label   class="control-label col-lg-2">Địa chỉ <span class="required">*</span></label>
-                      <div class="col-lg-10">
+                      <label   class="control-label col-lg-3">Địa chỉ <span class="required">*</span></label>
+                      <div class="col-lg-6">
                         <input class=" form-control" id="address" name="txtDiaChi" value="{{ $nhanvien->nv_diachi }}" type="text" />
                       </div>
                     </div>
                     <div class="form-group">
-                      <div class="col-lg-offset-2 col-lg-10">
-                        <button class="btn btn-primary" type="submit">Cập nhập thông tin</button>
+                      <div class="col-lg-offset-3 col-lg-6">
+                        <center><button class="btn btn-primary" type="submit">Cập nhập thông tin</button></center>
                       </div>
                     </div>
                   </form>

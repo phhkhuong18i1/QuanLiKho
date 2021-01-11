@@ -5,8 +5,8 @@
         <div class="row">
           <div class="col-lg-12">
             <ol class="breadcrumb">
-              <li><i class="fa fa-home"></i><a href="index.html">Trang chủ</a></li>
-              <li><i class="fa fa-table"></i>Nhân viên</li>
+              <li><i class="fa fa-home"></i><a href="qlkho/index">Trang chủ</a></li>
+              <li><i class="fa fa-user"></i>Nhân viên</li>
             </ol>
           </div>
         </div>
@@ -60,7 +60,7 @@
                                     @endif
                                      </td>
                                 <td class="center">
-                                    <a onclick="return confirm('Bạn có chắc muốn xóa dữ liệu này?')" class="btn btn-danger" href="qlkho/nhanvien/xoa/{{ $item->id }}">
+                                <a  class="btn btn-danger" data-toggle="modal" data-target="#exampleModalXoa"  data-id="{{$item->id}}">
                                         <i class="fa fa-trash-o fa-fw"></i>Xóa
                                     </a>
                                 </td>
@@ -76,7 +76,32 @@
             </section>
           </div>
         </div>
+        @include('layout.xoa')
         <!-- page end-->
       </section>
     </section>
 @endsection
+@section('script')
+<script>
+      $('#exampleModalXoa').on('shown.bs.modal', function (e) {
+             
+             var id = $(e.relatedTarget).attr('data-id');
+            // $(this).find('.xkid').text(id);
+             $.ajax({
+                 type:'GET',
+                 url:'qlkho/nhanvien/xoa',
+                 data: {
+                     ID: id,
+                 },
+                 success: function(response)
+                 {
+                     
+                     DeleteNV(response);
+                 }
+     
+             });
+           
+           });
+</script>
+@include('layout.script')
+ @endsection

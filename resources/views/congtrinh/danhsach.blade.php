@@ -16,7 +16,7 @@
             <section class="panel">
               <header class="panel-heading">
               <div class="text-right">
-              <a class="btn btn-primary" href="qlkho/kho/them">Thêm&nbsp;<span class="fa fa-plus"></span></a>
+              <a class="btn btn-primary" href="qlkho/congtrinh/them">Thêm&nbsp;<span class="fa fa-plus"></span></a>
               </div>
               </header>
               @if (session('thongbao'))
@@ -45,7 +45,7 @@
                                 <td>{{ $item->ten }}</td>
                                 <td>{{ $item->diachi }}</td>
                                 <td class="center">
-                                    <a class="btn btn-danger" href="qlkho/congtrinh/xoa/{{ $item->id }}"  onclick="return confirm('Bạn có chắc muốn xóa dữ liệu này?')">
+                                <a  class="btn btn-danger" data-toggle="modal" data-target="#exampleModalXoa"  data-id="{{$item->id}}">
                                         <i class="fa fa-trash-o fa-fw"></i>Xóa
                                     </a>
                                 </td>
@@ -61,7 +61,32 @@
             </section>
           </div>
         </div>
+        @include('layout.xoa')
         <!-- page end-->
       </section>
     </section>
 @endsection
+@section('script')
+<script>
+      $('#exampleModalXoa').on('shown.bs.modal', function (e) {
+             
+             var id = $(e.relatedTarget).attr('data-id');
+            // $(this).find('.xkid').text(id);
+             $.ajax({
+                 type:'GET',
+                 url:'qlkho/congtrinh/xoa',
+                 data: {
+                     ID: id,
+                 },
+                 success: function(response)
+                 {
+                     
+                     DeleteCT(response);
+                 }
+     
+             });
+           
+           });
+</script>
+@include('layout.script')
+ @endsection

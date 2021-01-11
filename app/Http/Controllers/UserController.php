@@ -327,4 +327,25 @@ class UserController extends Controller
         return redirect('qlkho/dangnhap')->with('thongbao','mật khẩu đã được đổi');
     }
 
+    public function getXoa(Request $request)
+    {
+        $id = $request->get('ID');
+        $nhanvien = NhanVien::where('id',$id)->first();
+        return response()->json([
+            'nhanvien'=>$nhanvien,
+            ]);
+    }
+    public function postXoa($id)
+    {
+        $nhanvien = NhanVien::find($id);
+        $user = User::find($id);
+        try {
+            $nhanvien->delete();
+            $user->delete();
+        } catch(\Exception $ex) {
+            return redirect('qlkho/nhanvien/danhsach')->with('loi', 'Không thể xóa được');
+        }
+        return redirect('qlkho/nhanvien/danhsach')->with('thongbao', 'Xóa thành công');
+    }
+
 }

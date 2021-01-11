@@ -51,11 +51,12 @@
        <table cellpadding="3px" style="border:thin solid;" >
       <thead>
         <tr>
-          <td style="border:thin solid;" width="50px"><strong>STT</strong></td>
+          <td style="border:thin solid;" width="30px"><strong>STT</strong></td>
           <td style="border:thin solid;" width="150px"><strong>Vật tư</strong></td>
           <td style="border:thin solid;" width="50px"><strong>Số lượng</strong></td>
-          <td style="border:thin solid;" width="150px"><strong>Đơn giá</strong></td>
-          <td style="border:thin solid;" width="150px"><strong>Thành tiền</strong></td>
+          <td style="border:thin solid;" width="50px"><strong>ĐVT</strong></td>
+          <td style="border:thin solid;" width="120px"><strong>Đơn giá</strong></td>
+          <td style="border:thin solid;" width="120px"><strong>Thành tiền</strong></td>
           <td style="border:thin solid;" width="200px"><strong>Kho</strong></td>
         </tr>
       </thead>
@@ -66,11 +67,15 @@
               <td style="border:thin blue solid;border-style:dashed;">{!! $count = $count + 1 !!}</td>
               <td style="border:thin blue solid;border-style:dashed;">
                   <?php  
-                      $vt = DB::table('vattu')->where('id',$val->vt_id)->first();
+            
+                      $vt = DB::table('vattu')->where('id',$val->vt_id)
+                      ->first();
+                      $dvt = DB::table('donvitinh')->where('id',$vt->donvitinh_id)->first();
                       print_r($vt->vt_ten);
                   ?>
               </td>
               <td style="border:thin blue solid;border-style:dashed;">{!! $val->ctnk_soluong !!}</td>
+              <td style="border:thin blue solid;border-style:dashed;">{!! $dvt->dvt_ten !!}</td>
               <td style="border:thin blue solid;border-style:dashed;">
               {!! number_format($vt->giatien) !!} vnđ 
               </td>

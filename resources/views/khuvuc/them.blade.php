@@ -7,7 +7,7 @@
             <ol class="breadcrumb">
               <li><i class="fa fa-home"></i><a href="qlkho/index">Trang chủ</a></li>
               <li><i class="icon_document_alt"></i><a href="qlkho/khuvuc/danhsach">Khu vực</a></li>
-              <li><i class="fa fa-files-o"></i>Thêm</li>
+              <li><i class="fa fa-plus"></i>Thêm</li>
             </ol>
           </div>
         </div>
@@ -43,7 +43,7 @@
                     <div class="form-group ">
                       <label  class="control-label col-lg-2">Tên khu vực <span class="required">*</span></label>
                       <div class="col-lg-10">
-                      <input type="number" class="form-control" name="txtTen">
+                      <input type="text" class="form-control" name="txtTen">
                       </div>
                     </div>
                    

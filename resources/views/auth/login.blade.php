@@ -38,7 +38,7 @@
     ======================================================= -->
 </head>
 
-<body class="login-img3-body">
+<body class="login-img3-body" style="font-family: Arial;"> 
 
   <div class="container">
   @if (count($errors) > 0)

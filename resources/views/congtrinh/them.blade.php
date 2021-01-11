@@ -7,7 +7,7 @@
             <ol class="breadcrumb">
               <li><i class="fa fa-home"></i><a href="qlkho/index">Trang chủ</a></li>
               <li><i class="icon_document_alt"></i><a href="qlkho/congtrinh/danhsach">Công trình</a></li>
-              <li><i class="fa fa-files-o"></i>Thêm</li>
+              <li><i class="fa fa-plus"></i>Thêm</li>
             </ol>
           </div>
         </div>
@@ -33,10 +33,10 @@
                         </div>
                     @endif
                 <div class="form">
-                  <form class="form-validate form-horizontal " id="register_form" method="POST" action="qlkho/coso/them">
+                  <form class="form-validate form-horizontal " id="register_form" method="POST" action="qlkho/congtrinh/them">
                   @csrf
                     <div class="form-group ">
-                      <label  class="control-label col-lg-2">Tên cơ sở <span class="required">*</span></label>
+                      <label  class="control-label col-lg-2">Tên công trình <span class="required">*</span></label>
                       <div class="col-lg-10">
                       <input class="form-control" name="txtTen"/>
                       </div>

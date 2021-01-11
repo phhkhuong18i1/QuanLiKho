@@ -32,7 +32,7 @@
                         </div>
                     @endif
                 <div class="form">
-                  <form class="form-validate form-horizontal " id="register_form" method="POST" action="qlkho/vattu/them">
+                  <form class="form-validate form-horizontal " id="register_form" method="POST" action="qlkho/nhomvattu/them">
                   @csrf
                     <div class="form-group ">
                       <label  class="control-label col-lg-2">Mã <span class="required">*</span></label>
@@ -43,7 +43,7 @@
                     <div class="form-group ">
                       <label  class="control-label col-lg-2">Tên nhóm vật tư <span class="required">*</span></label>
                       <div class="col-lg-10">
-                      <input type="number" class="form-control" name="txtTen">
+                      <input type="text" class="form-control" name="txtTen">
                       </div>
                     </div>
                     

@@ -154,7 +154,6 @@
                                                     <td>{{ $item->name }}</td>
                                                     <td>{{ $item->options->kho }}</td>
                                                     <td>{{ $item->weight }}</td>
-                                                    
                                                     <td> <input id="quanty-item-{{$item->rowId}}" min="0" class="form-control" onkeypress="return isNumberKey(event)"  required type="number" value="{{$item->qty}}" min="0" max="100" /></td>
                                                     <td>{{ number_format($item->price) }} vnđ</td>
                                                     <td>{{ number_format($item->qty*$item->price) }} vnđ</td>
@@ -176,80 +175,7 @@
         </div>
     </div>
 
-          <!-- modal -->
-
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Phiếu nhập kho</h5>
-        
-      </div>
-      <div class="modal-body">
-     <div id="modal-body1">
-    <hr>
-    <center><h2><b>Chi tiết phiếu nhập kho</b></h2></center>
-    <table >
-    <tr id="tr0">
-        <td width="120px" ><strong>Mã:</strong></td> <td ></td>
-        <td><strong></td>
-      </tr>
-      <tr id="tr1">
-        <td width="120px"><strong>Nhân viên lập phiếu:</strong></td> <td ></td>
-        <td><strong></td>
-      </tr>
-      <tr id="tr2">
-        <td width="120px"><strong>Lý do nhập:</strong></td> <td ></td>
-        <td></td>
-      </tr>
-      <tr id="tr3">
-      <td width="120px"><strong>Nhập từ:</strong></td> <td></td>
-        <td></td>
-      </tr>
-    </table><br><br>
-       <table  cellpadding="3px" style="border:thin solid;" >
-      <thead>
-    
-          <td style="border:thin solid;" width="50px"><strong>STT</strong></td>
-          <td style="border:thin solid;" width="150px"><strong>Vật tư</strong></td>
-          <td style="border:thin solid;" width="50px"><strong>Số lượng</strong></td>
-          <td style="border:thin solid;" width="150px"><strong>Đơn giá</strong></td>
-          <td style="border:thin solid;" width="200px"><strong>Thành tiền</strong></td>
-          <td style="border:thin solid;" width="200px"><strong>Kho</strong></td>
-        
-        </tr>
-      </thead>
-      <tbody id="table2" >
-            
-            <tr >
-              <td ></td>
-              <td >  
-              </td>
-              <td  ></td>
-              <td  >
-              </td>
-              <td   > </td>
-              <td   > </td>
-          </tr>
-            
-            
-      </tbody>
-    </table>
-    <table class="sumary-table">
-      <tr id="tongtien">
-        <td width="365px" >Tổng giá trị nhập</td>
-        <td ></td>
-      </tr>
-    </table><br>
-      </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-        <a  class="btn btn-primary" href="qlkho/nhap/innhap/">In</a>
-      </div>
-    </div>
-  </div>
-</div>
+ 
   
         <!-- page end-->
       </section>
@@ -259,26 +185,6 @@
 
 <script> 
 
-        function inNK()
-            {
-             
-            var id_npp = $("#state_id").val();
-            var id_nv = $("#id_nv").val();
-            var ma = $("#ma").val();
-            var lydo = $("#lydo").val();
-            var date = $("#date").val();
-             $.ajax({
-                 type:'GET',
-                 url:'qlkho/nhapkho/inNK',
-                 data: {"id_npp":id_npp,"id_nv":id_nv,"ma":ma,"lydo":lydo,"date":date},
-                 success: function(data)
-                 { 
-                    //  window.location = "qlkho/nhapkho/nhap";
-                 }
-     
-             });
-           
-           };
        function addCart()
        {
              

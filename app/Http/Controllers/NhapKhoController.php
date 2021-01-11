@@ -314,7 +314,14 @@ class NhapKhoController extends Controller
 		
 
 	}
-
+	public function getXoa(Request $request)
+	{
+		$id = $request->get('ID');
+		$nhapkho = DB::table('phieunhapkho')->where('id',$id)->first();
+		return response()->json([
+            'nhapkho'=>$nhapkho
+            ]);
+	}
     public function postXoa($id)
     {	
 		$ctnk = ChiTietNhapKho::where('pnk_id',$id)->get();

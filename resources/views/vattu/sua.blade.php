@@ -151,8 +151,8 @@
                     </div>
                     <div class="form-group ">
                       <label for="address" class="control-label col-lg-2">số lượng <span class="required">*</span></label>
-                      <div class="col-lg-10">
-                      <input onkeypress="return isNumberKey(event)" id="l" name="txtSLuong" class="span4" type="number" value="{!! $khovt->soluong_nhap !!}" autocomplete="false">
+                      <div class="col-lg-2">
+                      <input onkeypress="return isNumberKey(event)" class="form-control" id="l" name="txtSLuong" class="span4" type="number" value="{!! $khovt->soluong_nhap !!}" autocomplete="false">
                       </div>
                      
               </div>

@@ -7,7 +7,7 @@
             <ol class="breadcrumb">
               <li><i class="fa fa-home"></i><a href="qlkho/index">Trang chủ</a></li>
               <li><i class="icon_document_alt"></i><a href="qlkho/khuvuc/danhsach">Khu vực</a></li>
-              <li><i class="fa fa-files-o"></i>Sửa</li>
+              <li><i class="fa fa-pencil"></i>Sửa</li>
             </ol>
           </div>
         </div>

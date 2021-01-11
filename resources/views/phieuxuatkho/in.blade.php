@@ -30,6 +30,7 @@
           <td style="border:thin solid;" width="50px"><strong>STT</strong></td>
           <td style="border:thin solid;" width="150px"><strong>Vật tư</strong></td>
           <td style="border:thin solid;" width="50px"><strong>Số lượng</strong></td>
+          <td style="border:thin solid;" width="100px"><strong>Đơn vị tính</strong></td>
           <td style="border:thin solid;" width="150px"><strong>Đơn giá</strong></td>
           <td style="border:thin solid;" width="150px"><strong>Thành tiền</strong></td>
           <td style="border:thin solid;" width="150px"><strong>Kho</strong></td>
@@ -43,10 +44,12 @@
               <td style="border:thin blue solid;border-style:dashed;">
               <?php  
                       $vt = DB::table('vattu')->where('id',$val->vattu_id)->first();
+                      $dvt = DB::table('donvitinh')->where('id',$vt->donvitinh_id)->first();
                       print_r($vt->vt_ten);
                   ?>
               </td>
               <td style="border:thin blue solid;border-style:dashed;">{!! $val->ctxk_soluong !!}</td>
+              <td style="border:thin blue solid;border-style:dashed;">{!! $dvt->dvt_ten !!}</td>
               <td style="border:thin blue solid;border-style:dashed;">
               {!! number_format($vt->giatien) !!} vnđ 
               </td>
@@ -61,7 +64,7 @@
     <table class="sumary-table">
       <tr>
         <td width="455px">Tổng giá trị nhập</td>
-        <td width="280px" align="right">{!! number_format($pxk->xk_tongtien) !!} vnđ</td>
+        <td width="335px" align="right">{!! number_format($pxk->xk_tongtien) !!} vnđ</td>
       </tr>
     </table><br>
     <div >

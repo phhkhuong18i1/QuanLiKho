@@ -42,7 +42,7 @@
           <!-- inbox notificatoin start-->
           <li id="mail_notificatoin_bar" class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#" >
-                           <label style="color: red;"><b> nhóm vật tư</b></label>
+                           <label style="color: red;"><b> Nhóm Vật Tư</b></label>
                         </a>
             <ul class="dropdown-menu extended inbox">
               <div class="notify-arrow notify-arrow-blue"></div>
@@ -77,7 +77,7 @@
               @foreach($nhaphanphoi as $npp)
               <li>
                 <a href="qlkho/baocao/npp/{{$npp->id}}">
-                <div class="task-info">
+                <div class="task-info" >
                     <div class="desc">{{$npp->npp_ten}} </div>
                   </div>
                                    

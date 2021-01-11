@@ -4,6 +4,79 @@ function isNumberKey(evt){
     return !(charCode > 31 && (charCode < 48 || charCode > 57));
 }
 
+function Delete(response)
+{
+  var xoa = "<a  class='btn btn-danger'  href='qlkho/nhapkho/xoa/"+response['nhapkho'].id+"'>Xóa</a><button type='button' class='btn btn-secondary' data-dismiss='modal'>Đóng</button>"
+                $(".modal-footer").empty();
+                $(".modal-footer").append(xoa);
+}
+function DeleteXK(response)
+{
+  var xoa = "<a  class='btn btn-danger'  href='qlkho/xuatkho/xoa/"+response['xuatkho'].id+"'>Xóa</a><button type='button' class='btn btn-secondary' data-dismiss='modal'>Đóng</button>"
+                $(".modal-footer").empty();
+                $(".modal-footer").append(xoa);
+}
+function DeleteVT(response)
+{
+  var xoa = "<a  class='btn btn-danger'  href='qlkho/vattu/xoa/"+response['vattu'].id+"'>Xóa</a><button type='button' class='btn btn-secondary' data-dismiss='modal'>Đóng</button>"
+                $(".modal-footer").empty();
+                $(".modal-footer").append(xoa);
+}
+function DeleteNVT(response)
+{
+  var xoa = "<a  class='btn btn-danger'  href='qlkho/nhomvattu/xoa/"+response['nhomvattu'].id+"'>Xóa</a><button type='button' class='btn btn-secondary' data-dismiss='modal'>Đóng</button>"
+                $(".modal-footer").empty();
+                $(".modal-footer").append(xoa);
+}
+function DeleteNSX(response)
+{
+  var xoa = "<a  class='btn btn-danger'  href='qlkho/nhasanxuat/xoa/"+response['nhasanxuat'].id+"'>Xóa</a><button type='button' class='btn btn-secondary' data-dismiss='modal'>Đóng</button>"
+                $(".modal-footer").empty();
+                $(".modal-footer").append(xoa);
+}
+
+function DeleteNPP(response)
+{
+  var xoa = "<a  class='btn btn-danger'  href='qlkho/nhaphanphoi/xoa/"+response['nhapp'].id+"'>Xóa</a><button type='button' class='btn btn-secondary' data-dismiss='modal'>Đóng</button>"
+                $(".modal-footer").empty();
+                $(".modal-footer").append(xoa);
+}
+function DeleteNV(response)
+{
+  var xoa = "<a  class='btn btn-danger'  href='qlkho/nhanvien/xoa/"+response['nhanvien'].id+"'>Xóa</a><button type='button' class='btn btn-secondary' data-dismiss='modal'>Đóng</button>"
+                $(".modal-footer").empty();
+                $(".modal-footer").append(xoa);
+}
+function DeleteK(response)
+{
+  var xoa = "<a  class='btn btn-danger'  href='qlkho/kho/xoa/"+response['kho'].id+"'>Xóa</a><button type='button' class='btn btn-secondary' data-dismiss='modal'>Đóng</button>"
+                $(".modal-footer").empty();
+                $(".modal-footer").append(xoa);
+}
+function DeleteKV(response)
+{
+  var xoa = "<a  class='btn btn-danger'  href='qlkho/khuvuc/xoa/"+response['khuvuc'].id+"'>Xóa</a><button type='button' class='btn btn-secondary' data-dismiss='modal'>Đóng</button>"
+                $(".modal-footer").empty();
+                $(".modal-footer").append(xoa);
+}
+function DeleteDVT(response)
+{
+  var xoa = "<a  class='btn btn-danger'  href='qlkho/donvitinh/xoa/"+response['dvt'].id+"'>Xóa</a><button type='button' class='btn btn-secondary' data-dismiss='modal'>Đóng</button>"
+                $(".modal-footer").empty();
+                $(".modal-footer").append(xoa);
+}
+function DeleteCT(response)
+{
+  var xoa = "<a  class='btn btn-danger'  href='qlkho/congtrinh/xoa/"+response['ct'].id+"'>Xóa</a><button type='button' class='btn btn-secondary' data-dismiss='modal'>Đóng</button>"
+                $(".modal-footer").empty();
+                $(".modal-footer").append(xoa);
+}
+function DeleteCL(response)
+{
+  var xoa = "<a  class='btn btn-danger'  href='qlkho/chatluong/xoa/"+response['cl'].id+"'>Xóa</a><button type='button' class='btn btn-secondary' data-dismiss='modal'>Đóng</button>"
+                $(".modal-footer").empty();
+                $(".modal-footer").append(xoa);
+}
 function render(response)
 {
   console.log(response);
@@ -35,7 +108,7 @@ function render(response)
                  $("#table2").append(txt);   
               }
               
-             var tt = "<td width='480px'>Tổng giá trị nhập</td><td width='200px'>"+response['nhapkho'].tongtien+" VND </td>";
+             var tt = "<td width='480px'>Tổng giá trị nhập</td><td width='380px'>"+response['nhapkho'].tongtien+" VND </td>";
 
              $("#tongtien").empty();
                 $("#tongtien").append(tt);  

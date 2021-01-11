@@ -417,6 +417,14 @@ class XuatKhoController extends Controller
         $pxk->save();
         return redirect('qlkho/xuatkho/danhsach')->with('thongbao', 'Sửa thành công');
     }
+    public function getXoa(Request $request)
+    {
+        $id = $request->get('ID');
+        $xuatkho = DB::table('phieuxuatkho')->where('id',$id)->first();
+        return response()->json([
+            'xuatkho'=>$xuatkho,
+            ]);
+    }
 
     public function postXoa($id)
     {

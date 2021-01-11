@@ -69,6 +69,14 @@ class ChatLuongController extends Controller
         return redirect('qlkho/chatluong/them')->with('thongbao', 'Thêm thành công');
     }
 
+    public function getXoa(Request $request)
+    {
+        $id = $request->get('ID');
+        $cl = ChatLuong::where('id',$id)->first();
+        return response()->json([
+            'cl'=>$cl,
+            ]);
+    }
     public function postXoa($id)
     {
         $chatluong = ChatLuong::find($id);

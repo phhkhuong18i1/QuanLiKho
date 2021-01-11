@@ -15,7 +15,7 @@
         <div style="margin-left:-1px" class="span13">
         <div class="box">
             <div class="box-header">
-                <p><center><h1><b>Tồn kho tổng hợp</b></h1></center></p>
+                <p><center style="font-size:40px"><b>Tồn kho tổng hợp</b></center></p>
             </div>
             <div class="box-content">
                 <div class="form-inline">
@@ -30,8 +30,8 @@
                                    
                                     <td  align="right" colspan="9"> 
                                         <div >
-                                             <a href="qlkho/vattu/inton" class="btn btn-warning">
-                                             <i class="fa fa-file-pdf-o fa-fw" target="_blank"></i>Xuất file PDF
+                                             <a target="_blank" href="qlkho/vattu/inton" class="btn btn-warning">
+                                             <i class="fa fa-file-pdf-o fa-fw"  ></i>Xuất file PDF
                                             </a>
                                         </div>
                                     </td>
@@ -61,8 +61,8 @@
                                 <td>{{ $item->soluong_nhap }}</td>
                                 <td>{{ $item->soluong_xuat }}</td>
                                 <td>{{ $item->soluong_ton }}</td>
-                                <td>{{ number_format($item->giatien) }}</td>
-                                <td>{{ number_format($item->soluong_ton*$item->giatien) }}</td>
+                                <td>{{ number_format($item->giatien)  }} VNĐ</td>
+                                <td>{{ number_format($item->soluong_ton*$item->giatien)  }} VNĐ</td>
                             </tr>
                         @endforeach
                                       

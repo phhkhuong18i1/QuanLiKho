@@ -22,7 +22,7 @@
         <div style="margin-left:-1px" class="span13">
         <div class="box">
             <div class="box-header">
-                <p><center><h1><b>Tồn kho theo kho</b></h1></center></p>
+                <p><center style="font-size:40px"><b>Tồn kho theo kho</b></center></p>
             </div>
             <div class="box-content">
                 <div class="form-inline">
@@ -39,8 +39,8 @@
                                     
                                     <td  align="right"> 
                                         <div >
-                                             <a href="qlkho/baocao/inkho/{{$khovt->id}}" class="btn btn-warning">
-                                             <i class="fa fa-file-pdf-o fa-fw" target="_blank"></i>Xuất file PDF
+                                             <a target="_blank" href="qlkho/baocao/inkho/{{$khovt->id}}" class="btn btn-warning">
+                                             <i class="fa fa-file-pdf-o fa-fw" ></i>Xuất file PDF
                                             </a>
                                         </div>
                                     </td>
@@ -60,15 +60,15 @@
                                     
                                        
                                         @foreach ($vattukho as $val)
-                                        <tr align="right">
+                                        <tr align="center">
                                             <td>{!! $val->id !!}</td>
                                             <td>{!! $val->vt_ten !!}</td>
                                             <td>{!! $val->dvt_ten !!}</td>
                                             <td>{!! $val->soluong_nhap !!}</td>
                                             <td>{!! $val->soluong_xuat !!}</td>
                                             <td>{!! $val->soluong_ton !!}</td>
-                                            <td align="right">{!! number_format($val->giatien)  !!}</td>
-                                            <td align="right">{!! number_format($val->giatien*$val->soluong_ton)  !!}</td>
+                                            <td align="right">{!! number_format($val->giatien)  !!} VNĐ</td>
+                                            <td align="center">{!! number_format($val->giatien*$val->soluong_ton)!!} VNĐ</td>
                                         </tr>
                                           @endforeach  
                                       

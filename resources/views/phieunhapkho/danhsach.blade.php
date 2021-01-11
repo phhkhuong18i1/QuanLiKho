@@ -43,7 +43,7 @@
                             <th>Nhân viên</th>
                             <th>Xóa</th>
                             <th>Sửa</th>
-                            <th>In</th>
+                            <th>Xem</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -55,9 +55,9 @@
                                 <td>{{ number_format($item->tongtien,0,",",".") }} VNĐ</td>
                                 <td>{{$item->nhanvien->nv_ten}}</td>
                                 <td class="center">
-                                    <a onclick="return confirm('Bạn có chắc muốn xóa dữ liệu này?')" class="btn btn-danger" href="qlkho/nhapkho/xoa/{{ $item->id }}">
+                                    <a   class="btn btn-danger" data-toggle="modal" data-target="#exampleModalXoa"  data-id="{{$item->id}}">
                                         <i class="fa fa-trash-o fa-fw"></i>Xóa
-                                    </a>
+                                    </>
                                 </td>
                                 <td class="center">
                                     <a class="btn btn-primary" href="qlkho/nhapkho/sua/{{ $item->id }}">
@@ -123,13 +123,11 @@
             
             <tr >
               <td ></td>
-              <td >  
-              </td>
-              <td  ></td>
-              <td  >
-              </td>
-              <td   > </td>
-              <td   > </td>
+              <td ></td>
+              <td ></td>
+              <td ></td>
+              <td ></td>
+              <td ></td>
           </tr>
             
             
@@ -146,6 +144,25 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
         <a  class="btn btn-primary" href="qlkho/nhap/innhap/">In</a>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModalXoa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Xóa</h5>
+      </div>
+      <div class="modal-body">
+     <div id="modal-body1">
+   <p>Bạn có chắc chắn muốn xóa ko?</p>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-danger" href="#">Xóa</a><button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
         
       </div>
     </div>
@@ -170,12 +187,33 @@
             },
             success: function(response)
             { 
+              
                 render(response);
             }
 
         });
       
       });
+      $('#exampleModalXoa').on('shown.bs.modal', function (e) {
+             
+             var id = $(e.relatedTarget).attr('data-id');
+             //$(this).find('.nkid').text(id);
+             
+             $.ajax({
+                 type:'GET',
+                 url:'qlkho/nhapkho/xoa',
+                 data: {
+                     ID: id,
+                 },
+                 success: function(response)
+                 { 
+                   
+                    Delete(response);
+                 }
+     
+             });
+           
+           });
   
 </script>
 @include ('layout.script')

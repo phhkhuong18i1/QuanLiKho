@@ -47,7 +47,7 @@ class NhaSanXuatController extends Controller
         $this->validate($request,
     
             [   'txtMa' => 'required|unique:nhasanxuat,nsx_ma|min:1|max:10',
-                'txtTen' => 'required|unique:nhasanxuat,ten|min:10|max:100'],
+                'txtTen' => 'required|unique:nhasanxuat,nsx_ten|min:1|max:100'],
             [
                 'txtMa.required' => 'Chưa nhập mã nhà sản xuất',
                 'txtMa.unique' => 'Mã nhà sản xuất đã tồn tại. Nhập mã khác',
@@ -55,18 +55,26 @@ class NhaSanXuatController extends Controller
                 'txtMa.max' => 'Mã nhà sản xuất có tối đa 10 ký tự',
                 'txtTen.required' => 'Chưa nhập tên nhà sản xuất',
                 'txtTen.unique' => 'Tên nhà sản xuất đã tồn tại. Nhập tên khác',
-                'txtTen.min' => 'Tên nhà sản xuất phải có ít nhất 10 ký tự',
+                'txtTen.min' => 'Tên nhà sản xuất phải có ít nhất 1 ký tự',
                 'txtTen.max' => 'Tên nhà sản xuất có tối đa 100 ký tự'
             ]
         );
         $nsx = new NhaSanXuat;
         $nsx->nsx_ma = $request->txtMa;
         $nsx->nsx_ten = $request->txtTen;
-        $nsx->kv_id = $request->$sltKhuVuc;
+        $nsx->kv_id = $request->sltKhuVuc;
         $nsx->save();
         return redirect('qlkho/nhasanxuat/them')->with('thongbao', 'Thêm thành công');
     }
 
+    public function getXoa(Request $request)
+    {
+        $id = $request->get('ID');
+        $nhasanxuat = NhaSanXuat::where('id',$id)->first();
+        return response()->json([
+            'nhasanxuat'=>$nhasanxuat,
+            ]);
+    }
     public function postXoa($id)
     {
         $nsx = NhaSanXuat::find($id);

@@ -32,6 +32,7 @@
                                             <th class="span2">Kho</th>
                                             <th class="span2">Ngày nhập</th>
                                             <th class="span2">Số lượng</th>
+                                            <th class="span2">Đơn vị tính</th>
                                             <th class="span2">Đơn giá</th>
                                             <th class="span3">Thành tiền</th>
                                         </tr>
@@ -45,8 +46,12 @@
                                 <td>{{$item->id}}</td>
                                 <td>{{ $item->vattu->vt_ten }}</td>
                                 <td>{{ $item->kho->kho_ten }}</td>
-                                <td>{{ $item->created_at }}</td>
+                                <td>{{ $item->phieunhapkho->ngaylap }}</td>
                                 <td>{{ $item->ctnk_soluong }}</td>
+                                <td><?php
+                                $dvt = DB::table('donvitinh')->where('id',$item->vattu->donvitinh_id)->first();
+                                print_r($dvt->dvt_ten);
+                                 ?></td>
                                 <td>{{ number_format($item->vattu->gianhap) }} VNĐ</td>
                                 <td>{{ number_format($item->ctnk_soluong*$item->vattu->gianhap) }} VNĐ</td>
                             </tr>
